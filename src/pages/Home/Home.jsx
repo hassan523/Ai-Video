@@ -13,6 +13,8 @@ import svg_three from "../../assets/Third_Section/third_section_img_three.svg";
 import Contact from "../../components/ContactUs/Contact";
 import img_rob from "../../assets/img_rob.png";
 import main_gif from "../../assets/main_gif.gif";
+import ytGiff from "../../assets/ytGif.gif";
+
 import axios from "axios";
 import API_BASE_URL from "../../config";
 const faqs = [
@@ -517,6 +519,11 @@ const Home = () => {
           </div>
         </div>
       </span>
+      {/* Giff here  */}
+      <div className={style.ytGiffWrapper}>
+        <img src={ytGiff} className={style.ytGiff} alt="" />
+      </div>
+
       {/* <!-- FAQ,s Area...... --> */}
       <section className={style.section_five_wrapper}>
         <Container className={style.faqs_container}>

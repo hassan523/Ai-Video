@@ -22,6 +22,18 @@
   height: 30rem;
   width: 22rem;
 }
+
+.ytGiffWrapper { 
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+  margin-top: -100px !important;
+  z-index: 99999 !important;
+}
+
+
+
 @media screen and (max-width: 995px) {
   .right_box p {
     font-size: 0.8rem;
