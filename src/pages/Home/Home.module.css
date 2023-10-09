@@ -429,9 +429,9 @@
   font-size: 4rem;
   font-weight: 600;
   text-transform: uppercase;
-  -webkit-text-strokewidth: 1px;
+
+  -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #fff;
-  -webkit-text-size-adjust: 1rem;
   -webkit-text-fill-color: transparent;
 }
 @keyframes marquee {
@@ -459,9 +459,9 @@
   font-size: 4rem;
   font-weight: 600;
   text-transform: uppercase;
-  -webkit-text-strokewidth: 1px;
+
+  -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #fff;
-  -webkit-text-size-adjust: 1rem;
   -webkit-text-fill-color: transparent;
 }
 

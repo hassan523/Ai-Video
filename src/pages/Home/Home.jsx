@@ -99,6 +99,7 @@ const Home = () => {
   console.log(keyPointData);
   const handleSubmit = async () => {
     try {
+      setIsSummary(false);
       if (check === "paragraph") {
         const res = await axios.post(`${API_BASE_URL}/api/summary`, {
           vidURL: url,
@@ -106,6 +107,10 @@ const Home = () => {
           wordCounter: wordCounter,
         });
         setYtData(res.data);
+        if (res.status === 200) {
+          setIsSummary(true);
+        }
+        setKeyPoints(null);
         setonSubmit(true);
         console.log(res.data);
       } else if (check === "points") {
@@ -115,7 +120,11 @@ const Home = () => {
           keyPoints: keyPoints,
         });
         setKeyPointData(res.data);
+        setWordCounter(null);
         setonSubmit(true);
+        if (res.status === 200) {
+          setIsSummary(true);
+        }
         console.log(res.data);
       } else {
         alert("Invalid Request");
@@ -170,50 +179,76 @@ const Home = () => {
             <div className={style.options_btn}>
               <button onClick={() => setCheck("paragraph")}>Text Form</button>
               <button onClick={() => setCheck("points")}>Bullet Points</button>
-              <button
-                onClick={() => {
-                  setWordCounter(30), setKeyPoints(8);
-                }}
-              >
-                Short
-              </button>
-              <button
-                onClick={() => {
-                  setWordCounter(40), setKeyPoints(12);
-                }}
-              >
-                Medium
-              </button>
-              <button
-                onClick={() => {
-                  setWordCounter(60), setKeyPoints(15);
-                }}
-              >
-                Long
-              </button>
+              {check === "paragraph" ? (
+                <>
+                  <button
+                    onClick={() => {
+                      setWordCounter(30);
+                      setKeyPoints(null);
+                    }}
+                  >
+                    Short
+                  </button>
+                  <button
+                    onClick={() => {
+                      setWordCounter(40);
+                      setKeyPoints(null);
+                    }}
+                  >
+                    Medium
+                  </button>
+                  <button
+                    onClick={() => {
+                      setWordCounter(60);
+                      setKeyPoints(null);
+                    }}
+                  >
+                    Long
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={() => {
+                      setWordCounter(null);
+                      setKeyPoints(8);
+                    }}
+                  >
+                    Short
+                  </button>
+                  <button
+                    onClick={() => {
+                      setWordCounter(null);
+
+                      setKeyPoints(12);
+                    }}
+                  >
+                    Medium
+                  </button>
+                  <button
+                    onClick={() => {
+                      setWordCounter(null);
+
+                      setKeyPoints(15);
+                    }}
+                  >
+                    Long
+                  </button>
+                </>
+              )}
             </div>
 
             {isSummary ? (
               <div className={style.summary}>
                 <h4>Here is your Summary</h4>
                 <div className={style.summary_inside}>
-                  <p>
-                    "Levitating" is a pop song by British singer-songwriter Dua
-                    Lipa. Released in 2020 as part of her album "Future
-                    Nostalgia," the song combines elements of disco, dance-pop,
-                    and electronic music. The lyrics of "Levitating" express
-                    feelings of happiness, infatuation, and the excitement of
-                    being in love. Dua Lipa sings about the irresistible
-                    attraction she feels towards someone, comparing the
-                    experience to feeling weightless and euphoric, as if they
-                    are levitating together. The song's catchy melody, upbeat
-                    tempo, and danceable rhythm contribute to its feel-good and
-                    infectious energy. "Levitating" has become one of Dua Lipa's
-                    signature songs and has been widely acclaimed for its catchy
-                    hooks and production. It has also gained popularity on music
-                    charts and in pop culture, making it a favorite for dancing
-                    and celebrating love.
-                  </p>
+                  {ytData ? (
+                    <p>{ytData}</p>
+                  ) : (
+                    keyPointData.map((item, index) => (
+                      <p key={index}>{item.point}</p>
+                    ))
+                  )}
                   <div style={{ display: "flex" }}>
                     <button>
                       <svg
