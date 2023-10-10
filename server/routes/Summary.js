@@ -148,6 +148,22 @@ router.post("/summary", async (req, res) => {
       }));
 
 
+      // Counter Code
+      const findCouters = await counter.find();
+      const reversed = findCouters.reverse();
+      const currentCount = reversed[0]
+      if (findCouters.length !== 0) {
+        const createCount = new counter({
+          counter: currentCount.counter + 1
+        })
+        await createCount.save();
+      } else {
+        const createCount = new counter({
+          counter: 1
+        })
+        await createCount.save();
+      }
+
 
 
       res.status(200).json(pointsObjects);
@@ -163,18 +179,15 @@ router.post("/summary", async (req, res) => {
 
 router.post("/counter", async (req, res) => {
   try {
-    const { couting } = req.body;
 
-    const createCount = new counter({
-      counter: couting + 1
-    })
-    await createCount.save();
-    res.status(200).json({ count: createCount });
+
+    res.status(200).json("Counting");
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Error" });
 
   }
 })
+
 
 export default router;
