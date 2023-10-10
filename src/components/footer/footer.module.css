@@ -1,6 +1,8 @@
 .footer_wrapper {
   padding: 7rem 1rem 1rem 1rem;
   background: #222222;
+  position: relative;
+  z-index: 1;
 }
 .footer_div {
   display: flex;

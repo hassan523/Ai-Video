@@ -1,11 +1,26 @@
 import React from "react";
 import style from "./footer.module.css";
 import { Container } from "react-bootstrap";
-import { IoSendSharp } from "react-icons/io5";
-import { FaFacebookF } from "react-icons/fa";
-import { BsLinkedin, BsTwitter } from "react-icons/bs";
+import { BsInstagram, BsTwitter } from "react-icons/bs";
+import logo from "../../assets/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const homepage = () => {
+    navigate("/");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+  const aboutuspage = () => {
+    navigate("/about-us");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <>
       <div className={style.footer_wrapper}>
@@ -14,13 +29,18 @@ const Footer = () => {
             <div className={style.footer_div}>
               <div className={style.footer_logo}>
                 <div className={style.social_logo}>
-                  <p className={style.footer_creater_name}>YOUSUMMARISE</p>
-                  <div className="d-flex gap-5">
+                  <img
+                    src={logo}
+                    width="70%"
+                    className={style.footer_creater_name}
+                    alt="logo"
+                  />
+                  <div className="d-flex gap-5 py-3">
                     <p>
                       <BsTwitter />
                     </p>
                     <p>
-                      <FaFacebookF />
+                      <BsInstagram />
                     </p>
                   </div>
                 </div>
@@ -29,8 +49,12 @@ const Footer = () => {
                 <div className={style.our_services}>
                   <h3>Page</h3>
                   <ul>
-                    <li role="button">Home</li>
-                    <li role="button">About Us</li>
+                    <li role="button" onClick={homepage}>
+                      Home
+                    </li>
+                    <li role="button" onClick={aboutuspage}>
+                      About Us
+                    </li>
                   </ul>
                 </div>
                 <div className={style.company}>

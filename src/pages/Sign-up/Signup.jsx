@@ -4,8 +4,10 @@ import { Container } from "react-bootstrap";
 import gif from "../../assets/login/login_bg.gif";
 import { useNavigate } from "react-router-dom";
 import { useSign_upMutation } from "../../../redux/Auth/auth";
+import logo from "../../assets/logo.png";
 
 const Signup = () => {
+  const [confirmFields, setConfirmFields] = useState("");
   const [signUpfields, setsignUpFields] = useState({
     username: "",
     email: "",
@@ -25,11 +27,15 @@ const Signup = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const res = await sign_up(signUpfields);
-      if (!res.error) {
-        navigate("/login");
+      if (confirmFields === password) {
+        const res = await sign_up(signUpfields);
+        if (!res.error) {
+          navigate("/login");
+        } else {
+          alert("error");
+        }
       } else {
-        alert("error");
+        alert("Passwords do not match");
       }
     } catch (error) {
       console.log(error);
@@ -38,6 +44,8 @@ const Signup = () => {
 
   return (
     <div className={style.login_wrapper}>
+      <div className={style.white_box}></div>
+      <div className={style.red_box}></div>
       <h6
         className={style.Login_back}
         onClick={() => navigate("/")}
@@ -54,11 +62,13 @@ const Signup = () => {
             position: "absolute",
             filter: "blur(20px)",
             height: "100%",
+            width: "50rem",
           }}
           className={style.login_bg}
         />
         <div className={style.login_fields_wrapper}>
-          <h1>YOUSUMMARISE</h1>
+          <img src={logo} alt="" className={style.logo} />
+
           <form className={style.form_sign} onSubmit={handleSignUp}>
             <h3 style={{ color: "white", fontWeight: "400" }}>
               REGISTRATION FORM
@@ -109,6 +119,8 @@ const Signup = () => {
                   type="password"
                   placeholder="Re-Type password"
                   className={style.textfiled}
+                  value={confirmFields}
+                  onChange={(e) => setConfirmFields(e.target.value)}
                 />
               </div>
             </label>

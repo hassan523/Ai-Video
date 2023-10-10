@@ -1,12 +1,38 @@
+.red_box {
+  position: fixed;
+  width: 25rem;
+  height: 24rem;
+  border-radius: 50%;
+  background: red;
+  filter: blur(20px);
+  right: -26rem;
+  box-shadow: 1rem 0rem 31rem 3rem red;
+  bottom: 0;
+  z-index: 1;
+}
+.white_box {
+  position: fixed;
+  width: 25rem;
+  height: 24rem;
+  border-radius: 50%;
+  background: white;
+  filter: blur(20px);
+  left: -26rem;
+  box-shadow: 1rem 1rem 35rem -1rem white;
+  top: 0;
+  z-index: 1111;
+}
 .how_sum_wrapper {
-  /* height: 80%; */
-  /* width: 100%; */
   background-color: black;
+  position: relative;
 }
 .main_container {
   position: relative;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
 }
 .how_sum {
   display: flex;
@@ -15,24 +41,80 @@
 .how_sum strong {
   color: red;
 }
+.second_heading {
+  font-family: var(--digital-font);
+}
 .right_box {
   margin-left: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.right_box p {
+  text-align: start;
 }
 .robo_img {
+  height: 40rem;
+  width: 31rem;
+  border-radius: 20px;
+}
+
+.ytGiff {
+  width: 45rem;
+  position: absolute;
+  top: 20rem;
+  left: 50%;
+  transform: translateX(-50%);
   height: 30rem;
-  width: 22rem;
 }
 
-.ytGiffWrapper { 
-  display: flex; 
-  justify-content: center;
-  align-items: center;
-  background-color: #000000;
-  margin-top: -100px !important;
-  z-index: 99999 !important;
+.bannerAnimatedTxt {
+  width: 70% !important;
 }
 
-
+@media screen and (max-width: 1080px) {
+  .ytGiff {
+    width: 65vw;
+    position: absolute;
+    top: 20rem;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 22rem;
+  }
+}
+@media screen and (max-width: 900px) {
+  .ytGiff {
+    width: 80vw;
+    position: absolute;
+    top: 16rem;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 30rem;
+  }
+  .bannerAnimatedTxt {
+    width: 100% !important;
+  }
+}
+@media screen and (max-width: 600px) {
+  .ytGiff {
+    width: 80vw;
+    position: absolute;
+    top: 12rem;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 20rem;
+  }
+}
+@media screen and (max-width: 350px) {
+  .ytGiff {
+    width: 80vw;
+    position: absolute;
+    top: 12rem;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 15rem;
+  }
+}
 
 @media screen and (max-width: 995px) {
   .right_box p {
@@ -41,6 +123,21 @@
   .right_box h1 {
     font-size: 1.5rem;
   }
+  .how_sum {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .robo_img {
+    height: 100%;
+    width: 100%;
+  }
+  .right_box {
+    margin: 0;
+  }
+  .right_box h1 {
+    text-align: center;
+  }
 }
 @media screen and (max-width: 785px) {
   .how_sum {
@@ -48,8 +145,8 @@
     align-items: center;
   }
   .robo_img {
-    height: 25rem;
-    width: 20rem;
+    height: 100%;
+    width: 100%;
   }
   .right_box {
     margin-top: 2rem;
@@ -59,8 +156,18 @@
 }
 @media screen and (max-width: 500px) {
   .robo_img {
-    height: 18rem;
-    width: 12rem;
+    height: 100%;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 700px) {
+  .main_container_bg {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 370px) {
+  .heading_sec {
+    font-size: 20px !important;
   }
 }
 
@@ -69,31 +176,37 @@
   display: flex;
   flex-direction: column;
 }
+
 .text_url {
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: auto;
+  align-items: center;
 }
-.text_url input {
-  outline: none;
-  border: none;
-  background-color: transparent;
-  width: 28rem;
-  height: 2.4rem;
-}
-.text_url div {
-  border: 1px solid white;
+
+.inputFields {
+  background: white !important;
   border-radius: 20px;
-  background-color: white;
-  width: 28rem;
-  height: 2.4rem;
-  padding: 0rem 1rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 23rem;
 }
+.inputFields input {
+  background: transparent !important;
+  border-radius: 20px;
+  height: 3.2rem;
+  width: 19rem;
+  border: none !important;
+}
+.inputFields input:focus {
+  outline: none !important;
+}
+
 .text_url button {
   background-color: #000000;
   color: white;
-  height: 2.6rem;
+  height: 3.4rem;
   width: 8rem;
   border: 1px solid white;
   border-radius: 20px;
@@ -103,12 +216,16 @@
 .text_url button:hover {
   background-color: red;
 }
+.loader {
+  color: white;
+  padding-left: 0.8rem;
+}
 .options_btn {
-  width: auto;
-  margin-top: 1rem;
   display: flex;
   justify-content: center;
-  margin-bottom: 4rem;
+  align-items: center;
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 .options_btn button {
   margin-left: 0.6rem;
@@ -120,9 +237,10 @@
   border-radius: 10px;
   transition: background-color 0.2s ease-in 100ms;
 }
-.options_btn button:hover {
+.options_btn button:focus {
   background-color: red;
 }
+
 .summary {
   color: black;
   background-color: white;
@@ -130,6 +248,9 @@
   border: 1px solid white;
   border-radius: 10px;
   margin-bottom: 5rem;
+}
+.summary h4 {
+  font-family: var(--dot-font) !important;
 }
 .summary_inside {
   padding: 0.5rem;
@@ -149,15 +270,9 @@
   .text_url input {
     width: 24rem;
   }
-  .text_url div {
-    width: 24rem;
-  }
 }
 @media screen and (max-width: 530px) {
   .text_url input {
-    width: 20rem;
-  }
-  .text_url div {
     width: 20rem;
   }
   .text_url button {
@@ -178,14 +293,17 @@
   .text_url button {
     margin-top: 0.7rem;
   }
+  .loader {
+    padding-top: 1rem;
+  }
 }
 @media screen and (max-width: 360px) {
   .text_url input {
     width: 15rem;
     font-size: 0.8rem;
   }
-  .text_url div {
-    width: 15rem;
+  .inputFields {
+    width: 20rem;
   }
 }
 @media screen and (max-width: 280px) {
@@ -193,8 +311,8 @@
     width: 13rem;
     font-size: 0.7rem;
   }
-  .text_url div {
-    width: 13rem;
+  .inputFields {
+    width: 15rem;
   }
 }
 /* <!-- FAQ,s Area...... --> */
@@ -268,12 +386,16 @@
   position: absolute;
   right: 0;
   cursor: pointer;
-  /* top: 0; */
   bottom: 0;
 }
 
-.questions:checked ~ .plus {
-  transform: rotate(45deg);
+.plus {
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+
+.questions:checked + .plus {
+  transform: rotate(90deg);
 }
 
 .questions {
@@ -416,19 +538,18 @@
 }
 /* marquee */
 .scroll_text {
-  padding: 8rem 0rem;
+  padding: 7rem 0rem 20rem 0rem;
   position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
   background: black;
 }
 .marquee {
   width: 100%;
   overflow: hidden;
   position: relative;
-  height: 5rem;
+  height: 15rem;
 }
 
 .marquee div {
@@ -438,12 +559,12 @@
   animation: marquee 35s linear infinite;
 }
 .marquee h1 {
-  font-size: 4rem;
-  font-weight: 600;
+  font-size: 14rem;
+  font-weight: 800;
   text-transform: uppercase;
-  -webkit-text-strokewidth: 1px;
+
+  -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #fff;
-  -webkit-text-size-adjust: 1rem;
   -webkit-text-fill-color: transparent;
 }
 @keyframes marquee {
@@ -458,7 +579,7 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-  height: 5rem;
+  height: 15rem;
   padding-bottom: 4rem;
 }
 .marquee_second div {
@@ -468,12 +589,12 @@
   animation: marqueeSecond 35s linear infinite;
 }
 .marquee_second_para {
-  font-size: 4rem;
-  font-weight: 600;
+  font-size: 14rem;
+  font-weight: 800;
   text-transform: uppercase;
-  -webkit-text-strokewidth: 1px;
+
+  -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #fff;
-  -webkit-text-size-adjust: 1rem;
   -webkit-text-fill-color: transparent;
 }
 
@@ -486,6 +607,26 @@
   }
 }
 
+@media screen and (max-width: 900px) {
+  .marquee_second_para,
+  .marquee h1 {
+    font-size: 10rem;
+  }
+  .marquee_second,
+  .marquee {
+    height: 11rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .marquee_second_para,
+  .marquee h1 {
+    font-size: 5rem;
+  }
+  .marquee_second,
+  .marquee {
+    height: 6rem;
+  }
+}
 @media screen and (max-width: 550px) {
   .marquee span,
   .marquee_second p {
@@ -515,7 +656,7 @@
 }
 /* Third Section */
 .third_section_wrapper {
-  padding: 4rem 0rem;
+  padding: 9rem 0rem 1rem 0rem;
   background: black;
 }
 .third_sec_container {
@@ -529,6 +670,11 @@
   padding: 1rem;
   border: 1px solid #646262;
   border-radius: 12px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: baseline;
 }
 .third_sec_container div h3 {
   color: red;

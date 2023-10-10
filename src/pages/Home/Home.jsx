@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./home.module.css";
 import { Container } from "react-bootstrap";
 import img_one from "../../assets/slider/img_one.png";
@@ -14,6 +14,11 @@ import Contact from "../../components/ContactUs/Contact";
 import img_rob from "../../assets/img_rob.png";
 import main_gif from "../../assets/main_gif.gif";
 import ytGiff from "../../assets/ytGif.gif";
+import back from "../../assets/back.svg";
+import linkSvg from "../../assets/link.svg";
+import Spinner from "react-bootstrap/Spinner";
+import { Autoplay } from "swiper/modules";
+import "swiper/element/css/autoplay"; // Import Swiper CSS
 
 import axios from "axios";
 import API_BASE_URL from "../../config";
@@ -95,41 +100,91 @@ const Home = () => {
   const [wordCounter, setWordCounter] = useState(0);
 
   const [onSubmit, setonSubmit] = useState(false);
-
+  const [isLoading, setisLoading] = useState(false);
   const [ytData, setYtData] = useState("");
   const [keyPointData, setKeyPointData] = useState([]);
-  console.log(keyPointData);
+
+  const [currCount, setCurrCount] = useState(null);
+
   const handleSubmit = async () => {
     try {
+      setIsSummary(false);
+      setisLoading(true);
+
       if (check === "paragraph") {
-        const res = await axios.post(`${API_BASE_URL}/api/summary`, {
-          vidURL: url,
-          contentType: check,
-          wordCounter: wordCounter,
-        });
+        const paraFormData = new FormData();
+        paraFormData.append("vidURL", url);
+        paraFormData.append("contentType", check);
+        paraFormData.append("wordCounter", wordCounter);
+
+        const res = await axios.post(
+          `${API_BASE_URL}/api/summary`,
+          paraFormData
+        );
+
         setYtData(res.data);
+
+        if (res.status === 200) {
+          setisLoading(false);
+          setIsSummary(true);
+        }
+
+        setKeyPoints(null);
         setonSubmit(true);
         console.log(res.data);
       } else if (check === "points") {
-        const res = await axios.post(`${API_BASE_URL}/api/summary`, {
-          vidURL: url,
-          contentType: check,
-          keyPoints: keyPoints,
-        });
+        const pointsFormData = new FormData();
+        pointsFormData.append("vidURL", url);
+        pointsFormData.append("contentType", check);
+        pointsFormData.append("keyPoints", keyPoints);
+
+        const res = await axios.post(
+          `${API_BASE_URL}/api/summary`,
+          pointsFormData
+        );
+
         setKeyPointData(res.data);
+        setWordCounter(null);
         setonSubmit(true);
+
+        if (res.status === 200) {
+          setisLoading(false);
+          setIsSummary(true);
+        }
+
         console.log(res.data);
       } else {
+        setisLoading(false);
         alert("Invalid Request");
       }
     } catch (error) {
+      setisLoading(false);
       alert("Video Is Copyrighted");
       console.log(error);
     }
   };
 
+  useEffect(() => {
+    const timerId = setInterval(async () => {
+      try {
+        const res = await axios.get(`${API_BASE_URL}/api/get-counter`);
+        if (res.status === 200) {
+          setCurrCount(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+        // alert("Alert Error");
+      }
+    }, 5000);
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(timerId);
+  }, []);
+
   return (
     <div>
+      <div className={style.white_box}></div>
+      <div className={style.red_box}></div>
       <Header />
       <section className={style.main_wrapper}>
         <Container className={style.main_container}>
@@ -139,83 +194,123 @@ const Home = () => {
             style={{
               position: "absolute",
               zIndex: "1",
-              height: "100%",
+              // height: "100%",
+              width: "70%",
               filter: "blur(20px)",
             }}
+            className={style.main_container_bg}
           />
-          <div style={{ zIndex: "20" }}>
-            <h2
-              style={{
-                color: "white",
-                textAlign: "center",
-                marginBottom: "2.6rem",
-              }}
-            >
-              Learn
-            </h2>
-            <div className={style.text_url}>
-              <div>
+          <div
+            className={style.bannerAnimatedTxt}
+            style={{ zIndex: "20", width: "100%" }}
+          >
+            <div id="animated-text-container">
+              <h2 className="display-3">
+                <span>Learn</span> <span>more</span> <span>in</span>{" "}
+                <span>less</span> <span>time</span> <span> with </span>{" "}
+                <span> AI-powered</span>{" "}
+                <span style={{ color: "red" }}>summarize</span>
+              </h2>
+            </div>
+
+            <div className={`pt-5 ${style.text_url}`}>
+              <div className={style.inputFields}>
+                <span className="ps-3">
+                  <img src={linkSvg} alt="" />
+                </span>
                 <input
                   type="text"
                   placeholder="www.youtube.com/watch?example"
                   onChange={(e) => seturl(e.target.value)}
                 />
               </div>
-              <button
-                onClick={() => {
-                  setIsSummary((s) => !s), handleSubmit();
-                }}
-              >
-                Summarise
-              </button>
+              {isLoading ? (
+                <div className={style.loader}>
+                  <Spinner animation="border" />
+                </div>
+              ) : (
+                <button
+                  onClick={() => {
+                    setIsSummary((s) => !s), handleSubmit();
+                  }}
+                >
+                  summarize
+                </button>
+              )}
             </div>
             <div className={style.options_btn}>
               <button onClick={() => setCheck("paragraph")}>Text Form</button>
               <button onClick={() => setCheck("points")}>Bullet Points</button>
-              <button
-                onClick={() => {
-                  setWordCounter(30), setKeyPoints(8);
-                }}
-              >
-                Short
-              </button>
-              <button
-                onClick={() => {
-                  setWordCounter(40), setKeyPoints(12);
-                }}
-              >
-                Medium
-              </button>
-              <button
-                onClick={() => {
-                  setWordCounter(60), setKeyPoints(15);
-                }}
-              >
-                Long
-              </button>
+              {check === "paragraph" ? (
+                <>
+                  <button
+                    onClick={() => {
+                      setWordCounter(30);
+                      setKeyPoints(null);
+                    }}
+                  >
+                    Short
+                  </button>
+                  <button
+                    onClick={() => {
+                      setWordCounter(40);
+                      setKeyPoints(null);
+                    }}
+                  >
+                    Medium
+                  </button>
+                  <button
+                    onClick={() => {
+                      setWordCounter(60);
+                      setKeyPoints(null);
+                    }}
+                  >
+                    Long
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={() => {
+                      setWordCounter(null);
+                      setKeyPoints(8);
+                    }}
+                  >
+                    Short
+                  </button>
+                  <button
+                    onClick={() => {
+                      setWordCounter(null);
+
+                      setKeyPoints(12);
+                    }}
+                  >
+                    Medium
+                  </button>
+                  <button
+                    onClick={() => {
+                      setWordCounter(null);
+
+                      setKeyPoints(15);
+                    }}
+                  >
+                    Long
+                  </button>
+                </>
+              )}
             </div>
 
             {isSummary ? (
               <div className={style.summary}>
                 <h4>Here is your Summary</h4>
                 <div className={style.summary_inside}>
-                  <p>
-                    "Levitating" is a pop song by British singer-songwriter Dua
-                    Lipa. Released in 2020 as part of her album "Future
-                    Nostalgia," the song combines elements of disco, dance-pop,
-                    and electronic music. The lyrics of "Levitating" express
-                    feelings of happiness, infatuation, and the excitement of
-                    being in love. Dua Lipa sings about the irresistible
-                    attraction she feels towards someone, comparing the
-                    experience to feeling weightless and euphoric, as if they
-                    are levitating together. The song's catchy melody, upbeat
-                    tempo, and danceable rhythm contribute to its feel-good and
-                    infectious energy. "Levitating" has become one of Dua Lipa's
-                    signature songs and has been widely acclaimed for its catchy
-                    hooks and production. It has also gained popularity on music
-                    charts and in pop culture, making it a favorite for dancing
-                    and celebrating love.
-                  </p>
+                  {ytData ? (
+                    <p>{ytData}</p>
+                  ) : (
+                    keyPointData.map((item, index) => (
+                      <p key={index}>{item.point}</p>
+                    ))
+                  )}
                   <div style={{ display: "flex" }}>
                     <button>
                       <svg
@@ -266,42 +361,51 @@ const Home = () => {
             <div
               style={{
                 display: "flex",
-                justifyContent: "space-between",
-                padding: "0 1rem",
-                marginBottom: "7rem",
+                justifyContent: "space-evenly",
               }}
+              className=""
             >
-              <div>
+              <div className="d-flex align-items-center">
                 <h2
                   style={{
                     color: "white",
-                    fontFamily: "Flat Level",
-                    fontSize: "40px",
+                    fontSize: "31px",
                     fontWeight: "19",
+                    fontFamily: "var(--digital-font)",
                   }}
+                  className={style.heading_sec}
                 >
-                  SUMMARIES <strong style={{ color: "red" }}>GENRATED</strong>
+                  SUMMARIZE{" "}
+                  <strong
+                    style={{ color: "red", fontFamily: "var(--digital-font)" }}
+                  >
+                    GENRATED
+                  </strong>
                 </h2>
               </div>
               <div
+                className={`d-flex justify-content-center align-items-center ${style.second_heading}`}
                 style={{
-                  height: "2.8rem",
+                  height: "3.8rem",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                   width: "6rem",
                   border: "1px solid grey",
                   borderRadius: "8px",
                   textAlign: "center",
-                  fontSize: "1.6rem",
+                  fontSize: "55px",
                   color: "white",
                   fontWeight: "400",
                 }}
               >
-                153
+                {currCount}
               </div>
             </div>
           </div>
         </Container>
       </section>
-      <section className={style.how_sum_wrapper}>
+      <section className={`pt-5 ${style.how_sum_wrapper}`}>
         <Container className={style.how_sum_container}>
           <div className={style.how_sum}>
             <div>
@@ -309,7 +413,7 @@ const Home = () => {
             </div>
             <div className={style.right_box}>
               <h1 style={{ color: "white" }}>
-                GET HOW <strong style={{ color: "red" }}>YOUSUMMAARISE</strong>{" "}
+                GET HOW <strong style={{ color: "red" }}>YOUSUMMARIZE</strong>{" "}
                 WORK
               </h1>
 
@@ -343,6 +447,9 @@ const Home = () => {
                         border: "1px solid red",
                         rotate: "20deg",
                         borderRadius: "4px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}
                     >
                       <h2
@@ -350,6 +457,7 @@ const Home = () => {
                           textAlign: "center",
                           color: "red",
                           rotate: "-20deg",
+                          margin: "0",
                         }}
                       >
                         01
@@ -389,12 +497,16 @@ const Home = () => {
                         border: "1px solid red",
                         rotate: "20deg",
                         borderRadius: "4px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}
                     >
                       <h2
                         style={{
                           textAlign: "center",
                           color: "red",
+                          margin: "0",
                           rotate: "-20deg",
                         }}
                       >
@@ -438,6 +550,9 @@ const Home = () => {
                         border: "1px solid red",
                         rotate: "20deg",
                         borderRadius: "4px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}
                     >
                       <h2
@@ -445,6 +560,7 @@ const Home = () => {
                           textAlign: "center",
                           color: "red",
                           rotate: "-20deg",
+                          margin: "0",
                         }}
                       >
                         03
@@ -498,31 +614,28 @@ const Home = () => {
           </div>
         </Container>
       </section>
-      {/* summarise Animation */}
+      {/* summarize Animation */}
       <span className={style.scroll_text}>
         <div className={style.marquee}>
           <div>
             <h1>
-              * you summerise * you summerise * you summerise* you summerise *
-              you summerise * you summerise* you summerise * you summerise * you
-              summerise
+              * you summarize * you summarize * you summarize* you summarize *
+              you summarize * you summarize* you summarize * you summarize * you
+              summarize
             </h1>
           </div>
         </div>
         <div className={style.marquee_second}>
           <div>
             <h1 className={style.marquee_second_para}>
-              * you summerise * you summerise * you summerise* you summerise *
-              you summerise * you summerise* you summerise * you summerise * you
-              summerise
+              * you summarize * you summarize * you summarize* you summarize *
+              you summarize * you summerise* you summarize * you summarize * you
+              summarize
             </h1>
           </div>
         </div>
-      </span>
-      {/* Giff here  */}
-      <div className={style.ytGiffWrapper}>
         <img src={ytGiff} className={style.ytGiff} alt="" />
-      </div>
+      </span>
 
       {/* <!-- FAQ,s Area...... --> */}
       <section className={style.section_five_wrapper}>
@@ -535,6 +648,7 @@ const Home = () => {
                 style={{
                   padding: "1rem 0rem",
                   position: "relative",
+                  borderTop: "1px solid white",
                 }}
                 key={index}
               >
@@ -547,11 +661,13 @@ const Home = () => {
                 <label className={style.question}>
                   <div
                     className="d-flex align-items-center pe-5 w-100"
-                    style={{ position: "relative" }}
+                    style={{
+                      position: "relative",
+                    }}
                   >
                     <h5 className="m-0">{ans.question}</h5>
-                    <label htmlFor={index} className={style.plus}>
-                      +
+                    <label htmlFor={index}>
+                      <img src={back} alt="" className={style.plus} />
                     </label>
                   </div>
                 </label>
@@ -565,7 +681,16 @@ const Home = () => {
       <Contact />
       {/* {Organization area} */}
       <section className={style.section_two_wrapper}>
-        <Swiper breakpoints={breakpoints} className={style.section_two_swiper}>
+        <Swiper
+          breakpoints={breakpoints}
+          autoplay={{
+            delay: 1000, // 4 seconds
+            disableOnInteraction: false,
+            // Continue autoplay after user interaction
+          }}
+          modules={[Autoplay]}
+          className={style.section_two_swiper}
+        >
           {slider_img.map((img, index) => (
             <SwiperSlide
               style={{
