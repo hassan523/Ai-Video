@@ -110,33 +110,48 @@ const Home = () => {
     try {
       setIsSummary(false);
       setisLoading(true);
+
       if (check === "paragraph") {
-        const res = await axios.post(`${API_BASE_URL}/api/summary`, {
-          vidURL: url,
-          contentType: check,
-          wordCounter: wordCounter,
-        });
+        const paraFormData = new FormData();
+        paraFormData.append("vidURL", url);
+        paraFormData.append("contentType", check);
+        paraFormData.append("wordCounter", wordCounter);
+
+        const res = await axios.post(
+          `${API_BASE_URL}/api/summary`,
+          paraFormData
+        );
+
         setYtData(res.data);
+
         if (res.status === 200) {
           setisLoading(false);
           setIsSummary(true);
         }
+
         setKeyPoints(null);
         setonSubmit(true);
         console.log(res.data);
       } else if (check === "points") {
-        const res = await axios.post(`${API_BASE_URL}/api/summary`, {
-          vidURL: url,
-          contentType: check,
-          keyPoints: keyPoints,
-        });
+        const pointsFormData = new FormData();
+        pointsFormData.append("vidURL", url);
+        pointsFormData.append("contentType", check);
+        pointsFormData.append("keyPoints", keyPoints);
+
+        const res = await axios.post(
+          `${API_BASE_URL}/api/summary`,
+          pointsFormData
+        );
+
         setKeyPointData(res.data);
         setWordCounter(null);
         setonSubmit(true);
+
         if (res.status === 200) {
           setisLoading(false);
           setIsSummary(true);
         }
+
         console.log(res.data);
       } else {
         setisLoading(false);
@@ -190,7 +205,7 @@ const Home = () => {
             style={{ zIndex: "20", width: "100%" }}
           >
             <div id="animated-text-container">
-              <h2 class="display-3">
+              <h2 className="display-3">
                 <span>Learn</span> <span>more</span> <span>in</span>{" "}
                 <span>less</span> <span>time</span> <span> with </span>{" "}
                 <span> AI-powered</span>{" "}

@@ -1,12 +1,9 @@
 import React from "react";
 import style from "./footer.module.css";
 import { Container } from "react-bootstrap";
-import { IoSendSharp } from "react-icons/io5";
-import { FaFacebookF } from "react-icons/fa";
-import { BsLinkedin, BsTwitter } from "react-icons/bs";
+import { BsInstagram, BsTwitter } from "react-icons/bs";
 import logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
-
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -43,7 +40,7 @@ const Footer = () => {
                       <BsTwitter />
                     </p>
                     <p>
-                      <FaFacebookF />
+                      <BsInstagram />
                     </p>
                   </div>
                 </div>

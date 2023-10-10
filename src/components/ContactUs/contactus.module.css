@@ -7,16 +7,25 @@
   width: 100%;
   display: flex;
   align-items: center;
+  position: relative;
 }
 .contact_us_container {
   padding: 3rem 5rem 3rem 3rem !important;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  z-index: 11;
+}
+.right_img {
+  position: absolute;
+  right: 0;
+  opacity: 0.5;
+  height: 100%;
+  fill: black;
 }
 .contact_us_container div h1 {
   font-size: 5.5rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 .contact_us_container div p {
   font-size: 1.3rem;
