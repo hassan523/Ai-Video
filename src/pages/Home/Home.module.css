@@ -25,7 +25,6 @@
 .how_sum_wrapper {
   background-color: black;
   position: relative;
-  z-index: 111 !important;
 }
 .main_container {
   position: relative;
@@ -298,11 +297,17 @@
     width: 15rem;
     font-size: 0.8rem;
   }
+  .inputFields {
+    width: 20rem;
+  }
 }
 @media screen and (max-width: 280px) {
   .text_url input {
     width: 13rem;
     font-size: 0.7rem;
+  }
+  .inputFields {
+    width: 15rem;
   }
 }
 /* <!-- FAQ,s Area...... --> */

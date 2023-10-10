@@ -33,10 +33,11 @@ const Footer = () => {
                 <div className={style.social_logo}>
                   <img
                     src={logo}
+                    width="70%"
                     className={style.footer_creater_name}
                     alt="logo"
                   />
-                  <div className="d-flex gap-5">
+                  <div className="d-flex gap-5 py-3">
                     <p>
                       <BsTwitter />
                     </p>
