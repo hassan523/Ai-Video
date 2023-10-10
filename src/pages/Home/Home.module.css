@@ -51,18 +51,18 @@
   text-align: start;
 }
 .robo_img {
-  height: 33rem;
-  width: 28rem;
+  height: 35rem;
+  width: 31rem;
   border-radius: 20px;
 }
 
 .ytGiff {
-  width: 65rem;
+  width: 45rem;
   position: absolute;
   top: 20rem;
   left: 50%;
   transform: translateX(-50%);
-  height: 35rem;
+  height: 30rem;
 }
 
 .bannerAnimatedTxt {
@@ -71,12 +71,12 @@
 
 @media screen and (max-width: 1080px) {
   .ytGiff {
-    width: 80vw;
+    width: 65vw;
     position: absolute;
     top: 20rem;
     left: 50%;
     transform: translateX(-50%);
-    height: 30rem;
+    height: 22rem;
   }
 }
 @media screen and (max-width: 900px) {

@@ -4,8 +4,9 @@ import Footer from "../../components/footer/Footer";
 import Contact from "../../components/ContactUs/Contact";
 import { Container } from "react-bootstrap";
 import style from "./aboutus.module.css";
-import team_img_one from "../../assets/team/about_team.png";
 import uppergif from "../../assets/Login/login_bg.gif";
+import team_img_one from "../../assets/team/about_team.png";
+import team_img_two from "../../assets/team/about_team_two.png";
 import main_gif from "../../assets/main_gif.gif";
 import img_b from "../../assets/about_main.png";
 import linkdin from "../../assets/linkdin.png";
@@ -104,7 +105,7 @@ const AboutUs = () => {
               </p>
             </div>
             <div className={style.team_box}>
-              <img src={team_img_one} alt="" />
+              <img src={team_img_two} alt="" />
               <h3>
                 Tomas Lopez-Valcarcel <BsLinkedin className={style.logo} />
               </h3>

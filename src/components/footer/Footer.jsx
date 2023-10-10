@@ -7,6 +7,7 @@ import { BsLinkedin, BsTwitter } from "react-icons/bs";
 import logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 
+
 const Footer = () => {
   const navigate = useNavigate();
   const homepage = () => {

@@ -17,6 +17,8 @@ import ytGiff from "../../assets/ytGif.gif";
 import back from "../../assets/back.svg";
 import linkSvg from "../../assets/link.svg";
 import Spinner from "react-bootstrap/Spinner";
+import { Autoplay } from "swiper/modules";
+import "swiper/element/css/autoplay"; // Import Swiper CSS
 
 import axios from "axios";
 import API_BASE_URL from "../../config";
@@ -360,16 +362,19 @@ const Home = () => {
                   }}
                   className={style.heading_sec}
                 >
-                  SUMMARIES <strong style={{ color: "red",          fontFamily: "Astronaut" }}>GENRATED</strong>
+                  SUMMARIES{" "}
+                  <strong style={{ color: "red", fontFamily: "Astronaut" }}>
+                    GENRATED
+                  </strong>
                 </h2>
               </div>
               <div
                 className="mt-md-5 d-flex justify-content-center align-items-center"
                 style={{
                   height: "3.8rem",
-                  display:"flex",
-                  justifyContent:"center",
-                  alignItems:"center",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                   width: "6rem",
                   border: "1px solid grey",
                   borderRadius: "8px",
@@ -394,7 +399,7 @@ const Home = () => {
             </div>
             <div className={style.right_box}>
               <h1 style={{ color: "white" }}>
-                GET HOW <strong style={{ color: "red" }}>YOUSUMMAARISE</strong>{" "}
+                GET HOW <strong style={{ color: "red" }}>YOUSUMMARISE</strong>{" "}
                 WORK
               </h1>
 
@@ -600,18 +605,18 @@ const Home = () => {
         <div className={style.marquee}>
           <div>
             <h1>
-              * you summerise * you summerise * you summerise* you summerise *
-              you summerise * you summerise* you summerise * you summerise * you
-              summerise
+              * you summarise * you summarise * you summarise* you summarise *
+              you summarise * you summarise* you summarise * you summarise * you
+              summarise
             </h1>
           </div>
         </div>
         <div className={style.marquee_second}>
           <div>
             <h1 className={style.marquee_second_para}>
-              * you summerise * you summerise * you summerise* you summerise *
-              you summerise * you summerise* you summerise * you summerise * you
-              summerise
+              * you summarise * you summarise * you summarise* you summarise *
+              you summarise * you summerise* you summarise * you summarise * you
+              summarise
             </h1>
           </div>
         </div>
@@ -662,7 +667,16 @@ const Home = () => {
       <Contact />
       {/* {Organization area} */}
       <section className={style.section_two_wrapper}>
-        <Swiper breakpoints={breakpoints} className={style.section_two_swiper}>
+        <Swiper
+          breakpoints={breakpoints}
+          autoplay={{
+            delay: 1000, // 4 seconds
+            disableOnInteraction: false,
+             // Continue autoplay after user interaction
+            }}
+          modules={[Autoplay]}
+          className={style.section_two_swiper}
+        >
           {slider_img.map((img, index) => (
             <SwiperSlide
               style={{
