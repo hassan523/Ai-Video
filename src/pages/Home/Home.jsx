@@ -14,6 +14,7 @@ import Contact from "../../components/ContactUs/Contact";
 import img_rob from "../../assets/img_rob.png";
 import main_gif from "../../assets/main_gif.gif";
 import ytGiff from "../../assets/ytGif.gif";
+import back from "../../assets/back.svg";
 
 import axios from "axios";
 import API_BASE_URL from "../../config";
@@ -569,6 +570,7 @@ const Home = () => {
                 style={{
                   padding: "1rem 0rem",
                   position: "relative",
+                  borderTop: "1px solid white",
                 }}
                 key={index}
               >
@@ -581,11 +583,13 @@ const Home = () => {
                 <label className={style.question}>
                   <div
                     className="d-flex align-items-center pe-5 w-100"
-                    style={{ position: "relative" }}
+                    style={{
+                      position: "relative",
+                    }}
                   >
                     <h5 className="m-0">{ans.question}</h5>
-                    <label htmlFor={index} className={style.plus}>
-                      +
+                    <label htmlFor={index}>
+                      <img src={back} alt="" className={style.plus} />
                     </label>
                   </div>
                 </label>

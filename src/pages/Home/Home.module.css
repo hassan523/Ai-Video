@@ -24,11 +24,52 @@
 }
 
 .ytGiff {
-  width: 30%;
-  position: relative;
-  top: -11rem;
+  width: 65rem;
+  position: absolute;
+  top: 20rem;
   left: 50%;
   transform: translateX(-50%);
+  height: 35rem;
+}
+@media screen and (max-width: 1080px) {
+  .ytGiff {
+    width: 80vw;
+    position: absolute;
+    top: 20rem;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 30rem;
+  }
+}
+@media screen and (max-width: 900px) {
+  .ytGiff {
+    width: 80vw;
+    position: absolute;
+    top: 16rem;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 30rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .ytGiff {
+    width: 80vw;
+    position: absolute;
+    top: 12rem;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 20rem;
+  }
+}
+@media screen and (max-width: 350px) {
+  .ytGiff {
+    width: 80vw;
+    position: absolute;
+    top: 12rem;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 15rem;
+  }
 }
 
 @media screen and (max-width: 995px) {
@@ -58,11 +99,6 @@
   .robo_img {
     height: 18rem;
     width: 12rem;
-  }
-
-  .ytGiff {
-    width: 45%;
-    top: -6rem;
   }
 }
 @media screen and (max-width: 700px) {
@@ -283,12 +319,16 @@
   position: absolute;
   right: 0;
   cursor: pointer;
-  /* top: 0; */
   bottom: 0;
 }
 
-.questions:checked ~ .plus {
-  transform: rotate(45deg);
+.plus {
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+
+.questions:checked + .plus {
+  transform: rotate(90deg);
 }
 
 .questions {
@@ -431,19 +471,18 @@
 }
 /* marquee */
 .scroll_text {
-  padding: 8rem 0rem 0rem 0rem;
+  padding: 7rem 0rem 20rem 0rem;
   position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
   background: black;
 }
 .marquee {
   width: 100%;
   overflow: hidden;
   position: relative;
-  height: 5rem;
+  height: 15rem;
 }
 
 .marquee div {
@@ -453,8 +492,8 @@
   animation: marquee 35s linear infinite;
 }
 .marquee h1 {
-  font-size: 4rem;
-  font-weight: 600;
+  font-size: 14rem;
+  font-weight: 800;
   text-transform: uppercase;
 
   -webkit-text-stroke-width: 1px;
@@ -473,7 +512,7 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-  height: 5rem;
+  height: 15rem;
   padding-bottom: 4rem;
 }
 .marquee_second div {
@@ -483,8 +522,8 @@
   animation: marqueeSecond 35s linear infinite;
 }
 .marquee_second_para {
-  font-size: 4rem;
-  font-weight: 600;
+  font-size: 14rem;
+  font-weight: 800;
   text-transform: uppercase;
 
   -webkit-text-stroke-width: 1px;
@@ -501,6 +540,26 @@
   }
 }
 
+@media screen and (max-width: 900px) {
+  .marquee_second_para,
+  .marquee h1 {
+    font-size: 10rem;
+  }
+  .marquee_second,
+  .marquee {
+    height: 11rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .marquee_second_para,
+  .marquee h1 {
+    font-size: 5rem;
+  }
+  .marquee_second,
+  .marquee {
+    height: 6rem;
+  }
+}
 @media screen and (max-width: 550px) {
   .marquee span,
   .marquee_second p {
@@ -530,7 +589,7 @@
 }
 /* Third Section */
 .third_section_wrapper {
-  padding: 4rem 0rem;
+  padding: 9rem 0rem 1rem 0rem;
   background: black;
 }
 .third_sec_container {
@@ -544,6 +603,11 @@
   padding: 1rem;
   border: 1px solid #646262;
   border-radius: 12px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: baseline;
 }
 .third_sec_container div h3 {
   color: red;
