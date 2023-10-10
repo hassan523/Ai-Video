@@ -141,6 +141,8 @@ const Home = () => {
 
   return (
     <div>
+      <div className={style.white_box}></div>
+      <div className={style.red_box}></div>
       <Header />
       <section className={style.main_wrapper}>
         <Container className={style.main_container}>
@@ -389,6 +391,9 @@ const Home = () => {
                         border: "1px solid red",
                         rotate: "20deg",
                         borderRadius: "4px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}
                     >
                       <h2
@@ -396,6 +401,7 @@ const Home = () => {
                           textAlign: "center",
                           color: "red",
                           rotate: "-20deg",
+                          margin: "0",
                         }}
                       >
                         01
@@ -435,12 +441,16 @@ const Home = () => {
                         border: "1px solid red",
                         rotate: "20deg",
                         borderRadius: "4px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}
                     >
                       <h2
                         style={{
                           textAlign: "center",
                           color: "red",
+                          margin: "0",
                           rotate: "-20deg",
                         }}
                       >
@@ -484,6 +494,9 @@ const Home = () => {
                         border: "1px solid red",
                         rotate: "20deg",
                         borderRadius: "4px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}
                     >
                       <h2
@@ -491,6 +504,7 @@ const Home = () => {
                           textAlign: "center",
                           color: "red",
                           rotate: "-20deg",
+                          margin: "0",
                         }}
                       >
                         03

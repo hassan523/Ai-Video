@@ -14,6 +14,7 @@ const Header = () => {
           role="button"
           alt="logo"
           width="30%"
+          className={style.header_logo}
         />
         <div
           className={`d-flex align-items-center justify-content-between ${style.header_right}`}
