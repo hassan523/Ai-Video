@@ -1,6 +1,28 @@
+.red_box {
+  position: fixed;
+  width: 25rem;
+  height: 24rem;
+  border-radius: 50%;
+  background: red;
+  filter: blur(20px);
+  right: -26rem;
+  box-shadow: 1rem 0rem 31rem 3rem red;
+  top: 15rem;
+  z-index: 1;
+}
+.white_box {
+  position: fixed;
+  width: 25rem;
+  height: 24rem;
+  border-radius: 50%;
+  background: #32313a;
+  filter: blur(20px);
+  left: -26rem;
+  box-shadow: 1rem 0rem 31rem 3rem #32313a;
+  top: 15rem;
+  z-index: 1;
+}
 .how_sum_wrapper {
-  /* height: 80%; */
-  /* width: 100%; */
   background-color: black;
 }
 .main_container {
@@ -23,6 +45,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.right_box p {
+  text-align: start;
 }
 .robo_img {
   height: 33rem;
@@ -62,6 +87,9 @@
     transform: translateX(-50%);
     height: 30rem;
   }
+  .bannerAnimatedTxt {
+    width: 100% !important;
+  }
 }
 @media screen and (max-width: 600px) {
   .ytGiff {
@@ -91,6 +119,21 @@
   .right_box h1 {
     font-size: 1.5rem;
   }
+  .how_sum {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .robo_img {
+    height: 100%;
+    width: 100%;
+  }
+  .right_box {
+    margin: 0;
+  }
+  .right_box h1 {
+    text-align: center;
+  }
 }
 @media screen and (max-width: 785px) {
   .how_sum {
@@ -98,8 +141,8 @@
     align-items: center;
   }
   .robo_img {
-    height: 25rem;
-    width: 20rem;
+    height: 100%;
+    width: 100%;
   }
   .right_box {
     margin-top: 2rem;
@@ -109,8 +152,8 @@
 }
 @media screen and (max-width: 500px) {
   .robo_img {
-    height: 18rem;
-    width: 12rem;
+    height: 100%;
+    width: 100%;
   }
 }
 @media screen and (max-width: 700px) {
@@ -156,7 +199,6 @@
   outline: none !important;
 }
 
-
 .text_url button {
   background-color: #000000;
   color: white;
@@ -197,6 +239,9 @@
   border: 1px solid white;
   border-radius: 10px;
   margin-bottom: 5rem;
+}
+.summary h4 {
+  font-family: var(--dot-font) !important;
 }
 .summary_inside {
   padding: 0.5rem;
@@ -252,7 +297,7 @@
     font-size: 0.8rem;
   }
   .text_url div {
-    width: 15rem;
+    width: 18rem;
   }
 }
 @media screen and (max-width: 280px) {

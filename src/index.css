@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway+Dots&display=swap");
+
 * {
   padding: 0;
   margin: 0;
@@ -5,6 +7,7 @@
 }
 :root {
   --primary-bg: #14cf93;
+  --dot-font: "Raleway Dots", sans-serif;
 }
 
 @keyframes textAnimation {
@@ -19,6 +22,8 @@
 #animated-text-container {
   text-align: center;
   color: white;
+  display: flex;
+  justify-content: center;
 }
 
 #animated-text-container h2 span {
@@ -27,7 +32,19 @@
   display: inline-block;
   font-weight: 500;
 }
-
+#animated-text-container h2 {
+  font-size: 3.2rem;
+}
+@media screen and (max-width: 990px) {
+  #animated-text-container h2 {
+    font-size: 5vmin;
+  }
+}
+@media screen and (max-width: 600px) {
+  #animated-text-container h2 {
+    font-size: 7vmin;
+  }
+}
 #animated-text-container h2 span:nth-child(1) {
   animation-delay: 1s;
 }
