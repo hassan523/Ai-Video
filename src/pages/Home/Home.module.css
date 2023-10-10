@@ -24,6 +24,8 @@
 }
 .how_sum_wrapper {
   background-color: black;
+  position: relative;
+  z-index: 111 !important;
 }
 .main_container {
   position: relative;
@@ -212,7 +214,10 @@
 .text_url button:hover {
   background-color: red;
 }
-
+.loader {
+  color: white;
+  padding-left: 0.8rem;
+}
 .options_btn {
   display: flex;
   justify-content: center;
@@ -261,15 +266,9 @@
   .text_url input {
     width: 24rem;
   }
-  .text_url div {
-    width: 24rem;
-  }
 }
 @media screen and (max-width: 530px) {
   .text_url input {
-    width: 20rem;
-  }
-  .text_url div {
     width: 20rem;
   }
   .text_url button {
@@ -290,23 +289,20 @@
   .text_url button {
     margin-top: 0.7rem;
   }
+  .loader {
+    padding-top: 1rem;
+  }
 }
 @media screen and (max-width: 360px) {
   .text_url input {
     width: 15rem;
     font-size: 0.8rem;
   }
-  .text_url div {
-    width: 18rem;
-  }
 }
 @media screen and (max-width: 280px) {
   .text_url input {
     width: 13rem;
     font-size: 0.7rem;
-  }
-  .text_url div {
-    width: 13rem;
   }
 }
 /* <!-- FAQ,s Area...... --> */

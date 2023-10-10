@@ -16,6 +16,7 @@ import main_gif from "../../assets/main_gif.gif";
 import ytGiff from "../../assets/ytGif.gif";
 import back from "../../assets/back.svg";
 import linkSvg from "../../assets/link.svg";
+import Spinner from "react-bootstrap/Spinner";
 
 import axios from "axios";
 import API_BASE_URL from "../../config";
@@ -97,13 +98,14 @@ const Home = () => {
   const [wordCounter, setWordCounter] = useState(0);
 
   const [onSubmit, setonSubmit] = useState(false);
-
+  const [isLoading, setisLoading] = useState(false);
   const [ytData, setYtData] = useState("");
   const [keyPointData, setKeyPointData] = useState([]);
   console.log(keyPointData);
   const handleSubmit = async () => {
     try {
       setIsSummary(false);
+      setisLoading(true);
       if (check === "paragraph") {
         const res = await axios.post(`${API_BASE_URL}/api/summary`, {
           vidURL: url,
@@ -112,6 +114,7 @@ const Home = () => {
         });
         setYtData(res.data);
         if (res.status === 200) {
+          setisLoading(false);
           setIsSummary(true);
         }
         setKeyPoints(null);
@@ -127,13 +130,16 @@ const Home = () => {
         setWordCounter(null);
         setonSubmit(true);
         if (res.status === 200) {
+          setisLoading(false);
           setIsSummary(true);
         }
         console.log(res.data);
       } else {
+        setisLoading(false);
         alert("Invalid Request");
       }
     } catch (error) {
+      setisLoading(false);
       alert("Video Is Copyrighted");
       console.log(error);
     }
@@ -182,13 +188,19 @@ const Home = () => {
                   onChange={(e) => seturl(e.target.value)}
                 />
               </div>
-              <button
-                onClick={() => {
-                  setIsSummary((s) => !s), handleSubmit();
-                }}
-              >
-                Summarise
-              </button>
+              {isLoading ? (
+                <div className={style.loader}>
+                  <Spinner animation="border" />
+                </div>
+              ) : (
+                <button
+                  onClick={() => {
+                    setIsSummary((s) => !s), handleSubmit();
+                  }}
+                >
+                  Summarise
+                </button>
+              )}
             </div>
             <div className={style.options_btn}>
               <button onClick={() => setCheck("paragraph")}>Text Form</button>

@@ -1,5 +1,6 @@
 .header_wrapper {
   background: black;
+  position: relative;
   z-index: 111 !important;
 }
 .header_div {

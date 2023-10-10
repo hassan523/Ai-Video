@@ -4,8 +4,24 @@ import { Container } from "react-bootstrap";
 import { IoSendSharp } from "react-icons/io5";
 import { FaFacebookF } from "react-icons/fa";
 import { BsLinkedin, BsTwitter } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const homepage = () => {
+    navigate("/");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+  const aboutuspage = () => {
+    navigate("/about-us");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <>
       <div className={style.footer_wrapper}>
@@ -29,8 +45,12 @@ const Footer = () => {
                 <div className={style.our_services}>
                   <h3>Page</h3>
                   <ul>
-                    <li role="button">Home</li>
-                    <li role="button">About Us</li>
+                    <li role="button" onClick={homepage}>
+                      Home
+                    </li>
+                    <li role="button" onClick={aboutuspage}>
+                      About Us
+                    </li>
                   </ul>
                 </div>
                 <div className={style.company}>
