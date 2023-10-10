@@ -1,15 +1,20 @@
 import React from "react";
 import style from "./header.module.css";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/logo.png";
 
 const Header = () => {
   const navigate = useNavigate();
   return (
     <header className={style.header_wrapper}>
       <div className={style.header_div}>
-        <h1 onClick={() => navigate("/")} role="button">
-          YOUSUMMARISE
-        </h1>
+        <img
+          src={logo}
+          onClick={() => navigate("/")}
+          role="button"
+          alt="logo"
+          width="30%"
+        />
         <div
           className={`d-flex align-items-center justify-content-between ${style.header_right}`}
         >

@@ -154,16 +154,8 @@ const Home = () => {
             }}
             className={style.main_container_bg}
           />
-          <div style={{ zIndex: "20" }}>
-            <h2
-              style={{
-                color: "white",
-                textAlign: "center",
-                marginBottom: "2.6rem",
-              }}
-            >
-              Learn
-            </h2>
+          <div style={{ zIndex: "20", width:"100%" }}>
+            <img src="" alt="banner-2nd-vid" />
             <div className={style.text_url}>
               <div>
                 <input
