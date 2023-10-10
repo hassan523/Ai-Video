@@ -151,6 +151,7 @@ const Home = () => {
               height: "100%",
               filter: "blur(20px)",
             }}
+            className={style.main_container_bg}
           />
           <div style={{ zIndex: "20" }}>
             <h2
@@ -314,6 +315,7 @@ const Home = () => {
                     fontSize: "40px",
                     fontWeight: "19",
                   }}
+                  className={style.heading_sec}
                 >
                   SUMMARIES <strong style={{ color: "red" }}>GENRATED</strong>
                 </h2>
@@ -553,11 +555,8 @@ const Home = () => {
             </h1>
           </div>
         </div>
-      </span>
-      {/* Giff here  */}
-      <div className={style.ytGiffWrapper}>
         <img src={ytGiff} className={style.ytGiff} alt="" />
-      </div>
+      </span>
 
       {/* <!-- FAQ,s Area...... --> */}
       <section className={style.section_five_wrapper}>

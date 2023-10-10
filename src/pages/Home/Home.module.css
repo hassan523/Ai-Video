@@ -23,16 +23,13 @@
   width: 22rem;
 }
 
-.ytGiffWrapper { 
-  display: flex; 
-  justify-content: center;
-  align-items: center;
-  background-color: #000000;
-  margin-top: -100px !important;
-  z-index: 99999 !important;
+.ytGiff {
+  width: 30%;
+  position: relative;
+  top: -11rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
-
-
 
 @media screen and (max-width: 995px) {
   .right_box p {
@@ -61,6 +58,21 @@
   .robo_img {
     height: 18rem;
     width: 12rem;
+  }
+
+  .ytGiff {
+    width: 45%;
+    top: -6rem;
+  }
+}
+@media screen and (max-width: 700px) {
+  .main_container_bg {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 370px) {
+  .heading_sec {
+    font-size: 20px !important;
   }
 }
 
@@ -103,11 +115,14 @@
 .text_url button:hover {
   background-color: red;
 }
+
 .options_btn {
   width: auto;
   margin-top: 1rem;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+  gap: 1rem;
+  place-items: center;
   margin-bottom: 4rem;
 }
 .options_btn button {
@@ -416,7 +431,7 @@
 }
 /* marquee */
 .scroll_text {
-  padding: 8rem 0rem;
+  padding: 8rem 0rem 0rem 0rem;
   position: relative;
   width: 100%;
   display: flex;
