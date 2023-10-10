@@ -17,10 +17,14 @@
 }
 .right_box {
   margin-left: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .robo_img {
-  height: 30rem;
-  width: 22rem;
+  height: 33rem;
+  width: 28rem;
+  border-radius: 20px;
 }
 
 .ytGiff {

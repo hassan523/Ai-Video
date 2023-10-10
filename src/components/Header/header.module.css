@@ -1,6 +1,6 @@
 .header_wrapper {
   background: black;
-  z-index: 111;
+  z-index: 111 !important;
 }
 .header_div {
   display: flex;

@@ -10,6 +10,7 @@
   justify-content: center;
   background-position: center;
   padding-top: 6.6rem;
+  position: relative;
 }
 
 .mission {
@@ -120,6 +121,18 @@
   align-items: center;
   text-align: center;
   gap: 1rem;
+  height: 100%;
+}
+.team_box h3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.logo {
+  border-radius: 50%;
+  fill: blue;
+  background: white;
 }
 .team_box_wrapper {
   display: grid;
@@ -131,6 +144,8 @@
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
+}
+.team_box_logo {
 }
 @media screen and (max-width: 500px) {
   .team_box_wrapper {
