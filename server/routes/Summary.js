@@ -177,15 +177,22 @@ router.post("/summary", async (req, res) => {
 });
 
 
-router.post("/counter", async (req, res) => {
+router.get("/get-counter", async (req, res) => {
   try {
 
+    const findCounter = await counter.find();
+    const reversed = findCounter.reverse();
+    const currentCount = reversed[0]
 
-    res.status(200).json("Counting");
+    if (findCounter.length !== 0) {
+      return res.status(200).json(currentCount.counter);
+    } else {
+      res.status(200).json(0);
+    }
+
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal Server Error" });
-
+    res.status(500).json({ message: "Internal Server Error" })
   }
 })
 

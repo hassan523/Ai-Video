@@ -4,6 +4,7 @@ import { Container } from "react-bootstrap";
 import { IoSendSharp } from "react-icons/io5";
 import { FaFacebookF } from "react-icons/fa";
 import { BsLinkedin, BsTwitter } from "react-icons/bs";
+import logo from "../../assets/logo.png";
 
 const Footer = () => {
   return (
@@ -14,7 +15,7 @@ const Footer = () => {
             <div className={style.footer_div}>
               <div className={style.footer_logo}>
                 <div className={style.social_logo}>
-                  <p className={style.footer_creater_name}>YOUSUMMARISE</p>
+                  <img src={logo} className={style.footer_creater_name} alt="logo" />
                   <div className="d-flex gap-5">
                     <p>
                       <BsTwitter />
