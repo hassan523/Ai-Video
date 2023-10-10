@@ -350,9 +350,9 @@ const Home = () => {
                 display: "flex",
                 justifyContent: "space-evenly",
               }}
-              className="mt-5"
+              className=""
             >
-              <div className="mt-md-5 ">
+              <div className="">
                 <h2
                   style={{
                     color: "white",
@@ -369,7 +369,7 @@ const Home = () => {
                 </h2>
               </div>
               <div
-                className="mt-md-5 d-flex justify-content-center align-items-center"
+                className="d-flex justify-content-center align-items-center"
                 style={{
                   height: "3.8rem",
                   display: "flex",
@@ -391,7 +391,7 @@ const Home = () => {
           </div>
         </Container>
       </section>
-      <section className={style.how_sum_wrapper}>
+      <section className={`pt-5 ${style.how_sum_wrapper}`}>
         <Container className={style.how_sum_container}>
           <div className={style.how_sum}>
             <div>
