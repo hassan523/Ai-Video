@@ -14,6 +14,8 @@ import { BsLinkedin } from "react-icons/bs";
 const AboutUs = () => {
   return (
     <div>
+      <div className={style.white_box}></div>
+      <div className={style.red_box}></div>
       <Header />
       {/* OUR mission */}
       <section className={style.mission_wrapper}>

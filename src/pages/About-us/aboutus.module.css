@@ -1,3 +1,28 @@
+.red_box {
+  position: fixed;
+  width: 25rem;
+  height: 24rem;
+  border-radius: 50%;
+  background: red;
+  filter: blur(20px);
+  right: -26rem;
+  box-shadow: 1rem 0rem 31rem 3rem red;
+  top: 15rem;
+  z-index: 1;
+}
+.white_box {
+  position: fixed;
+  width: 25rem;
+  height: 24rem;
+  border-radius: 50%;
+  background: #32313a;
+  filter: blur(20px);
+  left: -26rem;
+  box-shadow: 1rem 0rem 31rem 3rem #32313a;
+  top: 15rem;
+  z-index: 1;
+}
+
 .mission_wrapper {
   background-image: url("../../assets/login/black_bg.png");
   height: auto;
