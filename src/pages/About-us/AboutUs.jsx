@@ -6,6 +6,7 @@ import { Container } from "react-bootstrap";
 import style from "./aboutus.module.css";
 import team_img_one from "../../assets/team/about_team.png";
 import uppergif from "../../assets/Login/login_bg.gif";
+import main_gif from "../../assets/main_gif.gif";
 import img_b from "../../assets/about_main.png";
 import linkdin from "../../assets/linkdin.png";
 import { BsLinkedin } from "react-icons/bs";
@@ -42,14 +43,23 @@ const AboutUs = () => {
               <h1 style={{ color: "white" }}>
                 OUR <strong style={{ color: "red" }}>MISSION</strong>
               </h1>
-              <p style={{ color: "white" }}>
+              <p style={{ color: "white", fontWeight: "100" }}>
                 Friends and innovators Mira and Tomas bonded over a shared
                 frustration - the inefficiency of self-directed research. After
                 meeting at an entrepreneurship programme in Silicon Valley in
                 2022, they realised they could combine their complementary
                 skills to help students better manage the flood of online
-                information. Witnessing their own and peers' waste of countless
-                hours watching inconsistent, sometimes questionable videos, they
+                information.
+              </p>
+              <p
+                style={{
+                  color: "white",
+                  marginTop: "-1rem",
+                  fontWeight: "100",
+                }}
+              >
+                Witnessing their own and peers' waste of countless hours
+                watching inconsistent, sometimes questionable videos, they
                 founded YouSummarise on a mission to put the student in control.
                 By synthesising key insights from lengthy videos into accessible
                 summaries, their platform allows learners to quickly evaluate
@@ -67,7 +77,8 @@ const AboutUs = () => {
       {/* meet team */}
       <section className={style.team_wrapper}>
         <Container className={style.team_container}>
-          <h1>
+          <img src={main_gif} alt="no img found" className={style.maingif} />
+          <h1 style={{ zIndex: "10" }}>
             Meet the <strong>team</strong>
           </h1>
           <div className={style.team_box_wrapper}>
@@ -76,6 +87,7 @@ const AboutUs = () => {
               <h3>
                 Mira Bhandari <BsLinkedin className={style.logo} />
               </h3>
+              <h4 className={style.cofounder}>Co-Founder</h4>
               <p>
                 Mira Bhandari is a co-founder of YouSummarise and an ambitious
                 entrepreneur who integrates innovation into her academic
@@ -94,6 +106,7 @@ const AboutUs = () => {
               <h3>
                 Tomas Lopez-Valcarcel <BsLinkedin className={style.logo} />
               </h3>
+              <h4 className={style.cofounder}>Co-Founder</h4>
               <p>
                 Tomas Lopez-Valcarcel is a co-founder of YouSummarise and a
                 passionate student entrepreneur who blends academics with
