@@ -154,7 +154,7 @@ router.post("/summary", async (req, res) => {
         // optional, safety settings
         safety_settings: [{ "category": "HARM_CATEGORY_DEROGATORY", "threshold": 1 }, { "category": "HARM_CATEGORY_TOXICITY", "threshold": 1 }, { "category": "HARM_CATEGORY_VIOLENCE", "threshold": 2 }, { "category": "HARM_CATEGORY_SEXUAL", "threshold": 2 }, { "category": "HARM_CATEGORY_MEDICAL", "threshold": 2 }, { "category": "HARM_CATEGORY_DANGEROUS", "threshold": 2 }],
         prompt: {
-          text: ` Give Me The Summary Of This Content In Maximum ${req.body.wordCounter} Amount of words ${promptString}`,
+          text: ` ${promptString} Give Me The Summary Of This Content In Maximum ${req.body.wordCounter} Amount of words`,
         }
       })
 
