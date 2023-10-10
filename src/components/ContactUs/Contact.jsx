@@ -6,15 +6,7 @@ import { Container } from "react-bootstrap";
 const Contact = () => {
   return (
     <section className={style.Contact_us_wrapper}>
-      <img
-        src={Contact_us_gif}
-        alt="no img found"
-        style={{
-          width: "100%",
-          objectFit: "contain",
-          height: "30rem",
-        }}
-      />
+      <img src={Contact_us_gif} alt="no img found" className={style.gif_img} />
       <div className={style.contact_us_right}>
         <Container className={style.contact_us_container}>
           <div>
@@ -25,7 +17,16 @@ const Contact = () => {
               to enhancing your experience with YouSummarised.
             </p>
           </div>
-
+          <select
+            defaultValue="Question or Feedback"
+            className={style.Contact_select}
+          >
+            <option defaultValue="Question or Feedback">
+              Question or Feedback
+            </option>
+            <option>Question</option>
+            <option>Feedback</option>
+          </select>
           <div className={style.contact_us_fields}>
             <input type="text" placeholder="Enter your Name" />
             <input type="text" placeholder="Enter your email..." />

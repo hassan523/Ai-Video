@@ -166,8 +166,6 @@ const Home = () => {
     return () => clearInterval(timerId);
   }, []);
 
-  console.log(currCount);
-
   return (
     <div>
       <div className={style.white_box}></div>
@@ -196,7 +194,7 @@ const Home = () => {
                 <span>Learn</span> <span>more</span> <span>in</span>{" "}
                 <span>less</span> <span>time</span> <span> with </span>{" "}
                 <span> AI-powered</span>{" "}
-                <span style={{ color: "red" }}>summaries</span>
+                <span style={{ color: "red" }}>summarize</span>
               </h2>
             </div>
 
@@ -221,7 +219,7 @@ const Home = () => {
                     setIsSummary((s) => !s), handleSubmit();
                   }}
                 >
-                  Summarise
+                  summarize
                 </button>
               )}
             </div>
@@ -352,24 +350,26 @@ const Home = () => {
               }}
               className=""
             >
-              <div className="">
+              <div className="d-flex align-items-center">
                 <h2
                   style={{
                     color: "white",
-                    fontSize: "55px",
+                    fontSize: "31px",
                     fontWeight: "19",
-                    fontFamily: "Astronaut",
+                    fontFamily: "var(--digital-font)",
                   }}
                   className={style.heading_sec}
                 >
-                  SUMMARIES{" "}
-                  <strong style={{ color: "red", fontFamily: "Astronaut" }}>
+                  SUMMARIZE{" "}
+                  <strong
+                    style={{ color: "red", fontFamily: "var(--digital-font)" }}
+                  >
                     GENRATED
                   </strong>
                 </h2>
               </div>
               <div
-                className="d-flex justify-content-center align-items-center"
+                className={`d-flex justify-content-center align-items-center ${style.second_heading}`}
                 style={{
                   height: "3.8rem",
                   display: "flex",
@@ -382,7 +382,6 @@ const Home = () => {
                   fontSize: "55px",
                   color: "white",
                   fontWeight: "400",
-                  fontFamily: "Astronaut",
                 }}
               >
                 {currCount}
@@ -399,7 +398,7 @@ const Home = () => {
             </div>
             <div className={style.right_box}>
               <h1 style={{ color: "white" }}>
-                GET HOW <strong style={{ color: "red" }}>YOUSUMMARISE</strong>{" "}
+                GET HOW <strong style={{ color: "red" }}>YOUSUMMARIZE</strong>{" "}
                 WORK
               </h1>
 
@@ -600,23 +599,23 @@ const Home = () => {
           </div>
         </Container>
       </section>
-      {/* summarise Animation */}
+      {/* summarize Animation */}
       <span className={style.scroll_text}>
         <div className={style.marquee}>
           <div>
             <h1>
-              * you summarise * you summarise * you summarise* you summarise *
-              you summarise * you summarise* you summarise * you summarise * you
-              summarise
+              * you summarize * you summarize * you summarize* you summarize *
+              you summarize * you summarize* you summarize * you summarize * you
+              summarize
             </h1>
           </div>
         </div>
         <div className={style.marquee_second}>
           <div>
             <h1 className={style.marquee_second_para}>
-              * you summarise * you summarise * you summarise* you summarise *
-              you summarise * you summerise* you summarise * you summarise * you
-              summarise
+              * you summarize * you summarize * you summarize* you summarize *
+              you summarize * you summerise* you summarize * you summarize * you
+              summarize
             </h1>
           </div>
         </div>
@@ -672,8 +671,8 @@ const Home = () => {
           autoplay={{
             delay: 1000, // 4 seconds
             disableOnInteraction: false,
-             // Continue autoplay after user interaction
-            }}
+            // Continue autoplay after user interaction
+          }}
           modules={[Autoplay]}
           className={style.section_two_swiper}
         >

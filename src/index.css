@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway+Dots&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&family=Orbitron&display=swap");
 * {
   padding: 0;
   margin: 0;
@@ -8,12 +8,12 @@
 :root {
   --primary-bg: #14cf93;
   --dot-font: "Raleway Dots", sans-serif;
+  --digital-font: "Orbitron", sans-serif;
 }
 
-
 @font-face {
-  font-family: 'Astronaut';
-  src: url('./fonts/ASTRI___.TTF') format('truetype');
+  font-family: "Astronaut";
+  src: url("./fonts/ASTRI___.TTF") format("truetype");
   /* You might need to adjust the URL based on the location of your font file */
   font-weight: normal;
   font-style: normal;
@@ -83,4 +83,9 @@
 }
 #animated-text-container h2 span:nth-child(8) {
   animation-delay: 4.5s;
+}
+
+select option {
+  background: red !important;
+  color: white;
 }

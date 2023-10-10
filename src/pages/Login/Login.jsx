@@ -7,6 +7,7 @@ import { BiLogoGmail } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../../redux/Auth/auth";
+import logo from "../../assets/logo.png";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(true);
@@ -41,6 +42,8 @@ const Login = () => {
 
   return (
     <div className={style.login_wrapper}>
+      <div className={style.white_box}></div>
+      <div className={style.red_box}></div>
       <h6
         className={style.Login_back}
         onClick={() => navigate("/")}
@@ -56,16 +59,17 @@ const Login = () => {
             objectFit: "contain",
             position: "absolute",
             height: "100%",
-            filter: "blur(10px)",
+            filter: "blur(20px)",
+            width: "50rem",
           }}
           className={style.login_bg}
         />
         <div className={style.login_fields_wrapper}>
-          <h1>YOUSUMMARISE</h1>
+          <img src={logo} alt="" className={style.logo} />
           <h3>LOGIN FORM</h3>
           <form className={style.form} method="POST" onSubmit={handleLogin}>
             <label className={style.label}>
-              <h6>Email*</h6>
+              <h6>Email</h6>
               <div className={style.password_fields}>
                 <input
                   type="text"
@@ -79,7 +83,7 @@ const Login = () => {
             </label>
 
             <label className={style.label}>
-              <h6>Password*</h6>
+              <h6>Password</h6>
               <div className={style.password_fields}>
                 <input
                   type="password"
@@ -99,8 +103,9 @@ const Login = () => {
                 <input type="checkbox" /> <p>Hear From Us</p>
               </div>
             </div>
-
-            <button className={style.signin_btn}>Sign In</button>
+            <div className="w-100 d-flex justify-content-center">
+              <button className={style.signin_btn}>Sign In</button>
+            </div>
           </form>
         </div>
       </Container>

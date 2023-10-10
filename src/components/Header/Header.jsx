@@ -5,6 +5,11 @@ import logo from "../../assets/logo.png";
 
 const Header = () => {
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const handleLogOut = () => {
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
   return (
     <header className={style.header_wrapper}>
       <div className={style.header_div}>
@@ -27,8 +32,14 @@ const Header = () => {
             ABOUT US
           </h6>
           <div className="gap-3 justify-content-round d-flex">
-            <button onClick={() => navigate("/login")}>Log in</button>
-            <button onClick={() => navigate("/signup")}>Sign in</button>
+            {user?.message === "Loggin successfully" ? (
+              <button onClick={handleLogOut}>Log Out</button>
+            ) : (
+              <>
+                <button onClick={() => navigate("/login")}>Log in</button>
+                <button onClick={() => navigate("/signup")}>Sign in</button>
+              </>
+            )}
           </div>
         </div>
       </div>

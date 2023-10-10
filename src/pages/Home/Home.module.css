@@ -7,7 +7,7 @@
   filter: blur(20px);
   right: -26rem;
   box-shadow: 1rem 0rem 31rem 3rem red;
-  top: 15rem;
+  bottom: 0;
   z-index: 1;
 }
 .white_box {
@@ -15,12 +15,12 @@
   width: 25rem;
   height: 24rem;
   border-radius: 50%;
-  background: #32313a;
+  background: white;
   filter: blur(20px);
   left: -26rem;
-  box-shadow: 1rem 0rem 31rem 3rem #32313a;
-  top: 15rem;
-  z-index: 1;
+  box-shadow: 1rem 1rem 35rem -1rem white;
+  top: 0;
+  z-index: 1111;
 }
 .how_sum_wrapper {
   background-color: black;
@@ -41,6 +41,9 @@
 .how_sum strong {
   color: red;
 }
+.second_heading {
+  font-family: var(--digital-font);
+}
 .right_box {
   margin-left: 6rem;
   display: flex;
@@ -51,7 +54,7 @@
   text-align: start;
 }
 .robo_img {
-  height: 35rem;
+  height: 40rem;
   width: 31rem;
   border-radius: 20px;
 }
@@ -234,9 +237,10 @@
   border-radius: 10px;
   transition: background-color 0.2s ease-in 100ms;
 }
-.options_btn button:hover {
+.options_btn button:focus {
   background-color: red;
 }
+
 .summary {
   color: black;
   background-color: white;

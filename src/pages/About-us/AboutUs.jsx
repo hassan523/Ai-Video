@@ -11,12 +11,16 @@ import main_gif from "../../assets/main_gif.gif";
 import img_b from "../../assets/about_main.png";
 import linkdin from "../../assets/linkdin.png";
 import { BsLinkedin } from "react-icons/bs";
+import left_chain from "../../assets/about_chain_left.png";
+import right_chain from "../../assets/about_chain_right.png";
 
 const AboutUs = () => {
   return (
     <div>
       <div className={style.white_box}></div>
       <div className={style.red_box}></div>
+      <img src={left_chain} alt="" className={style.about_chain_left} />
+      <img src={right_chain} alt="" className={style.about_chain_right} />
       <Header />
       {/* OUR mission */}
       <section className={style.mission_wrapper}>
