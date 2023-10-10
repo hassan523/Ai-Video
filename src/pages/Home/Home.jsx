@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./home.module.css";
 import { Container } from "react-bootstrap";
 import img_one from "../../assets/slider/img_one.png";
@@ -101,7 +101,9 @@ const Home = () => {
   const [isLoading, setisLoading] = useState(false);
   const [ytData, setYtData] = useState("");
   const [keyPointData, setKeyPointData] = useState([]);
-  console.log(keyPointData);
+
+  const [currCount, setCurrCount] = useState(null);
+
   const handleSubmit = async () => {
     try {
       setIsSummary(false);
@@ -144,6 +146,25 @@ const Home = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const timerId = setInterval(async () => {
+      try {
+        const res = await axios.get(`${API_BASE_URL}/api/get-counter`);
+        if (res.status === 200) {
+          setCurrCount(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+        alert("Alert Error");
+      }
+    }, 5000);
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(timerId);
+  }, []);
+
+  console.log(currCount);
 
   return (
     <div>
@@ -329,33 +350,37 @@ const Home = () => {
               }}
               className="mt-5"
             >
-              <div className="mt-md-5">
+              <div className="mt-md-5 ">
                 <h2
                   style={{
                     color: "white",
-                    fontFamily: "Flat Level",
-                    fontSize: "40px",
+                    fontSize: "55px",
                     fontWeight: "19",
+                    fontFamily: "Astronaut",
                   }}
                   className={style.heading_sec}
                 >
-                  SUMMARIES <strong style={{ color: "red" }}>GENRATED</strong>
+                  SUMMARIES <strong style={{ color: "red",          fontFamily: "Astronaut" }}>GENRATED</strong>
                 </h2>
               </div>
               <div
-                className="mt-md-5"
+                className="mt-md-5 d-flex justify-content-center align-items-center"
                 style={{
-                  height: "2.8rem",
+                  height: "3.8rem",
+                  display:"flex",
+                  justifyContent:"center",
+                  alignItems:"center",
                   width: "6rem",
                   border: "1px solid grey",
                   borderRadius: "8px",
                   textAlign: "center",
-                  fontSize: "1.6rem",
+                  fontSize: "55px",
                   color: "white",
                   fontWeight: "400",
+                  fontFamily: "Astronaut",
                 }}
               >
-                153
+                {currCount}
               </div>
             </div>
           </div>

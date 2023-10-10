@@ -3,6 +3,7 @@ import express from "express";
 
 import { TextServiceClient } from "@google-ai/generativelanguage";
 import { GoogleAuth } from "google-auth-library";
+import counter from "../models/counter.js";
 
 const router = express.Router();
 
@@ -145,8 +146,25 @@ router.post("/summary", async (req, res) => {
         index: index + 1, // Add 1 to make the index 1-based
         point: point.replace(/^\d+\.\s+/, "").trim(), // Remove leading index and whitespace
       }));
-      // 'pointsObjects' now contains an array of objects with index and point
-      // console.log(pointsObjects);
+
+
+      // Counter Code
+      const findCouters = await counter.find();
+      const reversed = findCouters.reverse();
+      const currentCount = reversed[0]
+      if (findCouters.length !== 0) {
+        const createCount = new counter({
+          counter: currentCount.counter + 1
+        })
+        await createCount.save();
+      } else {
+        const createCount = new counter({
+          counter: 1
+        })
+        await createCount.save();
+      }
+
+
 
       res.status(200).json(pointsObjects);
     } else {
@@ -157,5 +175,26 @@ router.post("/summary", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+
+router.get("/get-counter", async (req, res) => {
+  try {
+
+    const findCounter = await counter.find();
+    const reversed = findCounter.reverse();
+    const currentCount = reversed[0]
+
+    if (findCounter.length !== 0) {
+      return res.status(200).json(currentCount.counter);
+    } else {
+      res.status(200).json(0);
+    }
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" })
+  }
+})
+
 
 export default router;
