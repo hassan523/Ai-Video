@@ -3,6 +3,7 @@ import express from "express";
 
 import { TextServiceClient } from "@google-ai/generativelanguage";
 import { GoogleAuth } from "google-auth-library";
+import counter from "../models/counter.js";
 
 const router = express.Router();
 
@@ -145,8 +146,9 @@ router.post("/summary", async (req, res) => {
         index: index + 1, // Add 1 to make the index 1-based
         point: point.replace(/^\d+\.\s+/, "").trim(), // Remove leading index and whitespace
       }));
-      // 'pointsObjects' now contains an array of objects with index and point
-      // console.log(pointsObjects);
+
+
+
 
       res.status(200).json(pointsObjects);
     } else {
@@ -157,5 +159,22 @@ router.post("/summary", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+
+router.post("/counter", async (req, res) => {
+  try {
+    const { couting } = req.body;
+
+    const createCount = new counter({
+      counter: couting + 1
+    })
+    await createCount.save();
+    res.status(200).json({ count: createCount });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
+
+  }
+})
 
 export default router;
