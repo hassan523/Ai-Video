@@ -150,7 +150,7 @@ const Home = () => {
         }
       } catch (error) {
         console.log(error);
-        alert("Alert Error");
+        // alert("Alert Error");
       }
     }, 5000);
 
