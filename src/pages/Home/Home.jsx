@@ -15,6 +15,7 @@ import img_rob from "../../assets/img_rob.png";
 import main_gif from "../../assets/main_gif.gif";
 import ytGiff from "../../assets/ytGif.gif";
 import back from "../../assets/back.svg";
+import linkSvg from "../../assets/link.svg";
 
 import axios from "axios";
 import API_BASE_URL from "../../config";
@@ -149,15 +150,30 @@ const Home = () => {
             style={{
               position: "absolute",
               zIndex: "1",
-              height: "100%",
+              // height: "100%",
+              width: "70%",
               filter: "blur(20px)",
             }}
             className={style.main_container_bg}
           />
-          <div style={{ zIndex: "20", width:"100%" }}>
-            <img src="" alt="banner-2nd-vid" />
-            <div className={style.text_url}>
-              <div>
+          <div
+            className={style.bannerAnimatedTxt}
+            style={{ zIndex: "20", width: "100%" }}
+          >
+            <div id="animated-text-container">
+              <h2 class="display-3">
+                <span>Learn</span> <span>more</span> <span>in</span>{" "}
+                <span>less</span> <span>time</span> <span> with </span>{" "}
+                <span> AI-powered</span>{" "}
+                <span style={{ color: "red" }}>summaries</span>
+              </h2>
+            </div>
+
+            <div className={`pt-5 ${style.text_url}`}>
+              <div className={style.inputFields}>
+                <span className="ps-3">
+                  <img src={linkSvg} alt="" />
+                </span>
                 <input
                   type="text"
                   placeholder="www.youtube.com/watch?example"
@@ -295,12 +311,11 @@ const Home = () => {
             <div
               style={{
                 display: "flex",
-                justifyContent: "space-between",
-                padding: "0 1rem",
-                marginBottom: "7rem",
+                justifyContent: "space-evenly",
               }}
+              className="mt-5"
             >
-              <div>
+              <div className="mt-md-5">
                 <h2
                   style={{
                     color: "white",
@@ -314,6 +329,7 @@ const Home = () => {
                 </h2>
               </div>
               <div
+                className="mt-md-5"
                 style={{
                   height: "2.8rem",
                   width: "6rem",
