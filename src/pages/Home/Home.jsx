@@ -105,7 +105,7 @@ const Home = () => {
   const [keyPointData, setKeyPointData] = useState([]);
 
   const [currCount, setCurrCount] = useState(null);
-
+  console.log(check, url, keyPoints, wordCounter);
   const handleSubmit = async () => {
     try {
       setIsSummary(false);
@@ -119,7 +119,7 @@ const Home = () => {
 
         const res = await axios.post(
           `${API_BASE_URL}/api/summary`,
-          paraFormData
+          paraFormData,
         );
 
         setYtData(res.data);
@@ -127,11 +127,14 @@ const Home = () => {
         if (res.status === 200) {
           setisLoading(false);
           setIsSummary(true);
+          setCheck("");
+          seturl("");
+          setKeyPoints(0);
+          setWordCounter(0);
         }
 
         setKeyPoints(null);
         setonSubmit(true);
-        console.log(res.data);
       } else if (check === "points") {
         const pointsFormData = new FormData();
         pointsFormData.append("vidURL", url);
@@ -140,7 +143,7 @@ const Home = () => {
 
         const res = await axios.post(
           `${API_BASE_URL}/api/summary`,
-          pointsFormData
+          pointsFormData,
         );
 
         setKeyPointData(res.data);
@@ -150,9 +153,11 @@ const Home = () => {
         if (res.status === 200) {
           setisLoading(false);
           setIsSummary(true);
+          setCheck("");
+          seturl("");
+          setKeyPoints(0);
+          setWordCounter(0);
         }
-
-        console.log(res.data);
       } else {
         setisLoading(false);
         alert("Invalid Request");
@@ -170,6 +175,10 @@ const Home = () => {
         const res = await axios.get(`${API_BASE_URL}/api/get-counter`);
         if (res.status === 200) {
           setCurrCount(res.data);
+          setCheck("");
+          seturl("");
+          setKeyPoints(0);
+          setWordCounter(0);
         }
       } catch (error) {
         console.log(error);
@@ -180,6 +189,12 @@ const Home = () => {
     // Clean up the interval when the component unmounts
     return () => clearInterval(timerId);
   }, []);
+
+  const handleCopy = () => {
+    let text = document.getElementById("text");
+    text.select();
+    navigator.clipboard.write();
+  };
 
   return (
     <div>
@@ -222,6 +237,7 @@ const Home = () => {
                   type="text"
                   placeholder="www.youtube.com/watch?example"
                   onChange={(e) => seturl(e.target.value)}
+                  value={url}
                 />
               </div>
               {isLoading ? (
@@ -253,7 +269,7 @@ const Home = () => {
                   </button>
                   <button
                     onClick={() => {
-                      setWordCounter(40);
+                      setWordCounter(35);
                       setKeyPoints(null);
                     }}
                   >
@@ -261,7 +277,7 @@ const Home = () => {
                   </button>
                   <button
                     onClick={() => {
-                      setWordCounter(60);
+                      setWordCounter(40);
                       setKeyPoints(null);
                     }}
                   >
@@ -282,7 +298,7 @@ const Home = () => {
                     onClick={() => {
                       setWordCounter(null);
 
-                      setKeyPoints(12);
+                      setKeyPoints(8);
                     }}
                   >
                     Medium
@@ -291,7 +307,7 @@ const Home = () => {
                     onClick={() => {
                       setWordCounter(null);
 
-                      setKeyPoints(15);
+                      setKeyPoints(10);
                     }}
                   >
                     Long
@@ -302,17 +318,26 @@ const Home = () => {
 
             {isSummary ? (
               <div className={style.summary}>
-                <h4>Here is your Summary</h4>
+                <h4 style={{ fontWeight: "800" }}>Here is your Summary</h4>
                 <div className={style.summary_inside}>
                   {ytData ? (
-                    <p>{ytData}</p>
+                    <p style={{ height: "10rem", overflow: "auto" }} id="text">
+                      {ytData}
+                    </p>
                   ) : (
                     keyPointData.map((item, index) => (
-                      <p key={index}>{item.point}</p>
+                      <p
+                        key={index}
+                        style={{ height: "10rem", overflow: "auto" }}
+                        id="text"
+                      >
+                        {item.point}
+                      </p>
                     ))
                   )}
+
                   <div style={{ display: "flex" }}>
-                    <button>
+                    <button onClick={handleCopy}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="37"
@@ -399,7 +424,7 @@ const Home = () => {
                   fontWeight: "400",
                 }}
               >
-                {currCount}
+                {currCount ? { currCount } : 0}
               </div>
             </div>
           </div>
@@ -408,7 +433,7 @@ const Home = () => {
       <section className={`pt-5 ${style.how_sum_wrapper}`}>
         <Container className={style.how_sum_container}>
           <div className={style.how_sum}>
-            <div>
+            <div style={{ zIndex: "10" }}>
               <img src={img_rob} alt="Robot image" className={style.robo_img} />
             </div>
             <div className={style.right_box}>
