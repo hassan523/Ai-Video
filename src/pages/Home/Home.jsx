@@ -171,22 +171,22 @@ const Home = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const timerId = setInterval(async () => {
-  //     try {
-  //       const res = await axios.get(`${API_BASE_URL}/api/get-counter`);
-  //       if (res.status === 200) {
-  //         setCurrCount(res.data);
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //       // alert("Alert Error");
-  //     }
-  //   }, 5000);
+  useEffect(() => {
+    const timerId = setInterval(async () => {
+      try {
+        const res = await axios.get(`${API_BASE_URL}/api/get-counter`);
+        if (res.status === 200) {
+          setCurrCount(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+        // alert("Alert Error");
+      }
+    }, 5000);
 
-  //   // Clean up the interval when the component unmounts
-  //   return () => clearInterval(timerId);
-  // }, []);
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(timerId);
+  }, []);
 
   const handleCopy = () => {
     let text = document.getElementById("text");
