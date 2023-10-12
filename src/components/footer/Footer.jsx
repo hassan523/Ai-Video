@@ -37,9 +37,6 @@ const Footer = () => {
                   />
                   <div className="d-flex gap-5 py-3">
                     <p>
-                      <BsTwitter />
-                    </p>
-                    <p>
                       <BsInstagram />
                     </p>
                   </div>
@@ -47,7 +44,7 @@ const Footer = () => {
               </div>
               <div className={style.footer_middle_div}>
                 <div className={style.our_services}>
-                  <h3>Page</h3>
+                  <h3>Links</h3>
                   <ul>
                     <li role="button" onClick={homepage}>
                       Home
@@ -60,7 +57,7 @@ const Footer = () => {
                 <div className={style.company}>
                   <h3>Links</h3>
                   <ul>
-                    <li role="button">Term Of Use</li>
+                    <li role="button">Terms Of Use</li>
                     <li role="button">Privacy Policy</li>
                   </ul>
                 </div>

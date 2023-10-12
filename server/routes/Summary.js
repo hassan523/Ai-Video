@@ -21,7 +21,7 @@ const router = express.Router();
 
 //       const options = {
 //         method: "POST",
-//         url: "https://api.edenai.run/v2/text/summarize",
+//         url: "https://api.edenai.run/v2/text/summarise",
 //         headers: {
 //           authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiY2Q2YzhmOTAtNDcwMC00MzU5LWE1MTYtY2ExZDMyYjc5NGY5IiwidHlwZSI6ImFwaV90b2tlbiJ9.dE31lltMIxj6-uBubCaAXMHsYBKPQHzAOzpkZPpBMEg`,
 //         },
@@ -66,7 +66,7 @@ const router = express.Router();
 
 //       const options = {
 //         method: "POST",
-//         url: "https://api.edenai.run/v2/text/summarize",
+//         url: "https://api.edenai.run/v2/text/summarise",
 //         headers: {
 //           authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiY2Q2YzhmOTAtNDcwMC00MzU5LWE1MTYtY2ExZDMyYjc5NGY5IiwidHlwZSI6ImFwaV90b2tlbiJ9.dE31lltMIxj6-uBubCaAXMHsYBKPQHzAOzpkZPpBMEg`,
 //         },
@@ -120,7 +120,11 @@ router.post("/summary", async (req, res) => {
     });
 
     // Check if the contentType is "paragraph" and wordCounter is provided
-    if (req.body.contentType === "paragraph" && req.body.wordCounter) {
+    if (
+      req.body.contentType === "paragraph" &&
+      req.body.wordCounter &&
+      !req.body.keyPoints
+    ) {
       const transcript = await YoutubeTranscript.fetchTranscript(
         req.body.vidURL
       );
@@ -156,7 +160,7 @@ router.post("/summary", async (req, res) => {
           { category: "HARM_CATEGORY_DANGEROUS", threshold: 2 },
         ],
         prompt: {
-          text: ` ${promptString} Give Me The Summary Of This Content In Maximum ${req.body.wordCounter} Amount of words`,
+          text: ` ${promptString} Give Me The Summary Of This Content In Maximum ${req.body.wordCounter} Amount of words not in keypoints`,
         },
       });
 
@@ -182,7 +186,11 @@ router.post("/summary", async (req, res) => {
       // Now 'responseString' contains the entire response as a single string
 
       res.status(200).json(responseString);
-    } else if (req.body.contentType === "points" && req.body.keyPoints) {
+    } else if (
+      req.body.contentType === "points" &&
+      req.body.keyPoints &&
+      !req.body.wordCounter
+    ) {
       const transcript = await YoutubeTranscript.fetchTranscript(
         req.body.vidURL
       );
@@ -218,7 +226,7 @@ router.post("/summary", async (req, res) => {
           { category: "HARM_CATEGORY_DANGEROUS", threshold: 2 },
         ],
         prompt: {
-          text: ` Give Me The Summary Of This Content In Maximum ${req.body.keyPoints} Key Points With No Heading ${promptString}`,
+          text: `${promptString} Give Me The Summary Of This Content In Maximum ${req.body.keyPoints} Key Points With No Heading and with not in paragraph`,
         },
       });
 
@@ -242,7 +250,9 @@ router.post("/summary", async (req, res) => {
       const responseString = filteredOutputArray.join("\n");
 
       // Split the input string into individual points
-      const pointsArray = responseString.split(/\n\d+\.\s+/).filter(Boolean);
+      const pointsArray = responseString
+        .split(/\n\d+\.\s+|\s+-\s+/)
+        .filter(Boolean);
 
       // Create an array of objects with index and point
       const pointsObjects = pointsArray.map((point, index) => ({

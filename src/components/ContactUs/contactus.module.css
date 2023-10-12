@@ -39,6 +39,7 @@
   object-fit: cover;
   height: 44rem;
 }
+
 .contact_us_fields input {
   padding: 0.8rem 1rem;
   background: transparent;
@@ -69,6 +70,11 @@
   outline: none;
   width: 28rem;
 }
+
+.input2 {
+  width: 28rem;
+}
+
 select option {
   padding: 1rem;
   background: transparent !important;

@@ -19,8 +19,20 @@ const auth = createApi({
         body: date,
       }),
     }),
+    contact: builder.mutation({
+      query: (data) => {
+        //  const  {query, email, firstName, lastName} = data
+        console.log(data);
+        return {
+          url: "/api/contact",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
   }),
 });
-export const { useLoginMutation, useSign_upMutation } = auth;
+export const { useLoginMutation, useSign_upMutation, useContactMutation } =
+  auth;
 
 export default auth;
