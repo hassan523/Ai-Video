@@ -356,13 +356,8 @@ const Home = () => {
                     </p>
                   ) : keyPointData.length !== 0 ? (
                     keyPointData.map((item, index) => (
-                      <p
-                        key={index}
-                        style={{ height: "10rem", overflow: "auto" }}
-                        id="text"
-                      >
-                        {" "}
-                        {item.point}
+                      <p key={index} id="text">
+                        {index + 1}.{item.point}
                       </p>
                     ))
                   ) : (
