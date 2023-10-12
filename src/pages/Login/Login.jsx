@@ -48,6 +48,7 @@ const Login = () => {
         className={style.Login_back}
         onClick={() => navigate("/")}
         role="button"
+        style={{zIndex:"99999"}}
       >
         BACK
       </h6>

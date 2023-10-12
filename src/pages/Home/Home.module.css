@@ -127,6 +127,9 @@
     transform: translateX(-50%);
     height: 20rem;
   }
+  .how_sum {
+    padding-top: 0px ;
+  }
 }
 @media screen and (max-width: 350px) {
   .ytGiff {
@@ -344,7 +347,7 @@
   /* height: 20rem; */
 }
 .faqs_container {
-  padding: 3rem 0rem;
+  padding: 6rem 0rem 6rem 0rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -558,6 +561,9 @@
   .section_two_swiper_images {
     width: 10rem !important;
   }
+  .scroll_text {
+    padding: 7rem 0rem 10rem 0rem !important;
+  }
 }
 /* marquee */
 .scroll_text {
@@ -649,6 +655,13 @@
   .marquee {
     height: 6rem;
   }
+  .third_section_wrapper {
+    padding: 3rem 0rem 1rem 0rem !important;
+    background: black;
+  }
+  .ytGiff {
+    height: 15rem !important;
+}
 }
 @media screen and (max-width: 550px) {
   .marquee span,
@@ -670,6 +683,10 @@
   .marquee_second p {
     height: 3rem;
   }
+
+.ytGiff {
+    height: 13rem;
+}
 }
 @media screen and (max-width: 300px) {
   .marquee span,
