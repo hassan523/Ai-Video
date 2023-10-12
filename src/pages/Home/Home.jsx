@@ -24,7 +24,7 @@ import axios from "axios";
 import API_BASE_URL from "../../config";
 const faqs = [
   {
-    question: "What types of videos can be summarised?",
+    question: "What types of videos can be summarise?",
     answer:
       "Currently, we only support YouTube video links. In the future, we may support other video platforms. ",
   },
@@ -423,22 +423,23 @@ const Home = () => {
               style={{
                 display: "flex",
                 justifyContent: "space-evenly",
+               
               }}
-              className=""
+              className="py-5 px-5"
             >
               <div className="d-flex align-items-center">
                 <h2
                   style={{
                     color: "white",
-                    fontSize: "31px",
+                    fontSize: "41px",
                     fontWeight: "19",
-                    fontFamily: "var(--digital-font)",
+                    fontFamily:"DS Digital",
                   }}
                   className={style.heading_sec}
                 >
                   summarise{" "}
                   <strong
-                    style={{ color: "red", fontFamily: "var(--digital-font)" }}
+                    style={{ color: "red", fontFamily:"DS Digital" }}
                   >
                     GENRATED
                   </strong>
@@ -447,20 +448,22 @@ const Home = () => {
               <div
                 className={`d-flex justify-content-center align-items-center ${style.second_heading}`}
                 style={{
-                  height: "3.8rem",
+                  height: "2.8rem",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  width: "6rem",
+                  minWidth: "4rem",
+                  width: "fit-content",
                   border: "1px solid grey",
                   borderRadius: "8px",
                   textAlign: "center",
-                  fontSize: "55px",
+                  fontSize: "30px",
                   color: "white",
                   fontWeight: "400",
+                  fontFamily:"DS Digital"
                 }}
               >
-                {currCount}
+                {currCount ? currCount : 0}
               </div>
             </div>
           </div>
@@ -474,7 +477,7 @@ const Home = () => {
             </div>
             <div className={style.right_box}>
               <h1 style={{ color: "white" }}>
-                GET HOW <strong style={{ color: "red" }}>YOUsummarise</strong>{" "}
+                GET HOW <strong style={{ color: "red" }}>YOUSUMMARISE</strong>{" "}
                 WORK
               </h1>
 
@@ -635,7 +638,7 @@ const Home = () => {
                     }}
                   >
                     <p>
-                      Press Summatise and recive an AI Summary of the video you
+                      Press Summarise and recive an AI Summary of the video you
                       provide
                     </p>
                   </div>
