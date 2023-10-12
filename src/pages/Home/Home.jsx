@@ -424,21 +424,21 @@ const Home = () => {
                 display: "flex",
                 justifyContent: "space-evenly",
               }}
-              className=""
+              className="py-5"
             >
               <div className="d-flex align-items-center">
                 <h2
                   style={{
                     color: "white",
-                    fontSize: "31px",
+                    fontSize: "41px",
                     fontWeight: "19",
-                    fontFamily: "var(--digital-font)",
+                    fontFamily:"DS Digital",
                   }}
                   className={style.heading_sec}
                 >
                   summarise{" "}
                   <strong
-                    style={{ color: "red", fontFamily: "var(--digital-font)" }}
+                    style={{ color: "red", fontFamily:"DS Digital" }}
                   >
                     GENRATED
                   </strong>
@@ -447,17 +447,19 @@ const Home = () => {
               <div
                 className={`d-flex justify-content-center align-items-center ${style.second_heading}`}
                 style={{
-                  height: "3.8rem",
+                  height: "2.8rem",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  width: "6rem",
+                  minWidth: "4rem",
+                  width: "fit-content",
                   border: "1px solid grey",
                   borderRadius: "8px",
                   textAlign: "center",
-                  fontSize: "55px",
+                  fontSize: "30px",
                   color: "white",
                   fontWeight: "400",
+                  fontFamily:"DS Digital"
                 }}
               >
                 {currCount}
@@ -474,7 +476,7 @@ const Home = () => {
             </div>
             <div className={style.right_box}>
               <h1 style={{ color: "white" }}>
-                GET HOW <strong style={{ color: "red" }}>YOUsummarise</strong>{" "}
+                GET HOW <strong style={{ color: "red" }}>YOUSUMMARISE</strong>{" "}
                 WORK
               </h1>
 
