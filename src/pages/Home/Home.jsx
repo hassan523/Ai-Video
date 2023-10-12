@@ -460,7 +460,7 @@ const Home = () => {
                   fontWeight: "400",
                 }}
               >
-                {currCount ? { currCount } : 0}
+                {currCount}
               </div>
             </div>
           </div>

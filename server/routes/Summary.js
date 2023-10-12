@@ -187,16 +187,16 @@ router.post("/summary", async (req, res) => {
       // Counter Code
       const findCouters = await counter.find();
       const reversed = findCouters.reverse();
-      const currentCount = reversed[0]
+      const currentCount = reversed[0];
       if (findCouters.length !== 0) {
         const createCount = new counter({
-          counter: currentCount.counter + 1
-        })
+          counter: currentCount.counter + 1,
+        });
         await createCount.save();
       } else {
         const createCount = new counter({
-          counter: 1
-        })
+          counter: 1,
+        });
         await createCount.save();
       }
 
@@ -282,20 +282,18 @@ router.post("/summary", async (req, res) => {
       // Counter Code
       const findCouters = await counter.find();
       const reversed = findCouters.reverse();
-      const currentCount = reversed[0]
+      const currentCount = reversed[0];
       if (findCouters.length !== 0) {
         const createCount = new counter({
-          counter: currentCount.counter + 1
-        })
+          counter: currentCount.counter + 1,
+        });
         await createCount.save();
       } else {
         const createCount = new counter({
-          counter: 1
-        })
+          counter: 1,
+        });
         await createCount.save();
       }
-
-
 
       res.status(200).json(pointsObjects);
     } else {
@@ -307,26 +305,23 @@ router.post("/summary", async (req, res) => {
   }
 });
 
-
-
 router.get("/get-counter", async (req, res) => {
   try {
-
     const findCounter = await counter.find();
     const reversed = findCounter.reverse();
-    const currentCount = reversed[0]
+    const currentCount = reversed[0];
 
     if (findCounter.length !== 0) {
       return res.status(200).json(currentCount.counter);
     } else {
       res.status(200).json(0);
     }
-
+    console.log(currentCount.counter);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal Server Error" })
+    res.status(500).json({ message: "Internal Server Error" });
   }
-})
+});
 
 export default router;
 
