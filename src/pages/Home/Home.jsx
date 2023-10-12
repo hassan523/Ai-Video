@@ -24,7 +24,7 @@ import axios from "axios";
 import API_BASE_URL from "../../config";
 const faqs = [
   {
-    question: "What types of videos can be summarised?",
+    question: "What types of videos can be summarise?",
     answer:
       "Currently, we only support YouTube video links. In the future, we may support other video platforms. ",
   },
@@ -423,8 +423,9 @@ const Home = () => {
               style={{
                 display: "flex",
                 justifyContent: "space-evenly",
+               
               }}
-              className="py-5"
+              className="py-5 px-5"
             >
               <div className="d-flex align-items-center">
                 <h2
@@ -462,7 +463,7 @@ const Home = () => {
                   fontFamily:"DS Digital"
                 }}
               >
-                {currCount}
+                {currCount ? currCount : 0}
               </div>
             </div>
           </div>
@@ -637,7 +638,7 @@ const Home = () => {
                     }}
                   >
                     <p>
-                      Press Summatise and recive an AI Summary of the video you
+                      Press Summarise and recive an AI Summary of the video you
                       provide
                     </p>
                   </div>
