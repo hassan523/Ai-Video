@@ -239,7 +239,7 @@ const Home = () => {
                 <span>Learn</span> <span>more</span> <span>in</span>{" "}
                 <span>less</span> <span>time</span> <span> with </span>{" "}
                 <span> AI-powered</span>{" "}
-                <span style={{ color: "red" }}>summarise</span>
+                <span style={{ color: "red" }}>summaries</span>
               </h2>
             </div>
 
@@ -436,11 +436,11 @@ const Home = () => {
                   }}
                   className={style.heading_sec}
                 >
-                  summarise{" "}
+                  Summaries {" "}
                   <strong
                     style={{ color: "red", fontFamily: "var(--digital-font)" }}
                   >
-                    GENRATED
+                    Generated 
                   </strong>
                 </h2>
               </div>
