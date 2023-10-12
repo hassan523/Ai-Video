@@ -171,22 +171,22 @@ const Home = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const timerId = setInterval(async () => {
-  //     try {
-  //       const res = await axios.get(`${API_BASE_URL}/api/get-counter`);
-  //       if (res.status === 200) {
-  //         setCurrCount(res.data);
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //       // alert("Alert Error");
-  //     }
-  //   }, 5000);
+  useEffect(() => {
+    const timerId = setInterval(async () => {
+      try {
+        const res = await axios.get(`${API_BASE_URL}/api/get-counter`);
+        if (res.status === 200) {
+          setCurrCount(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+        // alert("Alert Error");
+      }
+    }, 5000);
 
-  //   // Clean up the interval when the component unmounts
-  //   return () => clearInterval(timerId);
-  // }, []);
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(timerId);
+  }, []);
 
   const handleCopy = () => {
     let text = document.getElementById("text");
@@ -424,43 +424,28 @@ const Home = () => {
                 display: "flex",
                 justifyContent: "space-evenly",
               }}
-              className=""
+              className="py-5 px-5"
             >
               <div className="d-flex align-items-center">
                 <h2
                   style={{
                     color: "white",
-                    fontSize: "31px",
+                    fontSize: "35px",
                     fontWeight: "19",
-                    fontFamily: "var(--digital-font)",
+                    fontFamily: "DS Digital",
                   }}
                   className={style.heading_sec}
                 >
-                  Summaries {" "}
-                  <strong
-                    style={{ color: "red", fontFamily: "var(--digital-font)" }}
-                  >
-                    Generated 
+                  Summaries{" "}
+                  <strong style={{ color: "red", fontFamily: "DS Digital" }}>
+                    Generated
                   </strong>
                 </h2>
               </div>
               <div
                 className={`d-flex justify-content-center align-items-center ${style.second_heading}`}
-                style={{
-                  height: "3.8rem",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "6rem",
-                  border: "1px solid grey",
-                  borderRadius: "8px",
-                  textAlign: "center",
-                  fontSize: "55px",
-                  color: "white",
-                  fontWeight: "400",
-                }}
               >
-                {currCount ? { currCount } : 0}
+                {currCount ? currCount : 0}
               </div>
             </div>
           </div>
@@ -474,7 +459,7 @@ const Home = () => {
             </div>
             <div className={style.right_box}>
               <h1 style={{ color: "white" }}>
-                GET HOW <strong style={{ color: "red" }}>YOUsummarise</strong>{" "}
+                GET HOW <strong style={{ color: "red" }}>YOUSUMMARISE</strong>{" "}
                 WORK
               </h1>
 
@@ -635,7 +620,7 @@ const Home = () => {
                     }}
                   >
                     <p>
-                      Press Summatise and recive an AI Summary of the video you
+                      Press Summarise and recive an AI Summary of the video you
                       provide
                     </p>
                   </div>
@@ -658,19 +643,20 @@ const Home = () => {
           </div>
           <div>
             <img src={svg_two} alt="no img" />
+            <h3>Boost Your Retention</h3>
+            <p>
+              Summaries cut out superfluous details and streamline the delivery
+              of core concepts, enabling quicker comprehension and better
+              retention.
+            </p>
+          </div>
+          <div>
+            <img src={svg_three} alt="no img" />
             <h3>Customize Your Learning Experience</h3>
             <p>
               Unlike videos that dictate the flow of information, summaries let
               you optimize and tailor the learning experience to your unique
               needs and priorities
-            </p>
-          </div>
-          <div>
-            <img src={svg_three} alt="no img" />
-            <h3>Get the Most Out of Your Time</h3>
-            <p>
-              Reading summaries gives you faster access to key information
-              compared to watching lengthy videos when time is scarce.
             </p>
           </div>
         </Container>
