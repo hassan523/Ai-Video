@@ -4,6 +4,7 @@ import OpenAI from "openai";
 import axios from "axios";
 // // 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
 import { HfInference } from "@huggingface/inference";
+import counter from "../models/counter.js";
 
 import { TextServiceClient } from "@google-ai/generativelanguage";
 import { GoogleAuth } from "google-auth-library";
@@ -183,6 +184,22 @@ router.post("/summary", async (req, res) => {
       // Join the elements of filteredOutputArray into a single string with newline separators
       const responseString = filteredOutputArray.join("\n");
 
+      // Counter Code
+      const findCouters = await counter.find();
+      const reversed = findCouters.reverse();
+      const currentCount = reversed[0]
+      if (findCouters.length !== 0) {
+        const createCount = new counter({
+          counter: currentCount.counter + 1
+        })
+        await createCount.save();
+      } else {
+        const createCount = new counter({
+          counter: 1
+        })
+        await createCount.save();
+      }
+
       // Now 'responseString' contains the entire response as a single string
 
       res.status(200).json(responseString);
@@ -262,6 +279,24 @@ router.post("/summary", async (req, res) => {
       // 'pointsObjects' now contains an array of objects with index and point
       // console.log(pointsObjects);
 
+      // Counter Code
+      const findCouters = await counter.find();
+      const reversed = findCouters.reverse();
+      const currentCount = reversed[0]
+      if (findCouters.length !== 0) {
+        const createCount = new counter({
+          counter: currentCount.counter + 1
+        })
+        await createCount.save();
+      } else {
+        const createCount = new counter({
+          counter: 1
+        })
+        await createCount.save();
+      }
+
+
+
       res.status(200).json(pointsObjects);
     } else {
       res.status(400).json({ message: "Invalid Request" });
@@ -271,6 +306,27 @@ router.post("/summary", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+
+
+router.get("/get-counter", async (req, res) => {
+  try {
+
+    const findCounter = await counter.find();
+    const reversed = findCounter.reverse();
+    const currentCount = reversed[0]
+
+    if (findCounter.length !== 0) {
+      return res.status(200).json(currentCount.counter);
+    } else {
+      res.status(200).json(0);
+    }
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" })
+  }
+})
 
 export default router;
 
