@@ -91,8 +91,17 @@ const AboutUs = () => {
           <div className={style.team_box_wrapper}>
             <div className={style.team_box}>
               <img src={team_img_one} alt="" />
+
               <h3>
-                Mira Bhandari <BsLinkedin className={style.logo} />
+                Mira Bhandari
+                <a
+                  href="https://www.linkedin.com/in/mira-bhandari-60b335228"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  role="button"
+                >
+                  <BsLinkedin className={style.logo} />
+                </a>
               </h3>
               <h4 className={style.cofounder}>Co-Founder</h4>
               <p>
@@ -111,7 +120,15 @@ const AboutUs = () => {
             <div className={style.team_box}>
               <img src={team_img_two} alt="" />
               <h3>
-                Tomas Lopez-Valcarcel <BsLinkedin className={style.logo} />
+                Tomas Lopez-Valcarcel
+                <a
+                  href="https://www.linkedin.com/in/tomaslv"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  role="button"
+                >
+                  <BsLinkedin className={style.logo} />
+                </a>
               </h3>
               <h4 className={style.cofounder}>Co-Founder</h4>
               <p>

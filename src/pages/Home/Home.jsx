@@ -24,31 +24,30 @@ import axios from "axios";
 import API_BASE_URL from "../../config";
 const faqs = [
   {
-    question: "What types of videos can be summarized?",
+    question: "What types of videos can be summarised?",
     answer:
-      "Videos on diverse topics, including education, news, and more, can be summarized.",
+      "Currently, we only support YouTube video links. In the future, we may support other video platforms. ",
   },
   {
     question: "Can I customize the length of the summary?",
-    answer: "Yes, you can customize summary length based on preferences.",
+    answer:
+      " Based on feedback, we have implemented three options for summary length - short, medium, and long - to provide more flexibility.",
   },
   {
     question:
       "Why did I receive an error message that states a summary cannot be provided?",
     answer:
-      "Error messages may occur due to video complexity or technical issues.",
+      "Due to copyright law, we can only summarise non-copyrighted content in the free model. ",
   },
   {
     question: "Are the summaries 100% accurate?",
-    answer: "Summaries aim for accuracy but may vary. Review for context.",
+    answer:
+      "While we cannot guarantee 100% accuracy in our AI-generated summaries, we aim to provide useful, high-quality responses to the best of our abilities.",
   },
   {
-    question: "Can the tool summarize in other languages?",
-    answer: "The tool supports summarization in multiple languages.",
-  },
-  {
-    question: "What languages do you support when writing content?",
-    answer: "Content writing is supported in various languages.",
+    question: "Can the tool summarise in other languages?",
+    answer:
+      "Currently, all summaries are in English. We are working on adding other languages in the future.",
   },
 ];
 
@@ -105,96 +104,112 @@ const Home = () => {
   const [keyPointData, setKeyPointData] = useState([]);
 
   const [currCount, setCurrCount] = useState(null);
-  console.log(check, url, keyPoints, wordCounter);
+
   const handleSubmit = async () => {
-    try {
-      setIsSummary(false);
-      setisLoading(true);
+    if (url && (keyPoints || wordCounter)) {
+      try {
+        setisLoading(true);
 
-      if (check === "paragraph") {
-        const paraFormData = new FormData();
-        paraFormData.append("vidURL", url);
-        paraFormData.append("contentType", check);
-        paraFormData.append("wordCounter", wordCounter);
+        if (check === "paragraph") {
+          const paraFormData = new FormData();
+          paraFormData.append("vidURL", url);
+          paraFormData.append("contentType", check);
+          paraFormData.append("wordCounter", wordCounter);
 
-        const res = await axios.post(
-          `${API_BASE_URL}/api/summary`,
-          paraFormData,
-        );
+          const res = await axios.post(
+            `${API_BASE_URL}/api/summary`,
+            paraFormData
+          );
 
-        setYtData(res.data);
+          setYtData(res.data);
 
-        if (res.status === 200) {
+          if (res.status === 200) {
+            setisLoading(false);
+            setIsSummary(true);
+            setCheck("");
+            seturl("");
+            setKeyPoints(0);
+            setWordCounter(0);
+          }
+
+          setKeyPoints(null);
+          setonSubmit(true);
+        } else if (check === "points") {
+          const pointsFormData = new FormData();
+          pointsFormData.append("vidURL", url);
+          pointsFormData.append("contentType", check);
+          pointsFormData.append("keyPoints", keyPoints);
+
+          const res = await axios.post(
+            `${API_BASE_URL}/api/summary`,
+            pointsFormData
+          );
+
+          setKeyPointData(res.data);
+          setWordCounter(null);
+          setonSubmit(true);
+
+          if (res.status === 200) {
+            setisLoading(false);
+            setIsSummary(true);
+            setCheck("");
+            seturl("");
+            setKeyPoints(0);
+            setWordCounter(0);
+          }
+        } else {
           setisLoading(false);
-          setIsSummary(true);
-          setCheck("");
-          seturl("");
-          setKeyPoints(0);
-          setWordCounter(0);
+          alert("Invalid Request");
         }
-
-        setKeyPoints(null);
-        setonSubmit(true);
-      } else if (check === "points") {
-        const pointsFormData = new FormData();
-        pointsFormData.append("vidURL", url);
-        pointsFormData.append("contentType", check);
-        pointsFormData.append("keyPoints", keyPoints);
-
-        const res = await axios.post(
-          `${API_BASE_URL}/api/summary`,
-          pointsFormData,
-        );
-
-        setKeyPointData(res.data);
-        setWordCounter(null);
-        setonSubmit(true);
-
-        if (res.status === 200) {
-          setisLoading(false);
-          setIsSummary(true);
-          setCheck("");
-          seturl("");
-          setKeyPoints(0);
-          setWordCounter(0);
-        }
-      } else {
+      } catch (error) {
         setisLoading(false);
-        alert("Invalid Request");
+        alert("Video Is Copyrighted");
+        console.log(error);
       }
-    } catch (error) {
-      setisLoading(false);
-      alert("Video Is Copyrighted");
-      console.log(error);
+    } else {
+      alert("Make Sure All The Fields Are Selected");
     }
   };
 
-  useEffect(() => {
-    const timerId = setInterval(async () => {
-      try {
-        const res = await axios.get(`${API_BASE_URL}/api/get-counter`);
-        if (res.status === 200) {
-          setCurrCount(res.data);
-          setCheck("");
-          seturl("");
-          setKeyPoints(0);
-          setWordCounter(0);
-        }
-      } catch (error) {
-        console.log(error);
-        // alert("Alert Error");
-      }
-    }, 5000);
+  // useEffect(() => {
+  //   const timerId = setInterval(async () => {
+  //     try {
+  //       const res = await axios.get(`${API_BASE_URL}/api/get-counter`);
+  //       if (res.status === 200) {
+  //         setCurrCount(res.data);
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //       // alert("Alert Error");
+  //     }
+  //   }, 5000);
 
-    // Clean up the interval when the component unmounts
-    return () => clearInterval(timerId);
-  }, []);
+  //   // Clean up the interval when the component unmounts
+  //   return () => clearInterval(timerId);
+  // }, []);
 
   const handleCopy = () => {
     let text = document.getElementById("text");
     text.select();
     navigator.clipboard.write();
   };
+
+  const handleReset = () => {
+    setIsSummary(false);
+    setCheck("");
+    seturl("");
+    setKeyPoints(0);
+    setWordCounter(0);
+  };
+
+  console.log(
+    check,
+    "check",
+    keyPoints,
+    "keypoints",
+    wordCounter,
+    "wordCounter"
+  );
 
   return (
     <div>
@@ -224,7 +239,7 @@ const Home = () => {
                 <span>Learn</span> <span>more</span> <span>in</span>{" "}
                 <span>less</span> <span>time</span> <span> with </span>{" "}
                 <span> AI-powered</span>{" "}
-                <span style={{ color: "red" }}>summarize</span>
+                <span style={{ color: "red" }}>summarise</span>
               </h2>
             </div>
 
@@ -247,10 +262,10 @@ const Home = () => {
               ) : (
                 <button
                   onClick={() => {
-                    setIsSummary((s) => !s), handleSubmit();
+                    handleSubmit();
                   }}
                 >
-                  summarize
+                  summarise
                 </button>
               )}
             </div>
@@ -318,22 +333,43 @@ const Home = () => {
 
             {isSummary ? (
               <div className={style.summary}>
-                <h4 style={{ fontWeight: "800" }}>Here is your Summary</h4>
+                <h4
+                  style={{ fontWeight: "800" }}
+                  className="d-flex align-items-center justify-content-between"
+                >
+                  Here is your Summary{" "}
+                  <p className="m-0" role="button" onClick={handleReset}>
+                    Reset
+                  </p>{" "}
+                </h4>
                 <div className={style.summary_inside}>
                   {ytData ? (
                     <p style={{ height: "10rem", overflow: "auto" }} id="text">
-                      {ytData}
+                      {ytData === "" ? (
+                        <h6 className="py-2 text-center">
+                          {" "}
+                          Sorry, Couldn't able to read the data
+                        </h6>
+                      ) : (
+                        ytData
+                      )}
                     </p>
-                  ) : (
+                  ) : keyPointData.length !== 0 ? (
                     keyPointData.map((item, index) => (
                       <p
                         key={index}
                         style={{ height: "10rem", overflow: "auto" }}
                         id="text"
                       >
+                        {" "}
                         {item.point}
                       </p>
                     ))
+                  ) : (
+                    <h6 className="py-2 text-center">
+                      {" "}
+                      Sorry, Couldn't able to read the data
+                    </h6>
                   )}
 
                   <div style={{ display: "flex" }}>
@@ -400,7 +436,7 @@ const Home = () => {
                   }}
                   className={style.heading_sec}
                 >
-                  SUMMARIZE{" "}
+                  summarise{" "}
                   <strong
                     style={{ color: "red", fontFamily: "var(--digital-font)" }}
                   >
@@ -438,7 +474,7 @@ const Home = () => {
             </div>
             <div className={style.right_box}>
               <h1 style={{ color: "white" }}>
-                GET HOW <strong style={{ color: "red" }}>YOUSUMMARIZE</strong>{" "}
+                GET HOW <strong style={{ color: "red" }}>YOUsummarise</strong>{" "}
                 WORK
               </h1>
 
@@ -639,23 +675,23 @@ const Home = () => {
           </div>
         </Container>
       </section>
-      {/* summarize Animation */}
+      {/* summarise Animation */}
       <span className={style.scroll_text}>
         <div className={style.marquee}>
           <div>
             <h1>
-              * you summarize * you summarize * you summarize* you summarize *
-              you summarize * you summarize* you summarize * you summarize * you
-              summarize
+              * you summarise * you summarise * you summarise* you summarise *
+              you summarise * you summarise* you summarise * you summarise * you
+              summarise
             </h1>
           </div>
         </div>
         <div className={style.marquee_second}>
           <div>
             <h1 className={style.marquee_second_para}>
-              * you summarize * you summarize * you summarize* you summarize *
-              you summarize * you summerise* you summarize * you summarize * you
-              summarize
+              * you summarise * you summarise * you summarise* you summarise *
+              you summarise * you summerise* you summarise * you summarise * you
+              summarise
             </h1>
           </div>
         </div>
@@ -705,7 +741,7 @@ const Home = () => {
       {/* <!-- Contact-us Area...... --> */}
       <Contact />
       {/* {Organization area} */}
-      <section className={style.section_two_wrapper}>
+      {/* <section className={style.section_two_wrapper}>
         <Swiper
           breakpoints={breakpoints}
           autoplay={{
@@ -738,6 +774,61 @@ const Home = () => {
                 alt="brand images"
                 className={style.section_two_swiper_images}
               />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section> */}
+      <section className={style.section_two_wrapper}>
+        <Swiper
+          breakpoints={breakpoints}
+          autoplay={{
+            delay: 1000,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay]}
+          className={style.section_two_swiper}
+        >
+          {slider_img.map((img, index) => (
+            <SwiperSlide
+              style={{
+                width: "auto",
+                padding: "0rem 1rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "auto",
+              }}
+              key={index}
+            >
+              {index === 1 || index === 4 || index === 7 ? ( // Check if it's the first image
+                <a
+                  href="https://www.shhs.gdst.net/news/atherton-award/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={img}
+                    style={{
+                      width: "10rem",
+                      height: "12rem",
+                      objectFit: "cover",
+                    }}
+                    alt="brand images"
+                    className={style.section_two_swiper_images}
+                  />
+                </a>
+              ) : (
+                <img
+                  src={img}
+                  style={{
+                    width: "10rem",
+                    height: "12rem",
+                    objectFit: "cover",
+                  }}
+                  alt="brand images"
+                  className={style.section_two_swiper_images}
+                />
+              )}
             </SwiperSlide>
           ))}
         </Swiper>

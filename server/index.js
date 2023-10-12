@@ -6,6 +6,7 @@ import cors from "cors";
 import fileUpload from "express-fileupload";
 import summary from "./routes/Summary.js";
 import auth from "./routes/auth.js";
+import contact from "./routes/contact.js";
 
 dotenv.config();
 connectDB();
@@ -16,13 +17,14 @@ app.use(cors());
 app.use(
   fileUpload({
     useTempFiles: true,
-  }),
+  })
 );
 app.get("/", (req, res) => {
   res.send("hello");
 });
 app.use("/api", summary);
 app.use("/auth", auth);
+app.use("/api", contact);
 
 const server = http.createServer(app);
 
