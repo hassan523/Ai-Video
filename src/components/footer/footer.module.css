@@ -141,6 +141,17 @@
   .footer_container {
     padding: 2rem 1rem 1rem 1rem;
   }
+  .footer_wrapper {
+    padding: 1rem 1rem 1rem 1rem;
+  }
+  .copyright {
+    padding: 2rem 0rem 1rem;
+  }
+  .copyright p {
+    color: white !important;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+  }
 }
 @media screen and (max-width: 380px) {
   .footer_creater_name {

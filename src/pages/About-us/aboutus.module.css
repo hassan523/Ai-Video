@@ -224,6 +224,9 @@
   .team_box {
     width: 100%;
   }
+  .team_container {
+    padding: 4rem 0.5rem;
+  }
 }
 @media screen and (max-width: 650px) {
   .about_chain_right {
