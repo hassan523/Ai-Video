@@ -44,7 +44,7 @@ const Footer = () => {
               </div>
               <div className={style.footer_middle_div}>
                 <div className={style.our_services}>
-                  <h3>Links</h3>
+                  <h3>Company</h3>
                   <ul>
                     <li role="button" onClick={homepage}>
                       Home
@@ -55,7 +55,7 @@ const Footer = () => {
                   </ul>
                 </div>
                 <div className={style.company}>
-                  <h3>Links</h3>
+                  <h3>Legal</h3>
                   <ul>
                     <li role="button">Terms Of Use</li>
                     <li role="button">Privacy Policy</li>

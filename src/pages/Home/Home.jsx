@@ -24,7 +24,7 @@ import axios from "axios";
 import API_BASE_URL from "../../config";
 const faqs = [
   {
-    question: "What types of videos can be summarise?",
+    question: "What types of videos can be summarised?",
     answer:
       "Currently, we only support YouTube video links. In the future, we may support other video platforms. ",
   },
@@ -239,7 +239,7 @@ const Home = () => {
                 <span>Learn</span> <span>more</span> <span>in</span>{" "}
                 <span>less</span> <span>time</span> <span> with </span>{" "}
                 <span> AI-powered</span>{" "}
-                <span style={{ color: "red" }}>summarise</span>
+                <span style={{ color: "red" }}>summaries</span>
               </h2>
             </div>
 
@@ -423,7 +423,6 @@ const Home = () => {
               style={{
                 display: "flex",
                 justifyContent: "space-evenly",
-               
               }}
               className="py-5 px-5"
             >
@@ -431,37 +430,20 @@ const Home = () => {
                 <h2
                   style={{
                     color: "white",
-                    fontSize: "41px",
+                    fontSize: "35px",
                     fontWeight: "19",
-                    fontFamily:"DS Digital",
+                    fontFamily: "DS Digital",
                   }}
                   className={style.heading_sec}
                 >
-                  summarise{" "}
-                  <strong
-                    style={{ color: "red", fontFamily:"DS Digital" }}
-                  >
-                    GENRATED
+                  Summaries{" "}
+                  <strong style={{ color: "red", fontFamily: "DS Digital" }}>
+                    Generated
                   </strong>
                 </h2>
               </div>
               <div
                 className={`d-flex justify-content-center align-items-center ${style.second_heading}`}
-                style={{
-                  height: "2.8rem",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  minWidth: "4rem",
-                  width: "fit-content",
-                  border: "1px solid grey",
-                  borderRadius: "8px",
-                  textAlign: "center",
-                  fontSize: "30px",
-                  color: "white",
-                  fontWeight: "400",
-                  fontFamily:"DS Digital"
-                }}
               >
                 {currCount ? currCount : 0}
               </div>
@@ -661,19 +643,20 @@ const Home = () => {
           </div>
           <div>
             <img src={svg_two} alt="no img" />
+            <h3>Boost Your Retention</h3>
+            <p>
+              Summaries cut out superfluous details and streamline the delivery
+              of core concepts, enabling quicker comprehension and better
+              retention.
+            </p>
+          </div>
+          <div>
+            <img src={svg_three} alt="no img" />
             <h3>Customize Your Learning Experience</h3>
             <p>
               Unlike videos that dictate the flow of information, summaries let
               you optimize and tailor the learning experience to your unique
               needs and priorities
-            </p>
-          </div>
-          <div>
-            <img src={svg_three} alt="no img" />
-            <h3>Get the Most Out of Your Time</h3>
-            <p>
-              Reading summaries gives you faster access to key information
-              compared to watching lengthy videos when time is scarce.
             </p>
           </div>
         </Container>

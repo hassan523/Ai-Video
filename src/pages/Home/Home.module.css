@@ -42,7 +42,19 @@
   color: red;
 }
 .second_heading {
-  font-family: var(--digital-font);
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 3.5rem;
+  width: fit-content;
+  border: 1px solid grey;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 23px;
+  color: white;
+  font-weight: 400;
+  font-family: "DS Digital";
 }
 .right_box {
   margin-left: 6rem;

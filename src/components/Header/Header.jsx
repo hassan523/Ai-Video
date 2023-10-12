@@ -2,6 +2,7 @@ import React from "react";
 import style from "./header.module.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import { RiLogoutBoxRFill } from "react-icons/ri";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -33,7 +34,20 @@ const Header = () => {
           </h6>
           <div className="gap-3 justify-content-round d-flex">
             {user?.message === "Loggin successfully" ? (
-              <button onClick={handleLogOut}>Log Out</button>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "2rem",
+                }}
+              >
+                <h4 className="m-0">{user?.findUser?.username}</h4>
+                <RiLogoutBoxRFill
+                  style={{ fontSize: "2rem" }}
+                  role="button"
+                  onClick={handleLogOut}
+                />
+              </div>
             ) : (
               <>
                 <button onClick={() => navigate("/login")}>Log in</button>

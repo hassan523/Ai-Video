@@ -51,7 +51,7 @@ const Contact = () => {
             <p style={{ color: "white" }}>
               If you have any questions, suggestions, or feedback, please don't
               hesitate to reach out to us. We value your input and are committed
-              to enhancing your experience with YouSummaries.
+              to enhancing your experience with YouSummarise.
             </p>
           </div>
           <select
@@ -92,7 +92,7 @@ const Contact = () => {
             />
           </div>
           <button onClick={onSubmit} className={style.contact_us_btn}>
-            Subscribe
+            Submit
           </button>
         </Container>
       </div>
