@@ -28,11 +28,7 @@ const faqs = [
     answer:
       "Currently, we only support YouTube video links. In the future, we may support other video platforms. ",
   },
-  {
-    question: "Can I customize the length of the summary?",
-    answer:
-      " Based on feedback, we have implemented three options for summary length - short, medium, and long - to provide more flexibility.",
-  },
+
   {
     question:
       "Why did I receive an error message that states a summary cannot be provided?",
@@ -299,35 +295,43 @@ const Home = () => {
                     Long
                   </button>
                 </>
-              ) : (
-                <>
+              ) : check === "" ? (
+                <div className="d-none">
                   <button
                     onClick={() => {
-                      setWordCounter(null);
-                      setKeyPoints(8);
+                      setWordCounter(30);
+                      setKeyPoints(null);
                     }}
                   >
                     Short
                   </button>
                   <button
                     onClick={() => {
-                      setWordCounter(null);
-
-                      setKeyPoints(8);
+                      setWordCounter(35);
+                      setKeyPoints(null);
                     }}
                   >
                     Medium
                   </button>
                   <button
                     onClick={() => {
-                      setWordCounter(null);
-
-                      setKeyPoints(10);
+                      setWordCounter(40);
+                      setKeyPoints(null);
                     }}
                   >
                     Long
                   </button>
-                </>
+                </div>
+              ) : (
+                <div className="ps-3">
+                  <input
+                    type="number"
+                    name="keyPoints"
+                    className={style.inputKeyPoint}
+                    value={keyPoints}
+                    onChange={(e) => setKeyPoints(e.target.value)}
+                  />
+                </div>
               )}
             </div>
 
@@ -430,7 +434,7 @@ const Home = () => {
                 <h2
                   style={{
                     color: "white",
-                    fontSize: "35px",
+                    fontSize: "30px",
                     fontWeight: "19",
                     fontFamily: "DS Digital",
                   }}
@@ -517,7 +521,9 @@ const Home = () => {
                       margin: "2.4rem 0 0 2rem ",
                     }}
                   >
-                    <p>Copy and Paste the link</p>
+                    <p>
+                      Copy and Paste a YouTube video URL into the input field{" "}
+                    </p>
                   </div>
                 </div>
                 <div
@@ -563,13 +569,14 @@ const Home = () => {
                   <div
                     style={{
                       color: "white",
-                      margin: "2.4rem 0 0 2rem",
+                      margin: "2rem 0 0 2rem",
                     }}
                   >
                     <p>
-                      Select the format: Either Bullet Points of Text and Select
-                      the Lenght: No of Bullets Points or Short, Mid-Lenght,
-                      Long
+                      Choose your desired summary format: Bullet Points of Text.
+                      Specify the length/amount of detail <br /> a. For Bullet
+                      Points, select the number of points <br /> b. For Text,
+                      choose Short Medium or Long
                     </p>
                   </div>
                 </div>
@@ -620,8 +627,9 @@ const Home = () => {
                     }}
                   >
                     <p>
-                      Press Summarise and recive an AI Summary of the video you
-                      provide
+                      Click the Summarise button and the AI will generate a
+                      concise summary based on your selections. Copy the output
+                      summary as needed
                     </p>
                   </div>
                 </div>
@@ -637,26 +645,26 @@ const Home = () => {
             <img src={svg_one} alt="no img" />
             <h3>Get the Most Out of Your Time</h3>
             <p>
-              Reading summaries gives you faster access to key information
-              compared to watching lengthy videos when time is scarce.
+              When time is limited, reading summaries provides faster access to
+              key information compared to watching lengthy videos.
             </p>
           </div>
           <div>
             <img src={svg_two} alt="no img" />
             <h3>Boost Your Retention</h3>
             <p>
-              Summaries cut out superfluous details and streamline the delivery
-              of core concepts, enabling quicker comprehension and better
-              retention.
+              By eliminating extraneous details, summaries streamline core
+              concepts for deeper comprehension and improved retention.
             </p>
           </div>
           <div>
             <img src={svg_three} alt="no img" />
             <h3>Customize Your Learning Experience</h3>
             <p>
-              Unlike videos that dictate the flow of information, summaries let
-              you optimize and tailor the learning experience to your unique
-              needs and priorities
+              Unlike videos that control the flow of information, summaries
+              allow you to customise and optimise the learning experience to
+              suit your unique needs and priorities. You can then choose to
+              return to videos that are of interest.
             </p>
           </div>
         </Container>

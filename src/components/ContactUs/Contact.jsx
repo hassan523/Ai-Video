@@ -51,7 +51,7 @@ const Contact = () => {
             <p style={{ color: "white" }}>
               If you have any questions, suggestions, or feedback, please don't
               hesitate to reach out to us. We value your input and are committed
-              to enhancing your experience with YouSummarise.
+              to enhancing your experience with Yousummarise.
             </p>
           </div>
           <select
