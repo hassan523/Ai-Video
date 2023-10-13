@@ -276,8 +276,15 @@ const Home = () => {
               )}
             </div>
             <div className={style.options_btn}>
-              <button onClick={() => setCheck("paragraph")}>Text Form</button>
-              <button onClick={() => setCheck("points")}>Bullet Points</button>
+              <button
+                className={check === "points" ? style.cond : ""}
+                onClick={() => setCheck("paragraph")}
+              >
+                Text
+              </button>
+              <button
+               className={check === "paragraph" ? style.cond : ""}
+              onClick={() => setCheck("points")}>Bullet Points</button>
               {check === "paragraph" ? (
                 <>
                   <button
@@ -694,8 +701,8 @@ const Home = () => {
         <Container className={style.third_sec_container}>
           <div>
             <img src={svg_one} alt="no img" />
-            <h3 >Get the Most Out of Your Time</h3>
-            <p style={{fontFamily:"ADLaMDisplay", fontWeight:"400"}}>
+            <h3>Get the Most Out of Your Time</h3>
+            <p style={{ fontFamily: "ADLaMDisplay", fontWeight: "400" }}>
               When time is limited, reading summaries provides faster access to
               key information compared to watching lengthy videos.
             </p>
@@ -714,8 +721,8 @@ const Home = () => {
             <p>
               Unlike videos that control the flow of information, summaries
               allow you to customise and optimise the learning experience to
-              suit your unique needs. You can then choose to
-              return to videos that are of interest.
+              suit your unique needs. You can then choose to return to videos
+              that are of interest.
             </p>
           </div>
         </Container>
