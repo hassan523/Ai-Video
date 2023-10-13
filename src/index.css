@@ -28,6 +28,14 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "ADLaMDisplay";
+  src: url("./fonts/ADLaMDisplay-Regular.ttf") format("truetype");
+  /* You might need to adjust the URL based on the location of your font file */
+  font-weight: normal;
+  font-style: normal;
+}
+
 @keyframes textAnimation {
   0% {
     opacity: 0;

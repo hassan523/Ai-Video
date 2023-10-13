@@ -275,7 +275,7 @@ const Home = () => {
                 <>
                   <button
                     onClick={() => {
-                      setWordCounter(500);
+                      setWordCounter(1000);
                       setKeyPoints(null);
                     }}
                   >
@@ -283,7 +283,7 @@ const Home = () => {
                   </button>
                   <button
                     onClick={() => {
-                      setWordCounter(1000);
+                      setWordCounter(1500);
                       setKeyPoints(null);
                     }}
                   >
@@ -291,7 +291,7 @@ const Home = () => {
                   </button>
                   <button
                     onClick={() => {
-                      setWordCounter(1000);
+                      setWordCounter(2000);
                       setKeyPoints(null);
                     }}
                   >
@@ -628,8 +628,8 @@ const Home = () => {
         <Container className={style.third_sec_container}>
           <div>
             <img src={svg_one} alt="no img" />
-            <h3>Get the Most Out of Your Time</h3>
-            <p>
+            <h3 >Get the Most Out of Your Time</h3>
+            <p style={{fontFamily:"ADLaMDisplay", fontWeight:"400"}}>
               When time is limited, reading summaries provides faster access to
               key information compared to watching lengthy videos.
             </p>
