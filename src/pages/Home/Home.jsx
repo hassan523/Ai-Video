@@ -208,6 +208,9 @@ const Home = () => {
     "wordCounter"
   );
 
+
+  console.log(ytData)
+
   return (
     <div>
       <div className={style.white_box}></div>
