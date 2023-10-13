@@ -101,6 +101,8 @@ const Home = () => {
   const [ytData, setYtData] = useState("");
   const [keyPointData, setKeyPointData] = useState([]);
 
+  const [err, setErr] = useState("");
+
   const [currCount, setCurrCount] = useState(null);
 
   const handleToggleDark = () => {
@@ -166,13 +168,16 @@ const Home = () => {
         }
       } catch (error) {
         setisLoading(false);
-        alert("Video Is Copyrighted");
+        setIsSummary(true);
+        setErr("Video Is Copyrighted, Please Try With A Different Link");
         console.log(error);
       }
     } else {
       alert("Make Sure All The Fields Are Selected");
     }
   };
+
+  console.log(err)
 
   useEffect(() => {
     const timerId = setInterval(async () => {
@@ -283,8 +288,11 @@ const Home = () => {
                 Text
               </button>
               <button
-               className={check === "paragraph" ? style.cond : ""}
-              onClick={() => setCheck("points")}>Bullet Points</button>
+                className={check === "paragraph" ? style.cond : ""}
+                onClick={() => setCheck("points")}
+              >
+                Bullet Points
+              </button>
               {check === "paragraph" ? (
                 <>
                   <button
@@ -403,7 +411,8 @@ const Home = () => {
                       {ytData === "" ? (
                         <h6 className="py-2 text-center">
                           {" "}
-                          Sorry, Couldn't able to read the data
+                          {err !== "" ? err : "Sorry, Couldn't able to read the data"}
+                          
                         </h6>
                       ) : ytData !== "" ? (
                         ytData
@@ -433,7 +442,7 @@ const Home = () => {
                   ) : (
                     <h6 className="py-2 text-center">
                       {" "}
-                      Sorry, Couldn't able to read the data
+                    {err !== "" ? err : "Sorry, Couldn't able to read the data"}  
                     </h6>
                   )}
 
