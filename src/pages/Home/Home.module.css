@@ -43,7 +43,7 @@
   color: red;
 }
 .second_heading {
-  height: 2rem;
+  height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,7 +52,7 @@
   border: 1px solid grey;
   border-radius: 8px;
   text-align: center;
-  font-size: 23px;
+  font-size: 27px;
   color: white;
   font-weight: 400;
   font-family: "DS Digital";
@@ -78,7 +78,7 @@
 }
 .robo_img {
   height: 30rem;
-  width: 30rem;
+  width: 25rem;
   border-radius: 20px;
 }
 
@@ -156,7 +156,7 @@
   }
   .robo_img {
     height: 100%;
-    width: 100%;
+    width: 60%;
   }
   .right_box {
     margin: 0;
@@ -172,7 +172,7 @@
   }
   .robo_img {
     height: 100%;
-    width: 100%;
+    width: 60%;
   }
   .right_box {
     margin-top: 2rem;
@@ -183,7 +183,7 @@
 @media screen and (max-width: 500px) {
   .robo_img {
     height: 100%;
-    width: 100%;
+    width: 60%;
   }
 }
 @media screen and (max-width: 700px) {
@@ -279,10 +279,13 @@
   font-family: var(--dot-font) !important;
 }
 .summary_inside {
-  padding: 0.5rem;
+  padding: 0.8rem;
   border: 2px solid gray;
   border-style: dotted;
   border-radius: 8px;
+}
+.summary_inside {
+  margin: 0px !important;
 }
 .summary_inside button {
   margin-right: 1rem;

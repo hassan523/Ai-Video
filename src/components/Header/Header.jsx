@@ -51,7 +51,7 @@ const Header = () => {
             ) : (
               <>
                 <button onClick={() => navigate("/login")}>Log in</button>
-                <button onClick={() => navigate("/signup")}>Sign in</button>
+                <button onClick={() => navigate("/signup")}>Register </button>
               </>
             )}
           </div>

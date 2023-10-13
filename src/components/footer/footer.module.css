@@ -56,6 +56,7 @@
 .company h3 {
   color: red;
   text-transform: capitalize;
+  font-size: 20px;
 }
 .our_services ul,
 .company ul {

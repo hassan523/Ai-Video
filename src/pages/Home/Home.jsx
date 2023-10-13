@@ -208,8 +208,7 @@ const Home = () => {
     "wordCounter"
   );
 
-
-  console.log(ytData)
+  console.log(ytData);
 
   return (
     <div>
@@ -265,7 +264,7 @@ const Home = () => {
                     handleSubmit();
                   }}
                 >
-                  summarise
+                  Summarise
                 </button>
               )}
             </div>
@@ -362,16 +361,25 @@ const Home = () => {
                         ytData
                       ) : keyPointData.length !== 0 ? (
                         keyPointData.map((item, index) => (
-                          <p key={index} id="text">
-                            {index + 1}.{item.point}
+                          <p
+                            style={{ marginBottom: "0.5rem" }}
+                            key={index}
+                            id="text"
+                          >
+                            {index + 1}.{" "}
+                            <span className="ms-3">{item.point}</span>
                           </p>
                         ))
                       ) : null}
                     </p>
                   ) : keyPointData.length !== 0 ? (
                     keyPointData.map((item, index) => (
-                      <p key={index} id="text">
-                        {index + 1}.{item.point}
+                      <p
+                        style={{ marginBottom: "0.3rem" }}
+                        key={index}
+                        id="text"
+                      >
+                        {index + 1}.<span className="ps-1">{item.point}</span>
                       </p>
                     ))
                   ) : (
@@ -428,47 +436,18 @@ const Home = () => {
                 </div>
               </div>
             ) : null}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-evenly",
-              }}
-              className="py-5 px-5"
-            >
-              <div className="d-flex align-items-center">
-                <h2
-                  style={{
-                    color: "white",
-                    fontSize: "30px",
-                    fontWeight: "19",
-                    fontFamily: "DS Digital",
-                  }}
-                  className={style.heading_sec}
-                >
-                  Summaries{" "}
-                  <strong style={{ color: "red", fontFamily: "DS Digital" }}>
-                    Generated
-                  </strong>
-                </h2>
-              </div>
-              <div
-                className={`d-flex justify-content-center align-items-center ${style.second_heading}`}
-              >
-                {currCount ? currCount : 0}
-              </div>
-            </div>
           </div>
         </Container>
       </section>
       <section className={`pt-5 ${style.how_sum_wrapper}`}>
         <Container className={style.how_sum_container}>
           <div className={style.how_sum}>
-            <div style={{ zIndex: "10" }}>
+            <div style={{ zIndex: "10" }} className="text-lg-start text-center">
               <img src={img_rob} alt="Robot image" className={style.robo_img} />
             </div>
             <div className={style.right_box}>
               <h1 style={{ color: "white" }}>
-                GET HOW <strong style={{ color: "red" }}>YOUSUMMARISE</strong>{" "}
+                GET HOW <strong style={{ color: "red" }}>YOUSUMMARIES</strong>{" "}
                 WORK
               </h1>
 
@@ -527,7 +506,8 @@ const Home = () => {
                     }}
                   >
                     <p>
-                      Copy and Paste a YouTube video URL into the input field{" "}
+                      Copy and Paste a YouTube video URL Link into the input
+                      field{" "}
                     </p>
                   </div>
                 </div>
@@ -578,7 +558,7 @@ const Home = () => {
                     }}
                   >
                     <p>
-                      Choose your desired summary format: Bullet Points of Text.
+                      Choose your desired summary format: Bullet Points or Text.
                       Specify the length/amount of detail <br /> a. For Bullet
                       Points, select the number of points <br /> b. For Text,
                       choose Short Medium or Long
@@ -696,6 +676,46 @@ const Home = () => {
         </div>
         <img src={ytGiff} className={style.ytGiff} alt="" />
       </span>
+
+      {/*  */}
+      <div 
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          background:"black"
+          }}
+        className="py-5 px-5"
+      >
+        <div className="d-flex align-items-center">
+          <h2
+            style={{
+              color: "white",
+              fontSize: "30px",
+              fontWeight: "400",
+              fontFamily: "DS Digital",
+            }}
+            className={style.heading_sec}
+          >
+            Summaries{" "}
+            <strong
+              style={{
+                color: "red",
+                fontFamily: "DS Digital",
+                fontWeight: "400",
+              }}
+            >
+              Generated
+            </strong>
+          </h2>
+        </div>
+        <div
+          className={`d-flex justify-content-center align-items-center ${style.second_heading}`}
+        >
+          {currCount ? currCount : 0}
+        </div>
+      </div>
+
+      {/*  */}
 
       {/* <!-- FAQ,s Area...... --> */}
       <section className={style.section_five_wrapper}>

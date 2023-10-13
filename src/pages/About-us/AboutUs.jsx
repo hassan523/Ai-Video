@@ -66,7 +66,7 @@ const AboutUs = () => {
                 }}
               >
                 Witnessing their own and peers' waste of countless hours
-                watching inconsistent, sometimes questionable videos, they
+                watching inconsistent, sometimes unreliable videos, they
                 founded YouSummarise on a mission to put the student in control.
                 By synthesising key insights from lengthy videos into accessible
                 summaries, their platform allows learners to quickly evaluate
@@ -75,7 +75,7 @@ const AboutUs = () => {
                 study time, boost retention of core concepts, and customise
                 their learning path. By cutting through the noise, YouSummarise
                 empowers students to get the most out of their research and in
-                turn deepen their knowledge on a topic
+                turn deepen their knowledge on a topic.
               </p>
             </div>
           </div>
