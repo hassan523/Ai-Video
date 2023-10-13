@@ -37,7 +37,7 @@
 .how_sum {
   display: flex;
   justify-content: space-around;
-  padding-top: 100px
+  padding-top: 100px;
 }
 .how_sum strong {
   color: red;
@@ -69,7 +69,7 @@
   height: 2.2rem;
   background: transparent;
   border: solid 1px white;
-  padding-left: 15px ;
+  padding-left: 15px;
   color: white;
 }
 
@@ -128,7 +128,7 @@
     height: 20rem;
   }
   .how_sum {
-    padding-top: 0px ;
+    padding-top: 0px;
   }
 }
 @media screen and (max-width: 350px) {
@@ -325,6 +325,9 @@
   }
   .loader {
     padding-top: 1rem;
+  }
+  .summary_heading {
+    flex-direction: column;
   }
 }
 @media screen and (max-width: 360px) {
@@ -665,7 +668,7 @@
   }
   .ytGiff {
     height: 15rem !important;
-}
+  }
 }
 @media screen and (max-width: 550px) {
   .marquee span,
@@ -688,9 +691,9 @@
     height: 3rem;
   }
 
-.ytGiff {
+  .ytGiff {
     height: 13rem;
-}
+  }
 }
 @media screen and (max-width: 300px) {
   .marquee span,

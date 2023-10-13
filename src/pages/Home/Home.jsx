@@ -18,6 +18,7 @@ import back from "../../assets/back.svg";
 import linkSvg from "../../assets/link.svg";
 import Spinner from "react-bootstrap/Spinner";
 import { Autoplay } from "swiper/modules";
+import Form from "react-bootstrap/Form";
 import "swiper/element/css/autoplay"; // Import Swiper CSS
 
 import axios from "axios";
@@ -86,6 +87,7 @@ const slider_img = [
   img_three,
 ];
 const Home = () => {
+  const [isDark, setIsDark] = useState(false);
   const [isSummary, setIsSummary] = useState(false);
 
   // api states
@@ -100,6 +102,11 @@ const Home = () => {
   const [keyPointData, setKeyPointData] = useState([]);
 
   const [currCount, setCurrCount] = useState(null);
+
+  const handleToggleDark = () => {
+    setIsDark(!isDark);
+    localStorage.setItem("darkmode", isDark);
+  };
 
   const handleSubmit = async () => {
     if (url && (keyPoints || wordCounter)) {
@@ -339,16 +346,50 @@ const Home = () => {
             </div>
 
             {isSummary ? (
-              <div className={style.summary}>
-                <h4
-                  style={{ fontWeight: "800" }}
-                  className="d-flex align-items-center justify-content-between"
+              <div
+                className={style.summary}
+                style={
+                  isDark
+                    ? {
+                        background: "black",
+                        color: "white",
+                        borderColor: "grey",
+                      }
+                    : {
+                        background: "white",
+                        color: "black",
+                        borderColor: "white",
+                      }
+                }
+              >
+                <div
+                  className={`${style.summary_heading} d-flex mb-2 align-items-center justify-content-between`}
                 >
-                  Here is your Summary{" "}
-                  <p className="m-0" role="button" onClick={handleReset}>
-                    Reset
-                  </p>{" "}
-                </h4>
+                  <h4
+                    style={{ fontWeight: "800" }}
+                    className="m-0  d-flex align-items-center justify-content-between"
+                  >
+                    Here is your Summary{" "}
+                  </h4>
+                  <div className={` d-flex align-items-center gap-3`}>
+                    <p
+                      style={{ fontWeight: "800" }}
+                      role="button"
+                      className="m-0"
+                      onClick={handleReset}
+                    >
+                      Reset
+                    </p>
+                    <Form style={{ fontSize: "1.2rem", cursor: "pointer" }}>
+                      <Form.Check // prettier-ignore
+                        type="switch"
+                        id="custom-switch"
+                        onChange={() => setIsDark(!isDark)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </Form>
+                  </div>
+                </div>
                 <div className={style.summary_inside}>
                   {ytData ? (
                     <p style={{ height: "10rem", overflow: "auto" }} id="text">
@@ -390,7 +431,20 @@ const Home = () => {
                   )}
 
                   <div style={{ display: "flex" }}>
-                    <button onClick={handleCopy}>
+                    <button
+                      onClick={handleCopy}
+                      style={
+                        isDark
+                          ? {
+                              background: "black",
+                              color: "white",
+                            }
+                          : {
+                              background: "white",
+                              color: "black",
+                            }
+                      }
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="37"
@@ -418,7 +472,19 @@ const Home = () => {
                       </svg>
                       Copy Text
                     </button>
-                    <button>
+                    <button
+                      style={
+                        isDark
+                          ? {
+                              background: "black",
+                              color: "white",
+                            }
+                          : {
+                              background: "white",
+                              color: "black",
+                            }
+                      }
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -678,12 +744,12 @@ const Home = () => {
       </span>
 
       {/*  */}
-      <div 
+      <div
         style={{
           display: "flex",
           justifyContent: "space-evenly",
-          background:"black"
-          }}
+          background: "black",
+        }}
         className="py-5 px-5"
       >
         <div className="d-flex align-items-center">
