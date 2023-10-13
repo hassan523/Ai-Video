@@ -37,7 +37,13 @@ const Footer = () => {
                   />
                   <div className="d-flex gap-5 py-3">
                     <p>
-                      <BsInstagram />
+                      <a
+                        href="https://www.instagram.com/yousummarise/"
+                        target="_blank"
+                        className="text-reset"
+                      >
+                        <BsInstagram />
+                      </a>
                     </p>
                   </div>
                 </div>
