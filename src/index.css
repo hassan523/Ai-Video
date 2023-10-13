@@ -27,6 +27,14 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "ADLaMDisplay";
+  src: url("./fonts/ADLaMDisplay-Regular.ttf") format("truetype");
+  /* You might need to adjust the URL based on the location of your font file */
+  font-weight: normal;
+  font-style: normal;
+}
+
 @keyframes textAnimation {
   0% {
     opacity: 0;
@@ -96,4 +104,15 @@
 select option {
   background: red !important;
   color: white;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox  */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

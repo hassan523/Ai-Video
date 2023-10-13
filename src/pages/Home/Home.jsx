@@ -86,7 +86,6 @@ const slider_img = [
   img_two,
   img_three,
 ];
-
 const Home = () => {
   const [isDark, setIsDark] = useState(false);
   const [isSummary, setIsSummary] = useState(false);
@@ -101,6 +100,8 @@ const Home = () => {
   const [isLoading, setisLoading] = useState(false);
   const [ytData, setYtData] = useState("");
   const [keyPointData, setKeyPointData] = useState([]);
+
+  const [err, setErr] = useState("");
 
   const [currCount, setCurrCount] = useState(null);
 
@@ -167,13 +168,16 @@ const Home = () => {
         }
       } catch (error) {
         setisLoading(false);
-        alert("Video Is Copyrighted");
+        setIsSummary(true);
+        setErr("Video Is Copyrighted, Please Try With A Different Link");
         console.log(error);
       }
     } else {
       alert("Make Sure All The Fields Are Selected");
     }
   };
+
+  console.log(err);
 
   useEffect(() => {
     const timerId = setInterval(async () => {
@@ -207,6 +211,17 @@ const Home = () => {
     window.location.reload(false);
   };
 
+  console.log(
+    check,
+    "check",
+    keyPoints,
+    "keypoints",
+    wordCounter,
+    "wordCounter"
+  );
+
+  console.log(ytData);
+
   return (
     <div>
       <div className={style.white_box}></div>
@@ -220,6 +235,7 @@ const Home = () => {
             style={{
               position: "absolute",
               zIndex: "1",
+              // height: "100%",
               width: "70%",
               filter: "blur(20px)",
             }}
@@ -265,13 +281,23 @@ const Home = () => {
               )}
             </div>
             <div className={style.options_btn}>
-              <button onClick={() => setCheck("paragraph")}>Text Form</button>
-              <button onClick={() => setCheck("points")}>Bullet Points</button>
+              <button
+                className={check === "points" ? style.cond : ""}
+                onClick={() => setCheck("paragraph")}
+              >
+                Text
+              </button>
+              <button
+                className={check === "paragraph" ? style.cond : ""}
+                onClick={() => setCheck("points")}
+              >
+                Bullet Points
+              </button>
               {check === "paragraph" ? (
                 // <>
                 //   <button
                 //     onClick={() => {
-                //       setWordCounter(500);
+                //       setWordCounter(3000);
                 //       setKeyPoints(null);
                 //     }}
                 //   >
@@ -279,7 +305,7 @@ const Home = () => {
                 //   </button>
                 //   <button
                 //     onClick={() => {
-                //       setWordCounter(1000);
+                //       setWordCounter(5000);
                 //       setKeyPoints(null);
                 //     }}
                 //   >
@@ -287,7 +313,7 @@ const Home = () => {
                 //   </button>
                 //   <button
                 //     onClick={() => {
-                //       setWordCounter(1000);
+                //       setWordCounter(10000);
                 //       setKeyPoints(null);
                 //     }}
                 //   >
@@ -341,7 +367,7 @@ const Home = () => {
                   </button>
                 </div>
               ) : (
-                <div>
+                <div className="ps-3">
                   <input
                     type="number"
                     name="keyPoints"
@@ -404,7 +430,9 @@ const Home = () => {
                       {ytData === "" ? (
                         <h6 className="py-2 text-center">
                           {" "}
-                          Sorry, Couldn't able to read the data
+                          {err !== ""
+                            ? err
+                            : "Sorry, Couldn't able to read the data"}
                         </h6>
                       ) : ytData !== "" ? (
                         ytData
@@ -434,7 +462,9 @@ const Home = () => {
                   ) : (
                     <h6 className="py-2 text-center">
                       {" "}
-                      Sorry, Couldn't able to read the data
+                      {err !== ""
+                        ? err
+                        : "Sorry, Couldn't able to read the data"}
                     </h6>
                   )}
 
@@ -703,7 +733,7 @@ const Home = () => {
           <div>
             <img src={svg_one} alt="no img" />
             <h3>Get the Most Out of Your Time</h3>
-            <p>
+            <p style={{ fontFamily: "ADLaMDisplay", fontWeight: "400" }}>
               When time is limited, reading summaries provides faster access to
               key information compared to watching lengthy videos.
             </p>

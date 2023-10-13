@@ -211,6 +211,10 @@ select option {
   }
 }
 
+.cond {
+  opacity: 0.3;
+}
+
 .main_wrapper {
   background-color: #000000;
   display: flex;
