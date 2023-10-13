@@ -86,6 +86,7 @@ const slider_img = [
   img_two,
   img_three,
 ];
+
 const Home = () => {
   const [isDark, setIsDark] = useState(false);
   const [isSummary, setIsSummary] = useState(false);
@@ -206,17 +207,6 @@ const Home = () => {
     window.location.reload(false);
   };
 
-  console.log(
-    check,
-    "check",
-    keyPoints,
-    "keypoints",
-    wordCounter,
-    "wordCounter"
-  );
-
-  console.log(ytData);
-
   return (
     <div>
       <div className={style.white_box}></div>
@@ -230,7 +220,6 @@ const Home = () => {
             style={{
               position: "absolute",
               zIndex: "1",
-              // height: "100%",
               width: "70%",
               filter: "blur(20px)",
             }}
@@ -279,32 +268,51 @@ const Home = () => {
               <button onClick={() => setCheck("paragraph")}>Text Form</button>
               <button onClick={() => setCheck("points")}>Bullet Points</button>
               {check === "paragraph" ? (
-                <>
-                  <button
-                    onClick={() => {
-                      setWordCounter(500);
-                      setKeyPoints(null);
-                    }}
-                  >
+                // <>
+                //   <button
+                //     onClick={() => {
+                //       setWordCounter(500);
+                //       setKeyPoints(null);
+                //     }}
+                //   >
+                //     Short
+                //   </button>
+                //   <button
+                //     onClick={() => {
+                //       setWordCounter(1000);
+                //       setKeyPoints(null);
+                //     }}
+                //   >
+                //     Medium
+                //   </button>
+                //   <button
+                //     onClick={() => {
+                //       setWordCounter(1000);
+                //       setKeyPoints(null);
+                //     }}
+                //   >
+                //     Long
+                //   </button>
+                // </>
+                <select
+                  defaultValue="Question or Feedback"
+                  className={style.Contact_select}
+                  onChange={(e) => setWordCounter(e.target.value)}
+                >
+                  <option defaultValue="Select Range" className={style.options}>
+                    Select Range
+                  </option>
+                  <option value={1000} className={style.options}>
+                    {" "}
                     Short
-                  </button>
-                  <button
-                    onClick={() => {
-                      setWordCounter(1000);
-                      setKeyPoints(null);
-                    }}
-                  >
+                  </option>
+                  <option value={1200} className={style.options}>
                     Medium
-                  </button>
-                  <button
-                    onClick={() => {
-                      setWordCounter(1000);
-                      setKeyPoints(null);
-                    }}
-                  >
+                  </option>
+                  <option value={1500} className={style.options}>
                     Long
-                  </button>
-                </>
+                  </option>
+                </select>
               ) : check === "" ? (
                 <div className="d-none">
                   <button
@@ -333,7 +341,7 @@ const Home = () => {
                   </button>
                 </div>
               ) : (
-                <div className="ps-3">
+                <div>
                   <input
                     type="number"
                     name="keyPoints"
@@ -714,8 +722,8 @@ const Home = () => {
             <p>
               Unlike videos that control the flow of information, summaries
               allow you to customise and optimise the learning experience to
-              suit your unique needs. You can then choose to
-              return to videos that are of interest.
+              suit your unique needs. You can then choose to return to videos
+              that are of interest.
             </p>
           </div>
         </Container>

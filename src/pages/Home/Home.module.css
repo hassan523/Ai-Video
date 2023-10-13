@@ -94,7 +94,21 @@
 .bannerAnimatedTxt {
   width: 70% !important;
 }
-
+.Contact_select {
+  padding: 0.5rem;
+  background: transparent;
+  color: white;
+  border-radius: 9px;
+  border: 1px solid white;
+  outline: none;
+  width: 10rem;
+}
+select option {
+  padding: 1rem;
+}
+.options {
+  background-color: #000000 !important;
+}
 @media screen and (max-width: 1080px) {
   .ytGiff {
     width: 65vw;
@@ -197,7 +211,6 @@
   }
 }
 
-
 .main_wrapper {
   background-color: #000000;
   display: flex;
@@ -253,9 +266,9 @@
   align-items: center;
   padding-top: 25px;
   padding-bottom: 25px;
+  gap: 1rem;
 }
 .options_btn button {
-  margin-left: 0.6rem;
   height: 2.6rem;
   width: 8rem;
   background-color: transparent;
