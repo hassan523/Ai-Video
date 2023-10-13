@@ -289,7 +289,7 @@ const Home = () => {
                 <>
                   <button
                     onClick={() => {
-                      setWordCounter(1000);
+                      setWordCounter(3000);
                       setKeyPoints(null);
                     }}
                   >
@@ -297,7 +297,7 @@ const Home = () => {
                   </button>
                   <button
                     onClick={() => {
-                      setWordCounter(1500);
+                      setWordCounter(5000);
                       setKeyPoints(null);
                     }}
                   >
@@ -305,7 +305,7 @@ const Home = () => {
                   </button>
                   <button
                     onClick={() => {
-                      setWordCounter(2000);
+                      setWordCounter(10000);
                       setKeyPoints(null);
                     }}
                   >
