@@ -177,8 +177,6 @@ const Home = () => {
     }
   };
 
-  console.log(err);
-
   useEffect(() => {
     const timerId = setInterval(async () => {
       try {
@@ -210,17 +208,6 @@ const Home = () => {
     setWordCounter(0);
     window.location.reload(false);
   };
-
-  console.log(
-    check,
-    "check",
-    keyPoints,
-    "keypoints",
-    wordCounter,
-    "wordCounter"
-  );
-
-  console.log(ytData);
 
   return (
     <div>
@@ -281,64 +268,73 @@ const Home = () => {
               )}
             </div>
             <div className={style.options_btn}>
-              <button
+              {/* <button
                 className={check === "points" ? style.cond : ""}
                 onClick={() => setCheck("paragraph")}
               >
                 Text
-              </button>
+              </button> */}
+              <select
+                defaultValue="Select Range"
+                className={
+                  check !== "paragraph"
+                    ? `${style.cond} ${style.Contact_select}`
+                    : style.Contact_select
+                }
+                onChange={(e) => {
+                  setWordCounter(e.target.value);
+                  setCheck("paragraph");
+                }}
+              >
+                <option defaultValue="Select Range" className={style.options}>
+                  Select Range
+                </option>
+                <option value={3000} className={style.options}>
+                  {" "}
+                  Short
+                </option>
+
+                <option value={5000} className={style.options}>
+                  Medium
+                </option>
+                <option value={10000} className={style.options}>
+                  Long
+                </option>
+              </select>
+
               <button
                 className={check === "paragraph" ? style.cond : ""}
-                onClick={() => setCheck("points")}
+                onClick={() => {
+                  setCheck("points");
+                }}
               >
                 Bullet Points
               </button>
               {check === "paragraph" ? (
-                // <>
-                //   <button
-                //     onClick={() => {
-                //       setWordCounter(3000);
-                //       setKeyPoints(null);
-                //     }}
-                //   >
-                //     Short
-                //   </button>
-                //   <button
-                //     onClick={() => {
-                //       setWordCounter(5000);
-                //       setKeyPoints(null);
-                //     }}
-                //   >
-                //     Medium
-                //   </button>
-                //   <button
-                //     onClick={() => {
-                //       setWordCounter(10000);
-                //       setKeyPoints(null);
-                //     }}
-                //   >
-                //     Long
-                //   </button>
-                // </>
-                <select
-                  defaultValue="Question or Feedback"
-                  className={style.Contact_select}
-                  onChange={(e) => setWordCounter(e.target.value)}
-                >
-                  <option defaultValue="Select Range" className={style.options}>
-                    Select Range
-                  </option>
-                  <option value={1000} className={style.options}>
-                    {" "}
-                    Short
-                  </option>
-                  <option value={1200} className={style.options}>
-                    Medium
-                  </option>
-                  <option value={1500} className={style.options}>
-                    Long
-                  </option>
-                </select>
+                <div className="d-none">
+                  <select
+                    defaultValue="Question or Feedback"
+                    className={style.Contact_select}
+                    onChange={(e) => setWordCounter(e.target.value)}
+                  >
+                    <option
+                      defaultValue="Select Range"
+                      className={style.options}
+                    >
+                      Select Range
+                    </option>
+                    <option value={1000} className={style.options}>
+                      {" "}
+                      Short
+                    </option>
+                    <option value={1200} className={style.options}>
+                      Medium
+                    </option>
+                    <option value={1500} className={style.options}>
+                      Long
+                    </option>
+                  </select>
+                </div>
               ) : check === "" ? (
                 <div className="d-none">
                   <button
@@ -544,8 +540,11 @@ const Home = () => {
         </Container>
       </section>
       <section className={`pt-5 ${style.how_sum_wrapper}`}>
-        <Container className={style.how_sum_container}>
-          <div className={style.how_sum}>
+        <Container
+          className={style.how_sum_container}
+          style={{ display: "flex" }}
+        >
+          <div className={style.how_sum} style={{ zIndex: "10" }}>
             <div style={{ zIndex: "10" }} className="text-lg-start text-center">
               <img src={img_rob} alt="Robot image" className={style.robo_img} />
             </div>
