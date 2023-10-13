@@ -196,6 +196,7 @@ const Home = () => {
     seturl("");
     setKeyPoints(0);
     setWordCounter(0);
+    window.location.reload(false);
   };
 
   console.log(
@@ -272,7 +273,7 @@ const Home = () => {
                 <>
                   <button
                     onClick={() => {
-                      setWordCounter(30);
+                      setWordCounter(500);
                       setKeyPoints(null);
                     }}
                   >
@@ -280,7 +281,7 @@ const Home = () => {
                   </button>
                   <button
                     onClick={() => {
-                      setWordCounter(35);
+                      setWordCounter(1000);
                       setKeyPoints(null);
                     }}
                   >
@@ -288,7 +289,7 @@ const Home = () => {
                   </button>
                   <button
                     onClick={() => {
-                      setWordCounter(40);
+                      setWordCounter(1000);
                       setKeyPoints(null);
                     }}
                   >
@@ -354,9 +355,15 @@ const Home = () => {
                           {" "}
                           Sorry, Couldn't able to read the data
                         </h6>
-                      ) : (
+                      ) : ytData !== "" ? (
                         ytData
-                      )}
+                      ) : keyPointData.length !== 0 ? (
+                        keyPointData.map((item, index) => (
+                          <p key={index} id="text">
+                            {index + 1}.{item.point}
+                          </p>
+                        ))
+                      ) : null}
                     </p>
                   ) : keyPointData.length !== 0 ? (
                     keyPointData.map((item, index) => (
