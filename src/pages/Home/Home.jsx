@@ -627,7 +627,7 @@ const Home = () => {
                       Choose your desired summary format: Bullet Points or Text.
                       Specify the length/amount of detail <br /> a. For Bullet
                       Points, select the number of points <br /> b. For Text,
-                      choose Short Medium or Long
+                      choose Short, Medium, or Long
                     </p>
                   </div>
                 </div>
@@ -714,7 +714,7 @@ const Home = () => {
             <p>
               Unlike videos that control the flow of information, summaries
               allow you to customise and optimise the learning experience to
-              suit your unique needs and priorities. You can then choose to
+              suit your unique needs. You can then choose to
               return to videos that are of interest.
             </p>
           </div>
