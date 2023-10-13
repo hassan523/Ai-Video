@@ -5,7 +5,7 @@ import Contact from "../../components/ContactUs/Contact";
 import { Container } from "react-bootstrap";
 import style from "./aboutus.module.css";
 import uppergif from "../../assets/Login/login_bg.gif";
-import team_img_one from "../../assets/team/about_team.png";
+import team_img_one from "../../assets/prodasd.png";
 import team_img_two from "../../assets/team/about_team_two.png";
 import main_gif from "../../assets/main_gif.gif";
 import img_b from "../../assets/about_main.png";
@@ -66,9 +66,9 @@ const AboutUs = () => {
                 }}
               >
                 Witnessing their own and peers' waste of countless hours
-                watching inconsistent, sometimes unreliable videos, they
-                founded YouSummarise on a mission to put the student in control.
-                By synthesising key insights from lengthy videos into accessible
+                watching inconsistent, sometimes unreliable videos, they founded
+                YouSummarise on a mission to put the student in control. By
+                synthesising key insights from lengthy videos into accessible
                 summaries, their platform allows learners to quickly evaluate
                 resources and spend time only on content that drives deeper
                 understanding. With YouSummarise, students can optimise their

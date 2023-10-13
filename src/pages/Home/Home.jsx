@@ -731,15 +731,16 @@ const Home = () => {
         <Container className={style.third_sec_container}>
           <div>
             <img src={svg_one} alt="no img" />
-            <h3>Get the Most Out of Your Time</h3>
-            <p style={{ fontFamily: "ADLaMDisplay", fontWeight: "400" }}>
-              When time is limited, reading summaries provides faster access to
-              key information compared to watching lengthy videos.
+            <h3>Maximise Learning Efficiency</h3>
+            <p>
+              Summaries deliver key concepts more efficiently than full videos,
+              empowering you to extract insights from a wider range of content.
+              You can then strategically revisit only the most relevant videos.
             </p>
           </div>
           <div>
             <img src={svg_two} alt="no img" />
-            <h3>Boost Your Retention</h3>
+            <h3>Boost Retention of Essentials</h3>
             <p>
               By eliminating extraneous details, summaries streamline core
               concepts for deeper comprehension and improved retention.
@@ -747,12 +748,11 @@ const Home = () => {
           </div>
           <div>
             <img src={svg_three} alt="no img" />
-            <h3>Customize Your Learning Experience</h3>
+            <h3>Take Charge of Your Learning</h3>
             <p>
-              Unlike videos that control the flow of information, summaries
-              allow you to customise and optimise the learning experience to
-              suit your unique needs. You can then choose to return to videos
-              that are of interest.
+              Distilling concepts to their essence, summaries put you in control
+              of customising your learning path based on your unique needs and
+              interests.
             </p>
           </div>
         </Container>
