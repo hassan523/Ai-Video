@@ -11,9 +11,10 @@ const Contact = () => {
     email: "",
     firstName: "",
     lastName: "",
+    message: "",
   });
 
-  const { email, firstName, lastName } = fields;
+  const { email, firstName, lastName, message } = fields;
 
   const onChangeHandler = (e) => {
     setFields({ ...fields, [e.target.name]: e.target.value });
@@ -28,6 +29,7 @@ const Contact = () => {
         email,
         firstName,
         lastName,
+        message,
       });
       if (!res.error) {
         alert("Contact successfully");
@@ -75,6 +77,7 @@ const Contact = () => {
               onChange={onChangeHandler}
             />
           </div>
+
           <div className={style.contact_us_fields}>
             <input
               type="text"
@@ -89,6 +92,18 @@ const Contact = () => {
               placeholder="Enter your last name"
               value={fields.lastName}
               onChange={onChangeHandler}
+            />
+          </div>
+          <div className={style.contact_us_fields}>
+            <textarea
+              type="text"
+              placeholder="Message..."
+              className={style.input2}
+              name="message"
+              value={fields.message}
+              onChange={onChangeHandler}
+              rows="5"
+              color="5"
             />
           </div>
           <button onClick={onSubmit} className={style.contact_us_btn}>
