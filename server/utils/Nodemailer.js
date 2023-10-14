@@ -5,14 +5,13 @@ let transporter = nodemailer.createTransport({
   port: 465,
   secure: true, // use SSL if required
   auth: {
-    user: "mynextek@gmail.com",
-    pass: "yxhxeyvxanonktfz",
+    user: "infousummarise@gmail.com",
+    pass: "xzxlusvzglmbrydr",
   },
   tls: { rejectUnauthorized: false },
 });
 
 export default transporter;
-
 
 // Send confirmation email
 //     const mailOptions = {

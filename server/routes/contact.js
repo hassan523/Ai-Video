@@ -1,5 +1,6 @@
 import express from "express";
 import contactSchema from "../models/contactSchema.js";
+import transporter from "../utils/Nodemailer.js";
 
 const router = express.Router();
 
@@ -10,8 +11,48 @@ router.post("/contact", async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
+      message: req.body.message,
     });
     const saveContact = await contact.save();
+
+    // Send confirmation email
+
+    const mailOptions = {
+      from: "infousummarise@gmail.com",
+      to: contact.email,
+      subject: "YOUSUMMARISE",
+      html: `Thank You For Contacting Us`,
+    };
+
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
+
+    const To = {
+      from: contact.email,
+      to: "infousummarise@gmail.com",
+      subject: "YOUSUMMARISE",
+      html: `
+      Query Type: ${req.body.query},
+      First Name: ${req.body.firstName},
+      Last Name: ${req.body.lastName},
+      Email: ${req.body.email},
+      Message: ${req.body.message},
+      `,
+    };
+
+    transporter.sendMail(To, (err, info) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
+
     res.status(200).json(saveContact);
   } catch (error) {
     console.log(error);

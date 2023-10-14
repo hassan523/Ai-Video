@@ -16,6 +16,9 @@ const contactSchema = new Schema(
     lastName: {
       type: String,
     },
+    message: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
