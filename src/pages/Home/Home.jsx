@@ -109,17 +109,30 @@ const Home = () => {
 
   const [vidURL, setVidURL] = useState("");
 
-  const [value, setValue] = useState("");
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = (text) => {
-    setValue(text);
-    setCopied(false);
+  const handleCopy = () => {
+    try {
+      if (check !== "points") {
+        navigator.clipboard.writeText(ytData);
+      } else if (check === "points"){
+        const data = keyPointData.map(item => item.point)
+        navigator.clipboard.writeText(`${data}`)
+      }else {
+        const formattedText = keyPointData
+        .map((item) => `${item.index}. ${item.point}`)
+        .join("\n");
+      navigator.clipboard.writeText(formattedText);
+      }
+    } catch (error) {
+      // Handle any clipboard-related errors here
+      console.error("Clipboard error:", error);
+    }
   };
 
   const handleCopySuccess = () => {
     setCopied(true);
   };
+
+
 
   const handleToggleDark = () => {
     setIsDark(!isDark);
@@ -147,10 +160,11 @@ const Home = () => {
           if (res.status === 200) {
             setisLoading(false);
             setIsSummary(true);
-            setCheck("");
             seturl("");
             setKeyPoints(0);
             setWordCounter(0);
+          }else {
+            console.log(res)
           }
 
           setKeyPoints(null);
@@ -173,7 +187,6 @@ const Home = () => {
           if (res.status === 200) {
             setisLoading(false);
             setIsSummary(true);
-            setCheck("");
             seturl("");
             setKeyPoints(0);
             setWordCounter(0);
@@ -210,27 +223,6 @@ const Home = () => {
     return () => clearInterval(timerId);
   }, []);
 
-  // const handleCopy = () => {
-  //   let textToCopy = "";
-
-  //   if (check === "points") {
-  //     textToCopy = keyPointData.map((item) => `${item.index} {" "} .${item.point}`).join("\n");
-  //   } else if (check !== "points") {
-  //     textToCopy = ytData;
-  //   } else {
-  //     console.log("some Error");
-  //     return; // Exit the function in case of an error
-  //   }
-
-  //   navigator.clipboard.writeText(textToCopy)
-  //     .then(() => {
-  //       console.log("Copied to clipboard");
-  //     })
-  //     .catch((error) => {
-  //       console.error("Unable to copy", error);
-  //     });
-  // };
-
   const handleReset = () => {
     setIsSummary(false);
     setCheck("");
@@ -246,8 +238,6 @@ const Home = () => {
     setVidURL(e.target.value);
   };
 
-  console.log(keyPoints, check);
-
   return (
     <div>
       <div className={style.white_box}></div>
@@ -261,7 +251,6 @@ const Home = () => {
             style={{
               position: "absolute",
               zIndex: "1",
-              // height: "100%",
               width: "70%",
               filter: "blur(20px)",
             }}
@@ -534,21 +523,7 @@ const Home = () => {
 
                   <div style={{ display: "flex" }}>
                     <button
-                      onClick={() => {
-                        try {
-                          if (check !== "points") {
-                            navigator.clipboard.writeText(ytData);
-                          } else {
-                            const formattedText = keyPointData
-                              .map((item) => `${item.index}. ${item.point}`)
-                              .join("\n");
-                            navigator.clipboard.writeText(formattedText);
-                          }
-                        } catch (error) {
-                          // Handle any clipboard-related errors here
-                          console.error("Clipboard error:", error);
-                        }
-                      }}
+                      onClick={handleCopy}
                       style={
                         isDark
                           ? {
@@ -933,43 +908,7 @@ const Home = () => {
       {/* <!-- Contact-us Area...... --> */}
       <Contact />
       {/* {Organization area} */}
-      {/* <section className={style.section_two_wrapper}>
-        <Swiper
-          breakpoints={breakpoints}
-          autoplay={{
-            delay: 1000, // 4 seconds
-            disableOnInteraction: false,
-            // Continue autoplay after user interaction
-          }}
-          modules={[Autoplay]}
-          className={style.section_two_swiper}
-        >
-          {slider_img.map((img, index) => (
-            <SwiperSlide
-              style={{
-                width: "auto",
-                padding: "0rem 1rem",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "auto",
-              }}
-              key={index}
-            >
-              <img
-                src={img}
-                style={{
-                  width: "10rem",
-                  height: "12rem",
-                  objectFit: "cover",
-                }}
-                alt="brand images"
-                className={style.section_two_swiper_images}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </section> */}
+      
       <section className={style.section_two_wrapper}>
         <Swiper
           breakpoints={breakpoints}
