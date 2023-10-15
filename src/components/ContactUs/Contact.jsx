@@ -50,7 +50,7 @@ const Contact = () => {
     if (success !== "") {
       const timer = setTimeout(() => {
         setSuccess("");
-      }, 3000); // Hide the message after 3 seconds (3000 milliseconds)
+      }, 3000); 
 
       return () => clearTimeout(timer);
     }

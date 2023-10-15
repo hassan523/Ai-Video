@@ -24,6 +24,7 @@ import refreshIcon from "../../assets/refreshIcon.jpg";
 
 import axios from "axios";
 import API_BASE_URL from "../../config";
+import CopyToClipboard from "react-copy-to-clipboard";
 const faqs = [
   {
     question: "What types of videos can be summarised?",
@@ -108,6 +109,17 @@ const Home = () => {
 
   const [vidURL, setVidURL] = useState("");
 
+  const [value, setValue] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = (text) => {
+    setValue(text);
+    setCopied(false);
+  };
+
+  const handleCopySuccess = () => {
+    setCopied(true);
+  };
 
   const handleToggleDark = () => {
     setIsDark(!isDark);
@@ -198,37 +210,26 @@ const Home = () => {
     return () => clearInterval(timerId);
   }, []);
 
-  const handleCopy = () => {
-    if (check === "keyPoints") {
-      const textToCopy = keyPointData
-        .map((item) => `${item.index}.${item.point}`)
-        .join("\n");
+  // const handleCopy = () => {
+  //   let textToCopy = "";
 
-      const textArea = document.createElement("textarea");
-      textArea.value = textToCopy;
-      document.body.appendChild(textArea);
-      textArea.select();
-    } else if (check !== "keyPoints") {
-      const textToCopy = ytData;
+  //   if (check === "points") {
+  //     textToCopy = keyPointData.map((item) => `${item.index} {" "} .${item.point}`).join("\n");
+  //   } else if (check !== "points") {
+  //     textToCopy = ytData;
+  //   } else {
+  //     console.log("some Error");
+  //     return; // Exit the function in case of an error
+  //   }
 
-      const textArea = document.createElement("textarea");
-      textArea.value = textToCopy;
-      document.body.appendChild(textArea);
-      textArea.select();
-    } else {
-      console.log("some Error");
-    }
-
-    try {
-      const successful = document.execCommand("copy");
-      const message = successful ? "Copied to clipboard" : "Failed to copy";
-      console.log(message);
-    } catch (error) {
-      console.error("Unable to copy", error);
-    }
-
-    document.body.removeChild(textArea);
-  };
+  //   navigator.clipboard.writeText(textToCopy)
+  //     .then(() => {
+  //       console.log("Copied to clipboard");
+  //     })
+  //     .catch((error) => {
+  //       console.error("Unable to copy", error);
+  //     });
+  // };
 
   const handleReset = () => {
     setIsSummary(false);
@@ -236,15 +237,14 @@ const Home = () => {
     seturl("");
     setKeyPoints(0);
     setWordCounter(0);
-    setVidURL("")
+    setVidURL("");
     window.location.reload(false);
   };
-
 
   const handleOnURlChange = (e) => {
     seturl(e.target.value);
     setVidURL(e.target.value);
-  }
+  };
 
   console.log(keyPoints, check);
 
@@ -490,32 +490,39 @@ const Home = () => {
                             : "Sorry, Couldn't able to read the data"}
                         </h6>
                       ) : ytData !== "" ? (
-                       `Here is your summary ${vidURL}   ${ytData}`
+                        `Here is your summary ${vidURL}   ${ytData}`
                       ) : keyPointData.length !== 0 ? (
                         keyPointData.map((item, index) => (
-                          <p
-                            style={{ marginBottom: "0.5rem" }}
-                            key={index}
-                            id="text"
-                            // ref={textAreaRef}
-                          >
-                            {index + 1}.{" "}
-                            <span className="ms-3">{item.point}</span>
-                          </p>
+                          <>
+                            <span>Here is your summary ${vidURL}</span>
+                            <p
+                              style={{ marginBottom: "0.5rem" }}
+                              key={index}
+                              id="text"
+                              // ref={textAreaRef}
+                            >
+                              {index + 1}.{" "}
+                              <span className="ms-3">{item.point}</span>
+                            </p>
+                          </>
                         ))
                       ) : null}
                     </p>
                   ) : keyPointData.length !== 0 ? (
-                    keyPointData.map((item, index) => (
-                      <p
-                        style={{ marginBottom: "0.3rem" }}
-                        key={index}
-                        id="text"
-                        // ref={textAreaRef}
-                      >
-                        {index + 1}.<span className="ps-1">{item.point}</span>
-                      </p>
-                    ))
+                    <div>
+                      <span>Here is your summary {vidURL}</span>
+                      {keyPointData.map((item, index) => (
+                        <p
+                          style={{ marginBottom: "0.5rem" }}
+                          key={index}
+                          id="text"
+                          // ref={textAreaRef}
+                        >
+                          {index + 1}.{" "}
+                          <span className="ms-3">{item.point}</span>
+                        </p>
+                      ))}
+                    </div>
                   ) : (
                     <h6 className="py-2 text-center">
                       {" "}
@@ -527,7 +534,21 @@ const Home = () => {
 
                   <div style={{ display: "flex" }}>
                     <button
-                      onClick={handleCopy}
+                      onClick={() => {
+                        try {
+                          if (check !== "points") {
+                            navigator.clipboard.writeText(ytData);
+                          } else {
+                            const formattedText = keyPointData
+                              .map((item) => `${item.index}. ${item.point}`)
+                              .join("\n");
+                            navigator.clipboard.writeText(formattedText);
+                          }
+                        } catch (error) {
+                          // Handle any clipboard-related errors here
+                          console.error("Clipboard error:", error);
+                        }
+                      }}
                       style={
                         isDark
                           ? {
