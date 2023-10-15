@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Contact_us_gif from "../../assets/contactUs/side_img.gif";
 import style from "./contactus.module.css";
 import { Container } from "react-bootstrap";
@@ -13,6 +13,8 @@ const Contact = () => {
     lastName: "",
     message: "",
   });
+
+  const [success, setSuccess] = useState("");
 
   const { email, firstName, lastName, message } = fields;
 
@@ -33,13 +35,28 @@ const Contact = () => {
       });
       if (!res.error) {
         alert("Contact successfully");
+        setSuccess("sent");
+      } else {
+        setSuccess("error");
       }
     } catch (error) {
+      setSuccess("error");
       console.log(error);
       alert("Sometihng Went Wrong Error");
     }
   };
 
+  useEffect(() => {
+    if (success !== "") {
+      const timer = setTimeout(() => {
+        setSuccess("");
+      }, 3000); // Hide the message after 3 seconds (3000 milliseconds)
+
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
+
+  console.log(success)
   console.log(query);
 
   return (
@@ -106,6 +123,13 @@ const Contact = () => {
               color="5"
             />
           </div>
+          <span className={success === "" ? "d-none": ""}>
+            {success === "sent" ? (
+              <p className="fw-bold text-white">Message Sent Successfully!</p>
+            ) : (
+              <p className="fw-bold text-white">Couldn't Send Message, Try Again Later</p>
+            )}
+          </span>
           <button onClick={onSubmit} className={style.contact_us_btn}>
             Submit
           </button>

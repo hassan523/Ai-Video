@@ -106,7 +106,8 @@ const Home = () => {
 
   const [currCount, setCurrCount] = useState(null);
 
-  const textAreaRef = useRef(null);
+  const [vidURL, setVidURL] = useState("");
+
 
   const handleToggleDark = () => {
     setIsDark(!isDark);
@@ -235,8 +236,15 @@ const Home = () => {
     seturl("");
     setKeyPoints(0);
     setWordCounter(0);
+    setVidURL("")
     window.location.reload(false);
   };
+
+
+  const handleOnURlChange = (e) => {
+    seturl(e.target.value);
+    setVidURL(e.target.value);
+  }
 
   console.log(keyPoints, check);
 
@@ -280,7 +288,7 @@ const Home = () => {
                 <input
                   type="text"
                   placeholder="www.youtube.com/watch?example"
-                  onChange={(e) => seturl(e.target.value)}
+                  onChange={handleOnURlChange}
                   value={url}
                 />
               </div>
@@ -461,14 +469,6 @@ const Home = () => {
                     Here is your Summary{" "}
                   </h4>
                   <div className={` d-flex align-items-center gap-3`}>
-                    <p
-                      style={{ fontWeight: "800" }}
-                      role="button"
-                      className="m-0"
-                      onClick={handleReset}
-                    >
-                      Reset
-                    </p>
                     <Form style={{ fontSize: "1.2rem", cursor: "pointer" }}>
                       <Form.Check // prettier-ignore
                         type="switch"
@@ -490,7 +490,7 @@ const Home = () => {
                             : "Sorry, Couldn't able to read the data"}
                         </h6>
                       ) : ytData !== "" ? (
-                        ytData
+                       `Here is your summary ${vidURL}   ${ytData}`
                       ) : keyPointData.length !== 0 ? (
                         keyPointData.map((item, index) => (
                           <p
