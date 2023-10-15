@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import style from "./home.module.css";
 import { Container } from "react-bootstrap";
 import img_one from "../../assets/slider/img_one.png";
@@ -105,6 +105,8 @@ const Home = () => {
 
   const [currCount, setCurrCount] = useState(null);
 
+  const textAreaRef = useRef(null);
+
   const handleToggleDark = () => {
     setIsDark(!isDark);
     localStorage.setItem("darkmode", isDark);
@@ -195,9 +197,35 @@ const Home = () => {
   }, []);
 
   const handleCopy = () => {
-    let text = document.getElementById("text");
-    text.select();
-    navigator.clipboard.write();
+    if (check === "keyPoints") {
+      const textToCopy = keyPointData
+        .map((item) => `${item.index}.${item.point}`)
+        .join("\n");
+
+      const textArea = document.createElement("textarea");
+      textArea.value = textToCopy;
+      document.body.appendChild(textArea);
+      textArea.select();
+    } else if (check !== "keyPoints") {
+      const textToCopy = ytData;
+
+      const textArea = document.createElement("textarea");
+      textArea.value = textToCopy;
+      document.body.appendChild(textArea);
+      textArea.select();
+    } else {
+      console.log("some Error");
+    }
+
+    try {
+      const successful = document.execCommand("copy");
+      const message = successful ? "Copied to clipboard" : "Failed to copy";
+      console.log(message);
+    } catch (error) {
+      console.error("Unable to copy", error);
+    }
+
+    document.body.removeChild(textArea);
   };
 
   const handleReset = () => {
@@ -208,6 +236,8 @@ const Home = () => {
     setWordCounter(0);
     window.location.reload(false);
   };
+
+  console.log(keyPoints, check);
 
   return (
     <div>
@@ -287,7 +317,7 @@ const Home = () => {
                 }}
               >
                 <option defaultValue="Select Range" className={style.options}>
-                  Select Range
+                  Text
                 </option>
                 <option value={3000} className={style.options}>
                   {" "}
@@ -302,14 +332,37 @@ const Home = () => {
                 </option>
               </select>
 
-              <button
-                className={check === "paragraph" ? style.cond : ""}
-                onClick={() => {
-                  setCheck("points");
-                }}
-              >
-                Bullet Points
-              </button>
+              <div>
+                <select
+                  value={keyPoints}
+                  className={
+                    check === "paragraph"
+                      ? `${style.cond} ${style.Contact_select}`
+                      : style.Contact_select
+                  }
+                  onClick={() => setCheck("points")}
+                  onChange={(e) => {
+                    setKeyPoints(e.target.value)
+                  }}
+                >
+                  <option value="keyPoints" className={style.options}>
+                    Bullet Points
+                  </option>
+                  <option value="10" className={style.options}>
+                    10
+                  </option>
+                  <option value="15" className={style.options}>
+                    15
+                  </option>
+                  <option value="20" className={style.options}>
+                    20
+                  </option>
+                  <option value="30" className={style.options}>
+                    30
+                  </option>
+                </select>
+              </div>
+
               {check === "paragraph" ? (
                 <div className="d-none">
                   <select
@@ -363,15 +416,7 @@ const Home = () => {
                   </button>
                 </div>
               ) : (
-                <div className="ps-3">
-                  <input
-                    type="number"
-                    name="keyPoints"
-                    className={style.inputKeyPoint}
-                    value={keyPoints}
-                    onChange={(e) => setKeyPoints(e.target.value)}
-                  />
-                </div>
+                ""
               )}
             </div>
 
@@ -438,6 +483,7 @@ const Home = () => {
                             style={{ marginBottom: "0.5rem" }}
                             key={index}
                             id="text"
+                            // ref={textAreaRef}
                           >
                             {index + 1}.{" "}
                             <span className="ms-3">{item.point}</span>
@@ -451,6 +497,7 @@ const Home = () => {
                         style={{ marginBottom: "0.3rem" }}
                         key={index}
                         id="text"
+                        // ref={textAreaRef}
                       >
                         {index + 1}.<span className="ps-1">{item.point}</span>
                       </p>
@@ -518,20 +565,7 @@ const Home = () => {
                               color: "black",
                             }
                       }
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                      >
-                        <path
-                          d="M19.0147 11.9586C19.1057 11.9584 19.1959 11.9763 19.28 12.0112C19.364 12.0461 19.4404 12.0973 19.5046 12.1619C19.5688 12.2264 19.6195 12.303 19.6539 12.3873C19.6884 12.4716 19.7057 12.5619 19.7051 12.6529V15.7905C19.7057 15.8811 19.6885 15.971 19.6544 16.0549C19.6203 16.1389 19.57 16.2153 19.5063 16.2798C19.4426 16.3443 19.3669 16.3956 19.2834 16.4308C19.1998 16.4659 19.1102 16.4843 19.0196 16.4848C18.929 16.4843 18.8393 16.4659 18.7558 16.4308C18.6723 16.3956 18.5966 16.3443 18.5329 16.2798C18.4692 16.2153 18.4189 16.1389 18.3848 16.0549C18.3507 15.971 18.3335 15.8811 18.3341 15.7905V14.6888C16.5508 17.6815 13.2408 19.7928 9.67428 19.7928C5.35564 19.7928 1.7362 17.1282 0.166408 13.0211C0.100496 12.85 0.104649 12.6598 0.177966 12.4917C0.251283 12.3236 0.387862 12.1912 0.558122 12.1231C0.910664 11.985 1.30825 12.1623 1.44535 12.5197C2.81635 16.1058 5.93831 18.4052 9.67428 18.4052C12.9755 18.4052 16.0592 16.2684 17.4958 13.358L16.0553 13.3678C15.9647 13.3679 15.8749 13.3502 15.7912 13.3156C15.7074 13.281 15.6313 13.2302 15.5672 13.1662C15.5031 13.1021 15.4522 13.0261 15.4175 12.9424C15.3828 12.8587 15.3649 12.769 15.3649 12.6783C15.3626 12.4954 15.4329 12.319 15.5605 12.1879C15.6881 12.0568 15.8626 11.9817 16.0455 11.9791L19.0147 11.9586ZM10.1522 0.207153C14.4689 0.207153 18.0893 2.87179 19.6591 6.97891C19.725 7.15003 19.7208 7.34022 19.6475 7.5083C19.5742 7.67638 19.4376 7.80881 19.2674 7.87691C19.1831 7.90976 19.0932 7.92555 19.0028 7.92336C18.9124 7.92116 18.8234 7.90103 18.7408 7.86413C18.6583 7.82723 18.5839 7.7743 18.5219 7.70841C18.46 7.64252 18.4118 7.56498 18.3801 7.4803C17.0091 3.89416 13.8872 1.5948 10.1512 1.5948C6.85003 1.5948 3.76626 3.7316 2.32965 6.64203L3.77018 6.63224C3.86079 6.63211 3.95055 6.64985 4.0343 6.68444C4.11806 6.71903 4.19418 6.76979 4.2583 6.83382C4.32242 6.89785 4.37329 6.97389 4.408 7.0576C4.44271 7.14131 4.46057 7.23104 4.46057 7.32166C4.46292 7.5046 4.39257 7.68099 4.26495 7.8121C4.13734 7.9432 3.96291 8.01829 3.77997 8.02087L0.809798 8.04143C0.718767 8.04156 0.62861 8.02366 0.544533 7.98877C0.460455 7.95388 0.38412 7.90268 0.319933 7.83812C0.255746 7.77357 0.204979 7.69695 0.170561 7.61268C0.136143 7.5284 0.118756 7.43815 0.119402 7.34712V4.20949C0.119402 3.82561 0.425918 3.51518 0.804901 3.51518C1.18291 3.51518 1.4904 3.82561 1.4904 4.20949V5.31118C3.27368 2.31849 6.58366 0.207153 10.1502 0.207153H10.1522Z"
-                          fill="#676767"
-                        />
-                      </svg>
-                    </button>
+                    ></button>
                   </div>
                 </div>
               </div>
@@ -550,8 +584,8 @@ const Home = () => {
             </div>
             <div className={style.right_box}>
               <h1 style={{ color: "white" }}>
-                GET HOW <strong style={{ color: "red" }}>YOUSUMMARIES</strong>{" "}
-                WORK
+                Get Summaries in{" "}
+                <strong style={{ color: "red" }}>THREE EASY STEPS</strong>{" "}
               </h1>
 
               <div
@@ -610,7 +644,7 @@ const Home = () => {
                   >
                     <p>
                       Copy and Paste a YouTube video URL Link into the input
-                      field{" "}
+                      field.{" "}
                     </p>
                   </div>
                 </div>
@@ -663,8 +697,9 @@ const Home = () => {
                     <p>
                       Choose your desired summary format: Bullet Points or Text.
                       Specify the length/amount of detail <br /> a. For Bullet
-                      Points, select the number of points <br /> b. For Text,
-                      choose Short, Medium, or Long
+                      Points replace , with : select the number of points <br />{" "}
+                      b. For Text replace , with : choose Short, Medium, or
+                      Long.
                     </p>
                   </div>
                 </div>
@@ -717,7 +752,7 @@ const Home = () => {
                     <p>
                       Click the Summarise button and the AI will generate a
                       concise summary based on your selections. Copy the output
-                      summary as needed
+                      summary as needed.
                     </p>
                   </div>
                 </div>

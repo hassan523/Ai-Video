@@ -49,11 +49,11 @@ const Contact = () => {
         <img src={right_chain} alt="" className={style.right_img} />
         <Container className={style.contact_us_container}>
           <div>
-            <h1 style={{ color: "black" }}>Contact US</h1>
+            <h1 style={{ color: "black" }}>Contact Us</h1>
             <p style={{ color: "white" }}>
               If you have any questions, suggestions, or feedback, please don't
               hesitate to reach out to us. We value your input and are committed
-              to enhancing your experience with Yousummarise.
+              to enhancing your experience with YouSummarise.
             </p>
           </div>
           <select
