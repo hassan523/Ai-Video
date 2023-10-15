@@ -321,7 +321,7 @@ const Home = () => {
               <select
                 defaultValue="Select Range"
                 className={
-                  check !== "paragraph"
+                  check !== "paragraph" && check !== ""
                     ? `${style.cond} ${style.Contact_select}`
                     : style.Contact_select
                 }
