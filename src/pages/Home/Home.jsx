@@ -20,6 +20,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { Autoplay } from "swiper/modules";
 import Form from "react-bootstrap/Form";
 import "swiper/element/css/autoplay"; // Import Swiper CSS
+import refreshIcon from "../../assets/refreshIcon.jpg";
 
 import axios from "axios";
 import API_BASE_URL from "../../config";
@@ -288,13 +289,26 @@ const Home = () => {
                   <Spinner animation="border" />
                 </div>
               ) : (
-                <button
-                  onClick={() => {
-                    handleSubmit();
-                  }}
-                >
-                  Summarise
-                </button>
+                <>
+                  <div className="d-flex d-sm-inline-flex">
+                    <button
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                    >
+                      Summarise
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        handleReset();
+                      }}
+                      style={{ width: "50px" }}
+                    >
+                      <img src={refreshIcon} width="25px" alt="" />
+                    </button>
+                  </div>
+                </>
               )}
             </div>
             <div className={style.options_btn}>
@@ -342,7 +356,7 @@ const Home = () => {
                   }
                   onClick={() => setCheck("points")}
                   onChange={(e) => {
-                    setKeyPoints(e.target.value)
+                    setKeyPoints(e.target.value);
                   }}
                 >
                   <option value="keyPoints" className={style.options}>
