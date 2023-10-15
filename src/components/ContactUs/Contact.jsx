@@ -8,7 +8,7 @@ import { useContactMutation } from "../../../redux/Auth/auth";
 const Contact = () => {
   const [query, setQuery] = useState("");
   const [fields, setFields] = useState({
-    email: "",
+    userEmail: "",
     firstName: "",
     lastName: "",
     message: "",
@@ -16,7 +16,7 @@ const Contact = () => {
 
   const [success, setSuccess] = useState("");
 
-  const { email, firstName, lastName, message } = fields;
+  const { userEmail, firstName, lastName, message } = fields;
 
   const onChangeHandler = (e) => {
     setFields({ ...fields, [e.target.name]: e.target.value });
@@ -26,18 +26,28 @@ const Contact = () => {
 
   const onSubmit = async () => {
     try {
-      const res = await contact({
-        query,
-        email,
-        firstName,
-        lastName,
-        message,
-      });
-      if (!res.error) {
-        alert("Contact successfully");
-        setSuccess("sent");
+      if (!userEmail || !firstName || !lastName || !message) {
+        alert("All Fields Are Required");
       } else {
-        setSuccess("error");
+        const res = await contact({
+          query,
+          userEmail,
+          firstName,
+          lastName,
+          message,
+        });
+        if (!res.error) {
+          alert("Contact successfully");
+          setSuccess("sent");
+          setFields({
+            userEmail: "",
+            firstName: "",
+            lastName: "",
+            message: "",
+          });
+        } else {
+          setSuccess("error");
+        }
       }
     } catch (error) {
       setSuccess("error");
@@ -50,13 +60,13 @@ const Contact = () => {
     if (success !== "") {
       const timer = setTimeout(() => {
         setSuccess("");
-      }, 3000); 
+      }, 3000);
 
       return () => clearTimeout(timer);
     }
   }, [success]);
 
-  console.log(success)
+  console.log(success);
   console.log(query);
 
   return (
@@ -89,8 +99,8 @@ const Contact = () => {
               type="text"
               placeholder="Enter your email..."
               className={style.input2}
-              name="email"
-              value={fields.email}
+              name="userEmail"
+              value={fields.userEmail}
               onChange={onChangeHandler}
             />
           </div>
@@ -123,11 +133,13 @@ const Contact = () => {
               color="5"
             />
           </div>
-          <span className={success === "" ? "d-none": ""}>
+          <span className={success === "" ? "d-none" : ""}>
             {success === "sent" ? (
               <p className="fw-bold text-white">Message Sent Successfully!</p>
             ) : (
-              <p className="fw-bold text-white">Couldn't Send Message, Try Again Later</p>
+              <p className="fw-bold text-white">
+                Couldn't Send Message, Try Again Later
+              </p>
             )}
           </span>
           <button onClick={onSubmit} className={style.contact_us_btn}>

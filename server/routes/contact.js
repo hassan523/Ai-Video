@@ -10,7 +10,7 @@ router.post("/contact", async (req, res) => {
       query: req.body.query,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      email: req.body.email,
+      userEmail: req.body.userEmail,
       message: req.body.message,
     });
     const saveContact = await contact.save();
@@ -19,7 +19,7 @@ router.post("/contact", async (req, res) => {
 
     const mailOptions = {
       from: "infousummarise@gmail.com",
-      to: contact.email,
+      to: contact.userEmail,
       subject: "YOUSUMMARISE",
       html: `Thank You For Contacting Us`,
     };
@@ -33,14 +33,14 @@ router.post("/contact", async (req, res) => {
     });
 
     const To = {
-      from: contact.email,
+      from: contact.userEmail,
       to: "infousummarise@gmail.com",
       subject: "YOUSUMMARISE",
       html: `
       Query Type: ${req.body.query},
       First Name: ${req.body.firstName},
       Last Name: ${req.body.lastName},
-      Email: ${req.body.email},
+      Email: ${req.body.userEmail},
       Message: ${req.body.message},
       `,
     };
