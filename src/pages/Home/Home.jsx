@@ -114,16 +114,16 @@ const Home = () => {
   const [showKeyPoint, setShowKeyPoint] = useState(false);
 
   const toggleTextLenght = () => {
-    setShowKeyPoint(false)
+    setShowKeyPoint(false);
     setShowTextLength(!showTextLength);
     setCheck("paragraph");
   };
 
   const toggleKeyPointLenght = () => {
-    setShowTextLength(false)
-    setCheck("points")
+    setShowTextLength(false);
+    setCheck("points");
     setShowKeyPoint(!showKeyPoint);
-  } 
+  };
 
   console.log(check);
 
@@ -352,6 +352,10 @@ const Home = () => {
                     setCheck("paragraph");
                   }}
                 >
+                  <option value="paragraph" className={style.options}>
+                    {" "}
+                    Length
+                  </option>
                   <option value={3000} className={style.options}>
                     {" "}
                     Short
@@ -369,9 +373,9 @@ const Home = () => {
               <div>
                 <button
                   className={check !== "points" ? style.cond : "ms-0 me-3"}
-                  onClick={(toggleKeyPointLenght)}
-                  style={{marginLeft:"-10px"}}
-               >
+                  onClick={toggleKeyPointLenght}
+                  style={{ marginLeft: "-10px" }}
+                >
                   Bullet Points
                 </button>
 
@@ -388,6 +392,7 @@ const Home = () => {
                     setKeyPoints(e.target.value);
                   }}
                 >
+                  <option className={style.options}> Length</option>
                   <option value="5" className={style.options}>
                     5
                   </option>
@@ -503,15 +508,11 @@ const Home = () => {
                         </h6>
                       ) : ytData !== "" ? (
                         <div>
-                          <span>
-                          Here is your summary {vidURL}
-                          </span>
-                          <br/>
-                          <br/>
+                          <span>Here is your summary {vidURL}</span>
+                          <br />
+                          <br />
                           {ytData}
-
                         </div>
-
                       ) : keyPointData.length !== 0 ? (
                         keyPointData.map((item, index) => (
                           <>
@@ -531,10 +532,12 @@ const Home = () => {
                     </p>
                   ) : keyPointData.length !== 0 ? (
                     <div>
-                      <span>Here is your summary  {vidURL} <br/> <br/></span>
+                      <span>
+                        Here is your summary {vidURL} <br /> <br />
+                      </span>
                       {keyPointData.map((item, index) => (
                         <p
-                          style={{ marginBottom: "0.5rem"  }}
+                          style={{ marginBottom: "0.5rem" }}
                           key={index}
                           id="text"
                           // ref={textAreaRef}
